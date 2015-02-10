@@ -15,7 +15,8 @@ namespace TimesheetParser
         private void GenerateButton_OnClick(object sender, RoutedEventArgs e)
         {
             var parser = new Parser();
-            parser.Parse(SourceTextBox.Text);
+            var result = parser.Parse(SourceTextBox.Text);
+            DestinationTextBox.Text = result.Format();
         }
     }
 }

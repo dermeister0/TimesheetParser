@@ -6,9 +6,9 @@ namespace TimesheetParser
 {
     internal class Parser
     {
-        public List<Job> Parse(string source)
+        public ParseResult Parse(string source)
         {
-            var result = new List<Job>();
+            var result = new ParseResult();
 
             var lines = source.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             Job currentJob = null;
@@ -28,7 +28,10 @@ namespace TimesheetParser
                 if (taskMatch.Success)
                 {
                     if (currentJob == null)
+                    {
+                        result.WrongLines.Add(line);
                         continue;
+                    }
 
                     currentJob.Task = taskMatch.Groups[1].Value;
                 }
@@ -38,7 +41,7 @@ namespace TimesheetParser
                     if (currentJob != null)
                     {
                         currentJob.EndTime = time;
-                        result.Add(currentJob);
+                        result.Jobs.Add(currentJob);
                     }
 
                     currentJob = new Job { StartTime = time };
@@ -46,7 +49,10 @@ namespace TimesheetParser
                 else
                 {
                     if (currentJob == null)
+                    {
+                        result.WrongLines.Add(line);
                         continue;
+                    }
 
                     currentJob.Description += line;
                 }
