@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <Grid.Resources>
+            <local:MainViewModel x:Key="MainVM" />
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -46,9 +50,9 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 
-                                <Button Grid.Row="0" Grid.Column="0">Copy Task</Button>
-                                <Button Grid.Row="1" Grid.Column="0">Copy Duration</Button>
-                                <Button Grid.Row="2" Grid.Column="0">Copy Description</Button>
+                                <Button Grid.Row="0" Grid.Column="0" Command="{Binding CopyCommand, Source={StaticResource MainVM}}" CommandParameter="{Binding Task}">Copy Task</Button>
+                                <Button Grid.Row="1" Grid.Column="0" Command="{Binding CopyCommand, Source={StaticResource MainVM}}" CommandParameter="{Binding ShortDuration}">Copy Duration</Button>
+                                <Button Grid.Row="2" Grid.Column="0" Command="{Binding CopyCommand, Source={StaticResource MainVM}}" CommandParameter="{Binding Description}">Copy Description</Button>
                                 
                                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Task}" />
                                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding TimeDescription}" />
