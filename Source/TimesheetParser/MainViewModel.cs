@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 
 namespace TimesheetParser
@@ -14,7 +15,7 @@ namespace TimesheetParser
 
         void CopyCommand_Executed(string param)
         {
-            
+            Clipboard.SetData(DataFormats.UnicodeText, param);
         }
     }
 }
