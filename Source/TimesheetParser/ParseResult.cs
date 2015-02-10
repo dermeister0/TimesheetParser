@@ -10,8 +10,6 @@ namespace TimesheetParser
         public List<Job> Jobs { get; set; } = new List<Job>();
         public List<string> WrongLines { get; set; } = new List<string>();
 
-        private const string DurationFormat = "{0:h:mm tt} - {1:h:mm tt} @ {2:hh}:{2:mm}\n";
-
         public string Format()
         {
             var sb = new StringBuilder();
@@ -44,7 +42,7 @@ namespace TimesheetParser
             {
                 if (!string.IsNullOrEmpty(job.Task))
                     sb.AppendLine("#" + job.Task);
-                sb.AppendFormat(DurationFormat, job.StartTime, job.EndTime, job.Duration);
+                sb.AppendLine(job.TimeDescription);
                 sb.AppendLine(job.Description);
                 sb.AppendLine();
             }

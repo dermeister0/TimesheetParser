@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace TimesheetParser
 {
@@ -17,6 +18,8 @@ namespace TimesheetParser
             var parser = new Parser();
             var result = parser.Parse(SourceTextBox.Text);
             DestinationTextBox.Text = result.Format();
+
+            JobsListView.ItemsSource = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task));
         }
     }
 }

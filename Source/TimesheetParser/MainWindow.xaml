@@ -17,9 +17,57 @@
         </Grid.ColumnDefinitions>
         
         <TextBox Name="SourceTextBox" Grid.Row="0" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" />
-        <TextBox Name="DestinationTextBox" Grid.Row="0" Grid.Column="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" />
+        
+        <TabControl Grid.Row="0" Grid.Column="1">
+            <TabItem Header="Raw View">
+                <TextBox Name="DestinationTextBox" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" />        
+            </TabItem>
+            <TabItem Header="Table View">
+                <ListView Name="JobsListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Margin" Value="5" />
+                                    </Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="5" />
+                                    </Style>
+                                </Grid.Resources>
+                                
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <Button Grid.Row="0" Grid.Column="0">Copy Task</Button>
+                                <Button Grid.Row="1" Grid.Column="0">Copy Duration</Button>
+                                <Button Grid.Row="2" Grid.Column="0">Copy Description</Button>
+                                
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Task}" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding TimeDescription}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Description}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </TabItem>
+        </TabControl>
+        
         
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </StackPanel.Resources>
+            
             <Button Name="GenerateButton" Width="100" Click="GenerateButton_OnClick">Generate</Button>
         </StackPanel>
     </Grid>
