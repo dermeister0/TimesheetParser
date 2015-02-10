@@ -8,5 +8,7 @@ namespace TimesheetParser
         public DateTime EndTime { get; set; }
         public string Task { get; set; }
         public string Description { get; set; }
+
+        public TimeSpan Duration => EndTime - StartTime;
     }
 }

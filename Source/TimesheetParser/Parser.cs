@@ -16,6 +16,8 @@ namespace TimesheetParser
             var taskRegex = new Regex(@"#(\d+)");
             var timeRegex = new Regex(@"\d+:\d+ [AP]M");
 
+            var state = ParserState.Begin;
+
             foreach (var l in lines)
             {
                 var line = l.Trim();
@@ -33,7 +35,14 @@ namespace TimesheetParser
                         continue;
                     }
 
+                    if (state == ParserState.EndTimeFound)
+                    {
+                        result.Jobs.Add(currentJob);
+                        currentJob = new Job { StartTime = currentJob.EndTime };
+                    }
+
                     currentJob.Task = taskMatch.Groups[1].Value;
+                    state = ParserState.TaskFound;
                 }
                 else if (timeMatch.Success)
                 {
@@ -41,10 +50,13 @@ namespace TimesheetParser
                     if (currentJob != null)
                     {
                         currentJob.EndTime = time;
-                        result.Jobs.Add(currentJob);
+                        state = ParserState.EndTimeFound;
                     }
-
-                    currentJob = new Job { StartTime = time };
+                    else
+                    {
+                        currentJob = new Job { StartTime = time };
+                        state = ParserState.StartTimeFound;
+                    }
                 }
                 else
                 {
@@ -54,8 +66,20 @@ namespace TimesheetParser
                         continue;
                     }
 
+                    if (state == ParserState.EndTimeFound)
+                    {
+                        result.Jobs.Add(currentJob);
+                        currentJob = new Job { StartTime = currentJob.EndTime };
+                    }
+
                     currentJob.Description += line;
+                    state = ParserState.DescriptionFound;
                 }
+            }
+
+            if (state == ParserState.EndTimeFound)
+            {
+                result.Jobs.Add(currentJob);
             }
 
             return result;

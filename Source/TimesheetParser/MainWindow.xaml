@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         
         <TextBox Name="SourceTextBox" Grid.Row="0" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" />
-        <TextBox Name="DestinationTextBox" Grid.Row="0" Grid.Column="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" />
+        <TextBox Name="DestinationTextBox" Grid.Row="0" Grid.Column="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" />
         
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Button Name="GenerateButton" Width="100" Click="GenerateButton_OnClick">Generate</Button>

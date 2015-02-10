@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Parser.cs" />
     <Compile Include="ParseResult.cs" />
+    <Compile Include="ParserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
