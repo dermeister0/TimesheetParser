@@ -50,16 +50,16 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 
-                                <CheckBox Grid.Row="0" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" />
-                                <CheckBox Grid.Row="1" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" />
-                                <CheckBox Grid.Row="2" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" />
+                                <CheckBox Grid.Row="0" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsTaskCopied}" />
+                                <CheckBox Grid.Row="1" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsDurationCopied}" />
+                                <CheckBox Grid.Row="2" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsDescriptionCopied}" />
                                 
-                                <Button Grid.Row="0" Grid.Column="1" Command="{Binding CopyTaskCommand}" CommandParameter="{Binding Task}">Copy Task</Button>
-                                <Button Grid.Row="1" Grid.Column="1" Command="{Binding CopyDurationCommand}" CommandParameter="{Binding ShortDuration}">Copy Duration</Button>
-                                <Button Grid.Row="2" Grid.Column="1" Command="{Binding CopyDescriptionCommand}" CommandParameter="{Binding Description}">Copy Description</Button>
+                                <Button Grid.Row="0" Grid.Column="1" Command="{Binding CopyTaskCommand}">Copy Task</Button>
+                                <Button Grid.Row="1" Grid.Column="1" Command="{Binding CopyDurationCommand}">Copy Duration</Button>
+                                <Button Grid.Row="2" Grid.Column="1" Command="{Binding CopyDescriptionCommand}">Copy Description</Button>
                                 
                                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Task}" />
-                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding TimeDescription}" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Duration}" />
                                 <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Description}" />
                             </Grid>
                         </DataTemplate>

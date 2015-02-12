@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using TimesheetParser.ViewModel;
 
 namespace TimesheetParser
 {
@@ -19,7 +20,7 @@ namespace TimesheetParser
             var result = parser.Parse(SourceTextBox.Text);
             DestinationTextBox.Text = result.Format();
 
-            JobsListView.ItemsSource = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task));
+            JobsListView.ItemsSource = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j));
         }
     }
 }
