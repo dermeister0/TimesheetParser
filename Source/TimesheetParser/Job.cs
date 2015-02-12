@@ -14,7 +14,5 @@ namespace TimesheetParser
         public TimeSpan Duration => EndTime - StartTime;
 
         public string TimeDescription => string.Format(DurationFormat, StartTime, EndTime, Duration);
-
-        public string ShortDuration => string.Format("{0:hh}:{0:mm}", Duration);
     }
 }

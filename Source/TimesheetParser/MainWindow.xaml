@@ -7,10 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Grid.Resources>
-            <local:MainViewModel x:Key="MainVM" />
-        </Grid.Resources>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -38,6 +34,9 @@
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Margin" Value="5" />
                                     </Style>
+                                    <Style TargetType="CheckBox">
+                                        <Setter Property="Margin" Value="5" />
+                                    </Style>
                                 </Grid.Resources>
                                 
                                 <Grid.RowDefinitions>
@@ -47,16 +46,21 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 
-                                <Button Grid.Row="0" Grid.Column="0" Command="{Binding CopyCommand, Source={StaticResource MainVM}}" CommandParameter="{Binding Task}">Copy Task</Button>
-                                <Button Grid.Row="1" Grid.Column="0" Command="{Binding CopyCommand, Source={StaticResource MainVM}}" CommandParameter="{Binding ShortDuration}">Copy Duration</Button>
-                                <Button Grid.Row="2" Grid.Column="0" Command="{Binding CopyCommand, Source={StaticResource MainVM}}" CommandParameter="{Binding Description}">Copy Description</Button>
+                                <CheckBox Grid.Row="0" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" />
+                                <CheckBox Grid.Row="1" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" />
+                                <CheckBox Grid.Row="2" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" />
                                 
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Task}" />
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding TimeDescription}" />
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Description}" />
+                                <Button Grid.Row="0" Grid.Column="1" Command="{Binding CopyTaskCommand}" CommandParameter="{Binding Task}">Copy Task</Button>
+                                <Button Grid.Row="1" Grid.Column="1" Command="{Binding CopyDurationCommand}" CommandParameter="{Binding ShortDuration}">Copy Duration</Button>
+                                <Button Grid.Row="2" Grid.Column="1" Command="{Binding CopyDescriptionCommand}" CommandParameter="{Binding Description}">Copy Description</Button>
+                                
+                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Task}" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding TimeDescription}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Description}" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
