@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace TimesheetParser
 {
     internal class Parser
     {
-        public ParseResult Parse(string source)
+        public ParseResult Parse(string source, bool distributeIdle)
         {
             var result = new ParseResult();
 
@@ -82,7 +83,31 @@ namespace TimesheetParser
                 result.Jobs.Add(currentJob);
             }
 
+            if (distributeIdle)
+            {
+                DistributeIdle(result);
+            }
+
             return result;
+        }
+
+        void DistributeIdle(ParseResult result)
+        {
+            var idleJobs = result.Jobs.Where(j => string.Compare(j.Description.Trim(), "Idle.", true) == 0).ToList();
+            var idleTime = idleJobs.Sum(j => j.Duration.TotalMinutes);
+
+            foreach (var idleJob in idleJobs)
+            {
+                result.Jobs.Remove(idleJob);
+            }
+
+            var normalJobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).ToList();
+            var additionalTime = TimeSpan.FromMinutes(idleTime / normalJobs.Count);
+
+            foreach (var job in normalJobs)
+            {
+                job.ExtraTime = additionalTime;
+            }
         }
     }
 }

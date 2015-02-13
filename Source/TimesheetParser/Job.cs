@@ -9,12 +9,13 @@ namespace TimesheetParser
         public DateTime EndTime { get; set; }
         public string Task { get; set; }
         public string Description { get; set; }
+        public TimeSpan ExtraTime { get; set; }
 
         public TimeSpan Duration
         {
             get
             {
-                var duration = EndTime - StartTime;
+                var duration = EndTime - StartTime + ExtraTime;
                 return duration.TotalMinutes > 0 ? duration : TimeSpan.FromMinutes(1);
             }
         }
