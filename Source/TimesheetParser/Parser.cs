@@ -102,7 +102,9 @@ namespace TimesheetParser
             }
 
             var normalJobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).ToList();
-            var additionalTime = TimeSpan.FromMinutes(Math.Floor(idleTime / normalJobs.Count));
+
+            var additionalMinutes = Math.Floor(idleTime / normalJobs.Count);
+            var additionalTime = TimeSpan.FromMinutes(additionalMinutes > 0 ? additionalMinutes : 1);
 
             foreach (var job in normalJobs)
             {
