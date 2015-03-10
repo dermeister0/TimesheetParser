@@ -20,7 +20,7 @@ namespace TimesheetParser.ViewModel
             CopyDescriptionCommand = new RelayCommand(CopyDescriptionCommand_Executed);
         }
 
-        public string Task => job.Task;
+        public string Task => "#" + job.Task;
         public string Duration => job.TimeDescription;
         public string Description => job.Description;
 
