@@ -14,7 +14,7 @@ namespace TimesheetParser
             var lines = source.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             Job currentJob = null;
 
-            var taskRegex = new Regex(@"#(\d+)");
+            var taskRegex = new Regex(@"#([A-Z]+-)*(\d+)");
             var timeRegex = new Regex(@"\d+:\d+ [AP]M");
 
             var state = ParserState.Begin;
@@ -42,7 +42,7 @@ namespace TimesheetParser
                         currentJob = new Job { StartTime = currentJob.EndTime };
                     }
 
-                    currentJob.Task = taskMatch.Groups[1].Value;
+                    currentJob.Task = taskMatch.Groups[0].Value;
                     state = ParserState.TaskFound;
                 }
                 else if (timeMatch.Success)
