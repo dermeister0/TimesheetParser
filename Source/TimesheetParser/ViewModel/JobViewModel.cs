@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -60,20 +61,32 @@ namespace TimesheetParser.ViewModel
 
         private void CopyTaskCommand_Executed()
         {
-            Clipboard.SetDataObject(job.Task);
+            SetClipboardText(job.Task);
             IsTaskCopied = true;
         }
 
         private void CopyDurationCommand_Executed()
         {
-            Clipboard.SetData(DataFormats.UnicodeText, string.Format("{0:hh}:{0:mm}", job.Duration));
+            SetClipboardText(string.Format("{0:hh}:{0:mm}", job.Duration));
             IsDurationCopied = true;
         }
 
         private void CopyDescriptionCommand_Executed()
         {
-            Clipboard.SetData(DataFormats.UnicodeText, job.Description);
+            SetClipboardText(job.Description);
             IsDescriptionCopied = true;
+        }
+
+        void SetClipboardText(string text)
+        {
+            try
+            {
+                Clipboard.SetText(text, TextDataFormat.UnicodeText);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed to set clipboard text.");
+            }            
         }
     }
 }
