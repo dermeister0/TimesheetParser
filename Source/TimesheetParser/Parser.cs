@@ -88,6 +88,8 @@ namespace TimesheetParser
                 DistributeIdle(result);
             }
 
+            result.Jobs.Sort((j1, j2) => string.Compare(j1.Task, j2.Task));
+
             return result;
         }
 
