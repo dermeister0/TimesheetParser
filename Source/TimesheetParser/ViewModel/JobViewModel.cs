@@ -60,7 +60,7 @@ namespace TimesheetParser.ViewModel
 
         private void CopyTaskCommand_Executed()
         {
-            Clipboard.SetData(DataFormats.UnicodeText, job.Task);
+            Clipboard.SetDataObject(job.Task);
             IsTaskCopied = true;
         }
 
