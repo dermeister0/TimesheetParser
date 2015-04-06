@@ -78,6 +78,8 @@
             
             <Button Name="GenerateButton" Width="100" Click="GenerateButton_OnClick">Generate</Button>
             <CheckBox Name="DistributeIdleCheckBox" VerticalAlignment="Center">Distribute Idle</CheckBox>
+            
+            <Button Width="100">Login</Button>
         </StackPanel>
     </Grid>
 </Window>
