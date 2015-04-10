@@ -38,7 +38,7 @@ namespace TimesheetParser
 
                     if (state == ParserState.EndTimeFound)
                     {
-                        result.Jobs.Add(currentJob);
+                        AddJob(result, currentJob);
                         currentJob = new Job { StartTime = currentJob.EndTime };
                     }
 
@@ -69,7 +69,7 @@ namespace TimesheetParser
 
                     if (state == ParserState.EndTimeFound)
                     {
-                        result.Jobs.Add(currentJob);
+                        AddJob(result, currentJob);
                         currentJob = new Job { StartTime = currentJob.EndTime };
                     }
 
@@ -80,7 +80,7 @@ namespace TimesheetParser
 
             if (state == ParserState.EndTimeFound)
             {
-                result.Jobs.Add(currentJob);
+                AddJob(result, currentJob);
             }
 
             if (distributeIdle)
@@ -112,6 +112,17 @@ namespace TimesheetParser
             {
                 job.ExtraTime = additionalTime;
             }
+        }
+
+        void AddJob(ParseResult result, Job job)
+        {
+            if (job.Description == null)
+            {
+                job.Description = "";
+                result.WrongLines.Add(string.Format("Job without description: #{0} ({1} - {2})", job.Task, job.StartTime, job.EndTime));
+            }
+
+            result.Jobs.Add(job);
         }
     }
 }
