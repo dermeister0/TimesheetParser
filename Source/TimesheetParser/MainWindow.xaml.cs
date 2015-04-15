@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Windows;
-using TimesheetParser.Extensions;
 using TimesheetParser.ViewModel;
 
 namespace TimesheetParser
@@ -30,9 +29,18 @@ namespace TimesheetParser
 
             mainVM.Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j)).ToList();
 
-            foreach (var jobVM in mainVM.Jobs.SelectOdds())
+            string previousTask = null;
+            bool isOdd = false;
+
+            foreach (var jobVM in mainVM.Jobs)
             {
-                jobVM.IsOdd = true;
+                if (jobVM.Task != previousTask)
+                {
+                    isOdd = !isOdd;
+                    previousTask = jobVM.Task;
+                }
+
+                jobVM.IsOdd = isOdd;
             }
         }
     }
