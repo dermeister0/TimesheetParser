@@ -23,10 +23,10 @@
                 <TextBox Name="DestinationTextBox" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" />        
             </TabItem>
             <TabItem Header="Table View">
-                <ListView Name="JobsListView">
+                <ListView ItemsSource="{Binding Jobs}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid Background="{Binding BackgroundBrush}">
                                 <Grid.Resources>
                                     <Style TargetType="Button">
                                         <Setter Property="Margin" Value="5" />
@@ -64,6 +64,11 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </TabItem>
         </TabControl>
@@ -80,6 +85,7 @@
             <CheckBox Name="DistributeIdleCheckBox" VerticalAlignment="Center">Distribute Idle</CheckBox>
             
             <Button Width="100">Login</Button>
+            <TextBlock>CRM Plugin: <Run Text="{Binding CrmPlugin}"/></TextBlock>
         </StackPanel>
     </Grid>
 </Window>

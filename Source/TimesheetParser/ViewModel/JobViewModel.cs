@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -11,6 +12,8 @@ namespace TimesheetParser.ViewModel
         private bool isDescriptionCopied;
         private bool isDurationCopied;
         private bool isTaskCopied;
+        private static Brush lightBrush;
+        private static Brush darkBrush;
 
         public JobViewModel(Job job)
         {
@@ -55,6 +58,8 @@ namespace TimesheetParser.ViewModel
             }
         }
 
+        public bool IsOdd { get; set; }
+
         public RelayCommand CopyTaskCommand { get; set; }
         public RelayCommand CopyDurationCommand { get; set; }
         public RelayCommand CopyDescriptionCommand { get; set; }
@@ -87,6 +92,17 @@ namespace TimesheetParser.ViewModel
             {
                 MessageBox.Show("Failed to set clipboard text.");
             }            
+        }
+
+        public Brush BackgroundBrush => IsOdd ? LightBrush : DarkBrush;
+
+        private static Brush LightBrush
+        {
+            get { return lightBrush ?? (lightBrush = Application.Current.Resources["LightRowBrush"] as Brush); }
+        }
+        private static Brush DarkBrush
+        {
+            get { return darkBrush ?? (darkBrush = Application.Current.Resources["DarkRowBrush"] as Brush); }
         }
     }
 }

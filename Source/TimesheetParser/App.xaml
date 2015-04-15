@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:TimesheetParser"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="LightRowBrush" Color="#FFC5CBF9" />
+        <SolidColorBrush x:Key="DarkRowBrush" Color="#FF7381F9" />      
     </Application.Resources>
 </Application>

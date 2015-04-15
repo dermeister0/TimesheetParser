@@ -1,14 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using GalaSoft.MvvmLight;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 
 namespace TimesheetParser.ViewModel
 {
-    internal class MainViewModel
+    internal class MainViewModel : ViewModelBase
     {
         private ICrm crmClient;
+        private IEnumerable<JobViewModel> jobs;
+
+        public IEnumerable<JobViewModel> Jobs
+        {
+            get { return jobs; }
+            set
+            {
+                jobs = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string CrmPlugin { get; set; } = "None";
 
         public void LoadPlugins()
         {
@@ -32,7 +47,5 @@ namespace TimesheetParser.ViewModel
                 }
             }
         }
-
-        public string CrmPlugin { get; set; } = "None";
     }
 }
