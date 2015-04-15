@@ -13,6 +13,11 @@ namespace TimesheetParser.ViewModel
         private ICrm crmClient;
         private IEnumerable<JobViewModel> jobs;
 
+        public MainViewModel()
+        {
+            Title = "Timesheet Parser " + Assembly.GetEntryAssembly().GetName().Version;
+        }
+
         public IEnumerable<JobViewModel> Jobs
         {
             get { return jobs; }
@@ -24,6 +29,7 @@ namespace TimesheetParser.ViewModel
         }
 
         public string CrmPlugin { get; set; } = "None";
+        public string Title { get; set; }
 
         public void LoadPlugins()
         {
