@@ -9,9 +9,14 @@ namespace TimesheetParser
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel mainVM;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            mainVM = new MainViewModel();
+            mainVM.LoadPlugins();
         }
 
         private void GenerateButton_OnClick(object sender, RoutedEventArgs e)
