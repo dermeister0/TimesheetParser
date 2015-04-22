@@ -2,8 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TimesheetParser"
+             xmlns:vm="clr-namespace:TimesheetParser.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <vm:ViewModelLocator x:Key="ViewModelLocator"></vm:ViewModelLocator>
+        
         <SolidColorBrush x:Key="LightRowBrush" Color="#FFC5CBF9" />
         <SolidColorBrush x:Key="DarkRowBrush" Color="#FF7381F9" />      
     </Application.Resources>

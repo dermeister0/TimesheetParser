@@ -6,7 +6,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
+using Microsoft.Practices.ServiceLocation;
 
 namespace TimesheetParser.ViewModel
 {
@@ -16,10 +19,16 @@ namespace TimesheetParser.ViewModel
         private IEnumerable<JobViewModel> jobs;
         private string crmToken = null;
         private bool isConnected;
+        private string sourceText;
+        private string resultText;
+        private bool distributeIdle;
 
         public MainViewModel()
         {
             Title = "Timesheet Parser " + Assembly.GetEntryAssembly().GetName().Version;
+
+            GenerateCommand = new RelayCommand(GenerateCommand_Executed);
+            CrmLoginCommand = new RelayCommand(CrmLoginCommand_Executed);
         }
 
         public IEnumerable<JobViewModel> Jobs
@@ -28,6 +37,36 @@ namespace TimesheetParser.ViewModel
             set
             {
                 jobs = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string SourceText
+        {
+            get { return sourceText; }
+            set
+            {
+                sourceText = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string ResultText
+        {
+            get { return resultText; }
+            set
+            {
+                resultText = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool DistributeIdle
+        {
+            get { return distributeIdle; }
+            set
+            {
+                distributeIdle = value;
                 RaisePropertyChanged();
             }
         }
@@ -45,6 +84,7 @@ namespace TimesheetParser.ViewModel
             }
         }
 
+        public ICommand GenerateCommand { get; set; }
         public ICommand CrmLoginCommand { get; set; }
 
         public void LoadPlugins()
@@ -76,6 +116,35 @@ namespace TimesheetParser.ViewModel
                 return;
 
             IsConnected = await crmClient.Login(crmToken);
+        }
+
+        private void GenerateCommand_Executed()
+        {
+            var parser = new Parser();
+            var result = parser.Parse(SourceText, DistributeIdle);
+            ResultText = result.Format();
+
+            var mainVM = ViewModelLocator.Instance.MainVM;
+            mainVM.Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j)).ToList();
+
+            string previousTask = null;
+            bool isOdd = false;
+
+            foreach (var jobVM in mainVM.Jobs)
+            {
+                if (jobVM.Task != previousTask)
+                {
+                    isOdd = !isOdd;
+                    previousTask = jobVM.Task;
+                }
+
+                jobVM.IsOdd = isOdd;
+            }
+        }
+
+        private void CrmLoginCommand_Executed()
+        {
+
         }
     }
 }
