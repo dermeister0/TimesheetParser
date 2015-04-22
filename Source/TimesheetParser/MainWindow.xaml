@@ -7,7 +7,7 @@
         xmlns:support="clr-namespace:TimesheetParser.Support"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="350" Width="525" Icon="TimesheetParser.ico">
-<Frame Source="MainPage.xaml">
+<Frame Source="MainPage.xaml" NavigationUIVisibility="Hidden">
     
 </Frame>
 </Window>

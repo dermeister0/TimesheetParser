@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
+﻿using System.Windows;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using TimesheetParser.Services;
 
 namespace TimesheetParser.ViewModel
 {
-    class ViewModelLocator
+    internal class ViewModelLocator
     {
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SimpleIoc.Default.Register<INavigationService, MyNavigationService>();
+
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public static ViewModelLocator Instance { get; } = new ViewModelLocator();
-
+        public static ViewModelLocator Current => Application.Current.Resources["ViewModelLocator"] as ViewModelLocator;
         public MainViewModel MainVM => SimpleIoc.Default.GetInstance<MainViewModel>();
     }
 }

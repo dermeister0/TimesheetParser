@@ -103,6 +103,7 @@
     <Compile Include="Properties\HeavysoftVersion.cs" />
     <Compile Include="Support\BooleanConverter.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Services\MyNavigationService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="CrmLoginPage.xaml">

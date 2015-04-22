@@ -124,7 +124,7 @@ namespace TimesheetParser.ViewModel
             var result = parser.Parse(SourceText, DistributeIdle);
             ResultText = result.Format();
 
-            var mainVM = ViewModelLocator.Instance.MainVM;
+            var mainVM = ViewModelLocator.Current.MainVM;
             mainVM.Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j)).ToList();
 
             string previousTask = null;
@@ -144,7 +144,8 @@ namespace TimesheetParser.ViewModel
 
         private void CrmLoginCommand_Executed()
         {
-
+            var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
+            navigationService.NavigateTo("CrmLoginPage.xaml");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TimesheetParser
         {
             InitializeComponent();
 
-            var mainVM = ViewModelLocator.Instance.MainVM;
+            var mainVM = ViewModelLocator.Current.MainVM;
             mainVM.LoadPlugins();
 
             Task.Run(() => mainVM.CheckConnection());
