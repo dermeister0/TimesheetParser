@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -152,9 +153,9 @@ namespace TimesheetParser.ViewModel
             navigationService.NavigateTo("CrmLoginPage.xaml");
         }
 
-        private void Connect(LoginMessage message)
+        private async void Connect(LoginMessage message)
         {
-            crmClient.Login(message.Login, message.Password);
+            IsConnected = await crmClient.Login(message.Login, message.Password);
         }
     }
 }
