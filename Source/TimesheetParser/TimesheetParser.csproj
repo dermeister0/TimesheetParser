@@ -98,6 +98,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\HeavysoftVersion.cs" />
+    <Compile Include="Support\BooleanConverter.cs" />
+    <Compile Include="Support\BooleanToVisibilityConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="CrmLoginPage.xaml">
       <SubType>Designer</SubType>

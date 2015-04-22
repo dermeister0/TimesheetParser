@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 
@@ -12,6 +14,8 @@ namespace TimesheetParser.ViewModel
     {
         private ICrm crmClient;
         private IEnumerable<JobViewModel> jobs;
+        private string crmToken = null;
+        private bool isConnected;
 
         public MainViewModel()
         {
@@ -30,6 +34,18 @@ namespace TimesheetParser.ViewModel
 
         public string CrmPlugin { get; set; } = "None";
         public string Title { get; set; }
+
+        public bool IsConnected
+        {
+            get { return isConnected; }
+            set
+            {
+                isConnected = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ICommand CrmLoginCommand { get; set; }
 
         public void LoadPlugins()
         {
@@ -52,6 +68,14 @@ namespace TimesheetParser.ViewModel
                     break;
                 }
             }
+        }
+
+        public async Task CheckConnection()
+        {
+            if (string.IsNullOrEmpty(crmToken))
+                return;
+
+            IsConnected = await crmClient.Login(crmToken);
         }
     }
 }

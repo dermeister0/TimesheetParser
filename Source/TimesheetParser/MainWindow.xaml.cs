@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using TimesheetParser.ViewModel;
 
@@ -17,6 +18,8 @@ namespace TimesheetParser
 
             mainVM = new MainViewModel();
             mainVM.LoadPlugins();
+
+            Task.Run(() => mainVM.CheckConnection());
 
             DataContext = mainVM;
         }

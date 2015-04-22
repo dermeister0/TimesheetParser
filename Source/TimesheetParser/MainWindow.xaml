@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimesheetParser"
+        xmlns:support="clr-namespace:TimesheetParser.Support"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="350" Width="525" Icon="TimesheetParser.ico">
+    <Window.Resources>
+        <support:BooleanToVisibilityConverter x:Key="NegativeBoolToVisibilityConverter" True="Collapsed" False="Visible" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -84,7 +89,7 @@
             <Button Name="GenerateButton" Width="100" Click="GenerateButton_OnClick">Generate</Button>
             <CheckBox Name="DistributeIdleCheckBox" VerticalAlignment="Center">Distribute Idle</CheckBox>
             
-            <Button Width="100">Login</Button>
+            <Button Width="100" Visibility="{Binding IsConnected, Converter={StaticResource NegativeBoolToVisibilityConverter}}">Login</Button>
             <TextBlock>CRM Plugin: <Run Text="{Binding CrmPlugin}"/></TextBlock>
         </StackPanel>
     </Grid>
