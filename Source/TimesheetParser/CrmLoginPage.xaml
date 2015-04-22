@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:TimesheetParser"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="500"
-      Title="CrmLoginPage">
+      Title="CrmLoginPage"
+      DataContext="{Binding CrmLoginVM, Source={StaticResource ViewModelLocator}}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,10 +23,10 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
             <TextBlock>Login:</TextBlock>
-            <TextBox />
+            <TextBox Text="{Binding Login}" />
             <TextBlock>Password:</TextBlock>
-            <PasswordBox />
+            <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" />
         </StackPanel>
-        <Button Grid.Column="1" Grid.Row="3" Width="100">Login</Button>
+        <Button Grid.Column="1" Grid.Row="3" Width="100" Command="{Binding LoginCommand}">Login</Button>
     </Grid>
 </Page>

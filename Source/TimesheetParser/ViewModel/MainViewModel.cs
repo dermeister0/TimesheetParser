@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using Microsoft.Practices.ServiceLocation;
+using TimesheetParser.Messages;
 
 namespace TimesheetParser.ViewModel
 {
@@ -29,6 +31,8 @@ namespace TimesheetParser.ViewModel
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             CrmLoginCommand = new RelayCommand(CrmLoginCommand_Executed);
+
+            Messenger.Default.Register<LoginMessage>(this, Connect);
         }
 
         public IEnumerable<JobViewModel> Jobs
@@ -146,6 +150,11 @@ namespace TimesheetParser.ViewModel
         {
             var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
             navigationService.NavigateTo("CrmLoginPage.xaml");
+        }
+
+        private void Connect(LoginMessage message)
+        {
+            crmClient.Login(message.Login, message.Password);
         }
     }
 }

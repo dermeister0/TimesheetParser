@@ -15,9 +15,11 @@ namespace TimesheetParser.ViewModel
             SimpleIoc.Default.Register<INavigationService, MyNavigationService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CrmLoginViewModel>();
         }
 
         public static ViewModelLocator Current => Application.Current.Resources["ViewModelLocator"] as ViewModelLocator;
         public MainViewModel MainVM => SimpleIoc.Default.GetInstance<MainViewModel>();
+        public CrmLoginViewModel CrmLoginVM => SimpleIoc.Default.GetInstance<CrmLoginViewModel>();
     }
 }
