@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -100,7 +99,7 @@ namespace TimesheetParser.ViewModel
                 Directory.CreateDirectory(pluginsDir);
             }
 
-            foreach (var file in Directory.GetFiles(pluginsDir))
+            foreach (var file in Directory.GetFiles(pluginsDir, "*.dll"))
             {
                 var assembly = Assembly.LoadFile(file);
                 var type = assembly.GetExportedTypes().FirstOrDefault(t => typeof (ICrm).IsAssignableFrom(t) && t.IsClass);

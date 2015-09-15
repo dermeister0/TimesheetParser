@@ -12,7 +12,7 @@ namespace TimesheetParser.ViewModel
     {
         public CrmLoginViewModel()
         {
-            LoginCommand = new RelayCommand(LoginCommand_Executed);
+            LoginCommand = new RelayCommand(LoginCommand_Executed, () => !string.IsNullOrWhiteSpace(Login) && Password != null && Password.Length > 0);
         }
 
         public string Login { get; set; }
