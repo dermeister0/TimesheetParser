@@ -5,9 +5,21 @@
              xmlns:vm="clr-namespace:TimesheetParser.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <vm:ViewModelLocator x:Key="ViewModelLocator"></vm:ViewModelLocator>
-        
-        <SolidColorBrush x:Key="LightRowBrush" Color="#FFC5CBF9" />
-        <SolidColorBrush x:Key="DarkRowBrush" Color="#FF7381F9" />      
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                
+                <ResourceDictionary>
+                    <vm:ViewModelLocator x:Key="ViewModelLocator"></vm:ViewModelLocator>
+
+                    <SolidColorBrush x:Key="LightRowBrush" Color="#FFC5CBF9" />
+                    <SolidColorBrush x:Key="DarkRowBrush" Color="#FF7381F9" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
