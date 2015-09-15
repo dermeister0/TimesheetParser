@@ -10,6 +10,7 @@ namespace TimesheetParser
         public string Task { get; set; }
         public string Description { get; set; }
         public TimeSpan ExtraTime { get; set; }
+        public int JobId { get; set; }
 
         public TimeSpan Duration
         {

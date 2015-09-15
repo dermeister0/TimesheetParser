@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -31,6 +32,7 @@ namespace TimesheetParser.ViewModel
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             CrmLoginCommand = new RelayCommand(CrmLoginCommand_Executed);
+            SubmitJobs = new RelayCommand(SubmitJobs_Executed);
 
             Messenger.Default.Register<LoginMessage>(this, Connect);
         }
@@ -90,6 +92,7 @@ namespace TimesheetParser.ViewModel
 
         public ICommand GenerateCommand { get; set; }
         public ICommand CrmLoginCommand { get; set; }
+        public ICommand SubmitJobs { get; set; }
 
         public void LoadPlugins()
         {
@@ -128,13 +131,12 @@ namespace TimesheetParser.ViewModel
             var result = parser.Parse(SourceText, DistributeIdle);
             ResultText = result.Format();
 
-            var mainVM = ViewModelLocator.Current.MainVM;
-            mainVM.Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j)).ToList();
+            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j)).ToList();
 
             string previousTask = null;
             bool isOdd = false;
 
-            foreach (var jobVM in mainVM.Jobs)
+            foreach (var jobVM in Jobs)
             {
                 if (jobVM.Task != previousTask)
                 {
@@ -155,6 +157,28 @@ namespace TimesheetParser.ViewModel
         private async void Connect(LoginMessage message)
         {
             IsConnected = await crmClient.Login(message.Login, message.Password);
+        }
+
+        private void SubmitJobs_Executed()
+        {
+            var tasks = new List<Task>();
+            var date = DateTime.Now;
+
+            foreach (var jobVM in Jobs)
+            {
+                // Handle numeric ids only for now.
+                if (string.IsNullOrEmpty(jobVM.Job.Task) || jobVM.Job.Task.Contains('-'))
+                    continue;
+
+                var taskId = Convert.ToInt32(jobVM.Job.Task);
+                tasks.Add(Task.Run(async () =>
+                {
+                    await crmClient.AddJob(new JobDefinition { TaskId = taskId, Date = date, Description = jobVM.Description, Duration = (int) jobVM.Job.Duration.TotalMinutes });
+                    jobVM.Job.JobId = 1; // @@
+                }));
+            }
+
+            Task.WaitAll(tasks.ToArray(), CancellationToken.None);
         }
     }
 }

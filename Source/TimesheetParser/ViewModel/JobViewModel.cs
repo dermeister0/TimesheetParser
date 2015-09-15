@@ -100,9 +100,12 @@ namespace TimesheetParser.ViewModel
         {
             get { return lightBrush ?? (lightBrush = Application.Current.Resources["LightRowBrush"] as Brush); }
         }
+
         private static Brush DarkBrush
         {
             get { return darkBrush ?? (darkBrush = Application.Current.Resources["DarkRowBrush"] as Brush); }
         }
+
+        public Job Job => job;
     }
 }

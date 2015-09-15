@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 
@@ -10,6 +9,9 @@ namespace TimesheetParser
         public ParseResult Parse(string source, bool distributeIdle)
         {
             var result = new ParseResult();
+
+            if (string.IsNullOrEmpty(source))
+                return result;
 
             var lines = source.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             Job currentJob = null;
