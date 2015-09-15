@@ -32,7 +32,7 @@ namespace TimesheetParser.ViewModel
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             CrmLoginCommand = new RelayCommand(CrmLoginCommand_Executed);
-            SubmitJobs = new RelayCommand(SubmitJobs_Executed);
+            SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed);
 
             Messenger.Default.Register<LoginMessage>(this, Connect);
         }
@@ -92,7 +92,7 @@ namespace TimesheetParser.ViewModel
 
         public ICommand GenerateCommand { get; set; }
         public ICommand CrmLoginCommand { get; set; }
-        public ICommand SubmitJobs { get; set; }
+        public ICommand SubmitJobsCommand { get; set; }
 
         public void LoadPlugins()
         {
