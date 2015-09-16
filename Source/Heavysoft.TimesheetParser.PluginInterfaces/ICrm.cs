@@ -8,5 +8,6 @@ namespace Heavysoft.TimesheetParser.PluginInterfaces
         Task<bool> Login(string login, SecureString password);
         Task<bool> Login(string token);
         Task<bool> AddJob(JobDefinition job);
+        Task<TaskHeader> GetTaskHeader(string taskId);
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="Properties\HeavysoftVersion.cs" />
     <Compile Include="ICrm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskHeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

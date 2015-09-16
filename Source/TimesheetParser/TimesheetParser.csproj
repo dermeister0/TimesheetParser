@@ -56,20 +56,20 @@
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight">
-      <HintPath>..\packages\MvvmLightLibs.5.1.0.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras">
-      <HintPath>..\packages\MvvmLightLibs.5.1.0.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform">
-      <HintPath>..\packages\MvvmLightLibs.5.1.0.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.2.0.37226, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.0.5085.1, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.0.5085.1\lib\net40\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
+    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.0.5086.0, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.0.5086.0\lib\net40\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
@@ -82,7 +82,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
