@@ -183,6 +183,7 @@ namespace TimesheetParser.ViewModel
                         TaskId = taskId,
                         Date = date, Description = jobVM.Description,
                         Duration = (int) jobVM.Job.Duration.TotalMinutes,
+                        IsBillable = taskHeader.IsBillable,
                     });
                     jobVM.Job.JobId = 1; // @@
                 }));

@@ -14,5 +14,7 @@ namespace Heavysoft.TimesheetParser.PluginInterfaces
         /// Duration in minutes.
         /// </summary>
         public int Duration { get; set; }
+
+        public bool IsBillable { get; set; }
     }
 }
