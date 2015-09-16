@@ -163,9 +163,8 @@ namespace TimesheetParser.ViewModel
             IsConnected = await crmClient.Login(message.Login, message.Password);
         }
 
-        private void SubmitJobs_Executed()
+        private async void SubmitJobs_Executed()
         {
-            var tasks = new List<Task>();
             var date = DateTime.Now;
 
             foreach (var jobVM in Jobs)
@@ -174,22 +173,28 @@ namespace TimesheetParser.ViewModel
                 if (string.IsNullOrEmpty(jobVM.Job.Task) || jobVM.Job.Task.Contains('-'))
                     continue;
 
-                var taskId = Convert.ToInt32(jobVM.Job.Task);
-                tasks.Add(Task.Run(async () =>
-                {
-                    var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
-                    await crmClient.AddJob(new JobDefinition
-                    {
-                        TaskId = taskId,
-                        Date = date, Description = jobVM.Description,
-                        Duration = (int) jobVM.Job.Duration.TotalMinutes,
-                        IsBillable = taskHeader.IsBillable,
-                    });
-                    jobVM.Job.JobId = 1; // @@
-                }));
-            }
+                // Job is submitted already.
+                if (jobVM.Job.JobId != 0)
+                    continue;
 
-            Task.WaitAll(tasks.ToArray(), CancellationToken.None);
+                var taskId = Convert.ToInt32(jobVM.Job.Task);
+
+                var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
+                jobVM.TaskTitle = taskHeader.Title;
+
+                jobVM.IsTaskCopied = true;
+                jobVM.IsDescriptionCopied = true;
+                jobVM.IsDurationCopied = true;
+
+                await crmClient.AddJob(new JobDefinition
+                {
+                    TaskId = taskId,
+                    Date = date, Description = jobVM.Description,
+                    Duration = (int) jobVM.Job.Duration.TotalMinutes,
+                    IsBillable = taskHeader.IsBillable,
+                });
+                jobVM.Job.JobId = 1; // @@
+            }
         }
     }
 }
