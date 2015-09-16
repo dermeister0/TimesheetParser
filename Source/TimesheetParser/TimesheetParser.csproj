@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Messages\LoginMessage.cs" />
     <Compile Include="Properties\HeavysoftVersion.cs" />
+    <Compile Include="Services\TaskInfoService.cs" />
     <Compile Include="Support\BooleanConverter.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
     <Compile Include="Services\MyNavigationService.cs" />

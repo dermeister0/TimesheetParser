@@ -14,6 +14,7 @@ namespace TimesheetParser.ViewModel
         private bool isTaskCopied;
         private static Brush lightBrush;
         private static Brush darkBrush;
+        private string taskTitle;
 
         public JobViewModel(Job job)
         {
@@ -107,5 +108,15 @@ namespace TimesheetParser.ViewModel
         }
 
         public Job Job => job;
+
+        public string TaskTitle
+        {
+            get { return taskTitle; }
+            set
+            {
+                taskTitle = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

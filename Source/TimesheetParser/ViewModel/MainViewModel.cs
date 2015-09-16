@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Messages;
+using TimesheetParser.Services;
 
 namespace TimesheetParser.ViewModel
 {
@@ -25,6 +26,7 @@ namespace TimesheetParser.ViewModel
         private string sourceText;
         private string resultText;
         private bool distributeIdle;
+        private TaskInfoService taskInfoService;
 
         public MainViewModel()
         {
@@ -115,6 +117,8 @@ namespace TimesheetParser.ViewModel
                     break;
                 }
             }
+
+            taskInfoService = new TaskInfoService(crmClient);
         }
 
         public async Task CheckConnection()
@@ -173,7 +177,13 @@ namespace TimesheetParser.ViewModel
                 var taskId = Convert.ToInt32(jobVM.Job.Task);
                 tasks.Add(Task.Run(async () =>
                 {
-                    await crmClient.AddJob(new JobDefinition { TaskId = taskId, Date = date, Description = jobVM.Description, Duration = (int) jobVM.Job.Duration.TotalMinutes });
+                    var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
+                    await crmClient.AddJob(new JobDefinition
+                    {
+                        TaskId = taskId,
+                        Date = date, Description = jobVM.Description,
+                        Duration = (int) jobVM.Job.Duration.TotalMinutes,
+                    });
                     jobVM.Job.JobId = 1; // @@
                 }));
             }

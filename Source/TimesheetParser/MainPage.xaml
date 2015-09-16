@@ -65,8 +65,8 @@
                                 <Button Grid.Row="0" Grid.Column="1" Command="{Binding CopyTaskCommand}">Copy Task</Button>
                                 <Button Grid.Row="1" Grid.Column="1" Command="{Binding CopyDurationCommand}">Copy Duration</Button>
                                 <Button Grid.Row="2" Grid.Column="1" Command="{Binding CopyDescriptionCommand}">Copy Description</Button>
-                                
-                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Task}" />
+
+                                <TextBlock Grid.Row="0" Grid.Column="2"><Run Text="{Binding Task, Mode=OneWay}" /> <Run Text="{Binding TaskTitle}" /></TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Duration}" />
                                 <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Description}" />
                             </Grid>
