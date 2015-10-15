@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mahappsControls="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d"
-        Title="{Binding Title}" Height="350" Width="525" Icon="TimesheetParser.ico">
+        mc:Ignorable="d" Width="800" MinWidth="700" Height="600" MinHeight="300"
+        Title="{Binding Title}" Icon="TimesheetParser.ico">
 <Frame Source="MainPage.xaml" NavigationUIVisibility="Hidden">
     
 </Frame>

@@ -95,6 +95,8 @@
             <Button Width="100" Visibility="{Binding IsConnected, Converter={StaticResource NegativeBoolToVisibilityConverter}}" Command="{Binding CrmLoginCommand}">Login</Button>
             <Button Width="100" Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}">Submit Jobs</Button>
             <TextBlock>CRM Plugin: <Run Text="{Binding CrmPlugin}"/></TextBlock>
+
+            <DatePicker SelectedDate="{Binding JobsDate}" />
         </StackPanel>
     </Grid>
 </Page>

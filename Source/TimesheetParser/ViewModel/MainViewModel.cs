@@ -21,16 +21,18 @@ namespace TimesheetParser.ViewModel
     {
         private ICrm crmClient;
         private IEnumerable<JobViewModel> jobs;
-        private string crmToken = null;
+        private readonly string crmToken = null;
         private bool isConnected;
         private string sourceText;
         private string resultText;
         private bool distributeIdle;
         private TaskInfoService taskInfoService;
+        private DateTime jobsDate;
 
         public MainViewModel()
         {
             Title = "Timesheet Parser " + Assembly.GetEntryAssembly().GetName().Version;
+            JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             CrmLoginCommand = new RelayCommand(CrmLoginCommand_Executed);
@@ -95,6 +97,16 @@ namespace TimesheetParser.ViewModel
         public ICommand GenerateCommand { get; set; }
         public ICommand CrmLoginCommand { get; set; }
         public ICommand SubmitJobsCommand { get; set; }
+
+        public DateTime JobsDate
+        {
+            get { return jobsDate; }
+            set
+            {
+                jobsDate = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public void LoadPlugins()
         {
@@ -165,8 +177,6 @@ namespace TimesheetParser.ViewModel
 
         private async void SubmitJobs_Executed()
         {
-            var date = DateTime.Now;
-
             foreach (var jobVM in Jobs)
             {
                 // Handle numeric ids only for now.
@@ -189,7 +199,7 @@ namespace TimesheetParser.ViewModel
                 await crmClient.AddJob(new JobDefinition
                 {
                     TaskId = taskId,
-                    Date = date, Description = jobVM.Description,
+                    Date = JobsDate, Description = jobVM.Description,
                     Duration = (int) jobVM.Job.Duration.TotalMinutes,
                     IsBillable = taskHeader.IsBillable,
                 });
