@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -14,6 +13,7 @@ using Heavysoft.TimesheetParser.PluginInterfaces;
 using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Messages;
 using TimesheetParser.Services;
+using TimesheetParser.Support;
 
 namespace TimesheetParser.ViewModel
 {
@@ -28,6 +28,7 @@ namespace TimesheetParser.ViewModel
         private bool distributeIdle;
         private TaskInfoService taskInfoService;
         private DateTime jobsDate;
+        private PasswordHelper passwordHelper;
 
         public MainViewModel()
         {
@@ -125,7 +126,11 @@ namespace TimesheetParser.ViewModel
                 {
                     crmClient = Activator.CreateInstance(type) as ICrm;
 
-                    CrmPlugin = Path.GetFileName(file);
+                    CrmPlugin = Path.GetFileName(file).Replace(".dll", "");
+                    
+                    passwordHelper = new PasswordHelper(ViewModelLocator.Current.CrmLoginVM, CrmPlugin);
+                    passwordHelper.LoadCredential();
+
                     break;
                 }
             }
@@ -172,6 +177,7 @@ namespace TimesheetParser.ViewModel
 
         private async void Connect(LoginMessage message)
         {
+            passwordHelper.SaveCredential();
             IsConnected = await crmClient.Login(message.Login, message.Password);
         }
 

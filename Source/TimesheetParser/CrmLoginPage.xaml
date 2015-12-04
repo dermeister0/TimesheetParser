@@ -3,11 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:TimesheetParser"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="500"
       Title="CrmLoginPage"
-      DataContext="{Binding CrmLoginVM, Source={StaticResource ViewModelLocator}}">
+      DataContext="{Binding CrmLoginVM, Source={StaticResource ViewModelLocator}}"
+      Loaded="CrmLoginPage_OnLoaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,7 +25,7 @@
             <TextBlock>Login:</TextBlock>
             <TextBox Text="{Binding Login}" />
             <TextBlock>Password:</TextBlock>
-            <PasswordBox PasswordChanged="PasswordBox_OnPasswordChanged" />
+            <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" />
         </StackPanel>
         <Button Grid.Column="1" Grid.Row="3" Width="100" Command="{Binding LoginCommand}">Login</Button>
     </Grid>

@@ -22,5 +22,14 @@ namespace TimesheetParser
                 crmLoginVM.Password = ((PasswordBox) e.Source).SecurePassword;
             }
         }
+
+        private void CrmLoginPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var crmLoginVM = DataContext as CrmLoginViewModel;
+            if (crmLoginVM != null)
+            {
+                PasswordBox.Password = crmLoginVM.Password.ConvertToUnsecureString();
+            }
+        }
     }
 }
