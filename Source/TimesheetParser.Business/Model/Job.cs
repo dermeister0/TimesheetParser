@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TimesheetParser.Model
+namespace TimesheetParser.Business.Model
 {
     public class Job
     {

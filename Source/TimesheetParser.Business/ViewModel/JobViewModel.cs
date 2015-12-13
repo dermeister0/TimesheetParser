@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
-using TimesheetParser.Model;
 
 namespace TimesheetParser.Business.ViewModel
 {
+    using Model;
+
     public class JobViewModel : ViewModelBase
     {
         private readonly Job job;

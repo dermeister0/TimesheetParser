@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using TimesheetParser.Business.Model;
 
 namespace TimesheetParser.ViewModel
 {

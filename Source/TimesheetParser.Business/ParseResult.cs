@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TimesheetParser.Model;
 
 namespace TimesheetParser.Business
 {
+    using Model;
+
     public class ParseResult
     {
         public List<Job> Jobs { get; set; } = new List<Job>();

@@ -14,6 +14,7 @@ using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Messages;
 using TimesheetParser.Services;
 using TimesheetParser.Support;
+using TimesheetParser.Business;
 
 namespace TimesheetParser.ViewModel
 {

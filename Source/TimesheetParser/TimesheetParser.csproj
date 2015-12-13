@@ -139,7 +139,6 @@
     <Compile Include="CrmLoginPage.xaml.cs">
       <DependentUpon>CrmLoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Job.cs" />
     <Compile Include="ViewModel\JobViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -147,9 +146,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser.cs" />
-    <Compile Include="ParseResult.cs" />
-    <Compile Include="ParserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -193,6 +189,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="TimesheetParser.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimesheetParser.Business\TimesheetParser.Business.csproj">
+      <Project>{f4bf5a97-d10b-4267-8dc0-7c6270532a5e}</Project>
+      <Name>TimesheetParser.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">

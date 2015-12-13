@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Linq;
-using TimesheetParser.Model;
+using TimesheetParser.Business.Model;
 
 namespace TimesheetParser.Business
 {
