@@ -8,5 +8,7 @@ namespace TimesheetParser.Business.ViewModel
         {
             SimpleIoc.Default.Register<MainViewModel>();
         }
+
+        public MainViewModel MainVM => SimpleIoc.Default.GetInstance<MainViewModel>();
     }
 }

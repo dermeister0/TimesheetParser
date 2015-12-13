@@ -3,7 +3,7 @@ using TimesheetParser.Model;
 
 namespace TimesheetParser.Business.ViewModel
 {
-    internal class JobViewModel : ViewModelBase
+    public class JobViewModel : ViewModelBase
     {
         private readonly Job job;
         private string taskTitle;

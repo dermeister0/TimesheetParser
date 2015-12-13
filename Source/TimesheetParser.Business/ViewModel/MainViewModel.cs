@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace TimesheetParser.Business.ViewModel
 {
-    class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         private IEnumerable<JobViewModel> jobs;
         private string sourceText;
@@ -16,6 +16,9 @@ namespace TimesheetParser.Business.ViewModel
         public MainViewModel()
         {
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
+
+            // Initialize attached property.
+            SourceText = string.Empty;
         }
 
         public IEnumerable<JobViewModel> Jobs
