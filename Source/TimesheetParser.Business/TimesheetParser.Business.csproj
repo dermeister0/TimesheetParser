@@ -38,6 +38,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\ClipboardMessage.cs" />
     <Compile Include="Model\Job.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="ParseResult.cs" />

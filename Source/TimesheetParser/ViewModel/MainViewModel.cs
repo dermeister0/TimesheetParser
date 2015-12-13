@@ -15,6 +15,9 @@ using TimesheetParser.Messages;
 using TimesheetParser.Services;
 using TimesheetParser.Support;
 using TimesheetParser.Business;
+using TimesheetParser.Business.Messages;
+using System.Windows;
+using TimesheetParser.Business.ViewModel;
 
 namespace TimesheetParser.ViewModel
 {
@@ -41,6 +44,7 @@ namespace TimesheetParser.ViewModel
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed);
 
             Messenger.Default.Register<LoginMessage>(this, Connect);
+            Messenger.Default.Register<ClipboardMessage>(this, SetClipboardText);
         }
 
         public IEnumerable<JobViewModel> Jobs
@@ -211,6 +215,18 @@ namespace TimesheetParser.ViewModel
                     IsBillable = taskHeader.IsBillable,
                 });
                 jobVM.Job.JobId = 1; // @@
+            }
+        }
+
+        void SetClipboardText(ClipboardMessage message)
+        {
+            try
+            {
+                Clipboard.SetText(message.Text, TextDataFormat.UnicodeText);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed to set clipboard text.");
             }
         }
     }

@@ -140,7 +140,6 @@
     <Compile Include="CrmLoginPage.xaml.cs">
       <DependentUpon>CrmLoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\JobViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
