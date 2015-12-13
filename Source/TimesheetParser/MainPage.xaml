@@ -12,6 +12,7 @@
     <Page.Resources>
         <support:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed" />
         <support:BooleanToVisibilityConverter x:Key="NegativeBoolToVisibilityConverter" True="Collapsed" False="Visible" />
+        <support:IsOddToBrushConverter x:Key="IsOddToBrushConverter" />
     </Page.Resources>
     
     <Grid>
@@ -34,7 +35,7 @@
                 <ListView ItemsSource="{Binding Jobs}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Background="{Binding BackgroundBrush}">
+                            <Grid Background="{Binding IsOdd, Converter={StaticResource IsOddToBrushConverter}}">
                                 <Grid.Resources>
                                     <Style TargetType="Button">
                                         <Setter Property="Margin" Value="5" />

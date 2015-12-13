@@ -13,8 +13,6 @@ namespace TimesheetParser.ViewModel
         private bool isDescriptionCopied;
         private bool isDurationCopied;
         private bool isTaskCopied;
-        private static Brush lightBrush;
-        private static Brush darkBrush;
         private string taskTitle;
 
         public JobViewModel(Job job)
@@ -94,18 +92,6 @@ namespace TimesheetParser.ViewModel
             {
                 MessageBox.Show("Failed to set clipboard text.");
             }            
-        }
-
-        public Brush BackgroundBrush => IsOdd ? LightBrush : DarkBrush;
-
-        private static Brush LightBrush
-        {
-            get { return lightBrush ?? (lightBrush = Application.Current.Resources["LightRowBrush"] as Brush); }
-        }
-
-        private static Brush DarkBrush
-        {
-            get { return darkBrush ?? (darkBrush = Application.Current.Resources["DarkRowBrush"] as Brush); }
         }
 
         public Job Job => job;
