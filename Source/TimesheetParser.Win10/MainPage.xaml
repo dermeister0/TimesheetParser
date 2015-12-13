@@ -5,7 +5,8 @@
     xmlns:local="using:TimesheetParser.Win10"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -24,8 +25,20 @@
                 <RichEditBox FontFamily="Consolas" IsReadOnly="True" />
             </PivotItem>
             <PivotItem Header="Table View">
-                <TextBlock>bbb</TextBlock>
+                <ListView ItemsSource="{Binding Jobs}">
+                    
+                </ListView>
             </PivotItem>
         </Pivot>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </StackPanel.Resources>
+            
+            <Button Name="GenerateButton" Width="100" Command="{Binding GenerateCommand}">Generate</Button>
+        </StackPanel>
     </Grid>
 </Page>
