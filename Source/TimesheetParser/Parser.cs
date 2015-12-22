@@ -13,7 +13,7 @@ namespace TimesheetParser
             if (string.IsNullOrEmpty(source))
                 return result;
 
-            var lines = source.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = source.Split(new[] { '\r', '\n', '\v' }, StringSplitOptions.RemoveEmptyEntries);
             Job currentJob = null;
 
             var taskRegex = new Regex(@"#((?:[A-z0-9]+-)*\d+)");
