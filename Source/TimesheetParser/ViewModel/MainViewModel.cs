@@ -6,9 +6,7 @@ using System.Reflection;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
-using Microsoft.Practices.ServiceLocation;
 
 namespace TimesheetParser.ViewModel
 {
@@ -116,10 +114,24 @@ namespace TimesheetParser.ViewModel
                     continue;
 
                 var crmClient = Activator.CreateInstance(type) as ICrm;
-                plugins.Add(new CrmPluginViewModel(crmClient));
+                var crmVM = new CrmPluginViewModel(crmClient);
+                crmVM.PropertyChanged += CrmVM_PropertyChanged;
+                plugins.Add(crmVM);
             }
 
             CrmPlugins = plugins;
+        }
+
+        private void CrmVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CrmPluginViewModel.IsConnected))
+            {
+                var crmVM = sender as CrmPluginViewModel;
+                if (crmVM != null)
+                {
+                    IsConnected |= crmVM.IsConnected;
+                }
+            }
         }
 
         public void CheckConnection()
@@ -161,7 +173,7 @@ namespace TimesheetParser.ViewModel
                 if (jobVM.Job.JobId != 0)
                     continue;
 
-                foreach (var pluginVM in CrmPlugins)
+                foreach (var pluginVM in CrmPlugins.Where(p => p.IsConnected))
                 {
                     if (!pluginVM.Client.IsValidTask(jobVM.Job.Task))
                         continue;

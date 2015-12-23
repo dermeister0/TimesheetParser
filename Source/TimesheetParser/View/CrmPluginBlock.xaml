@@ -12,10 +12,10 @@
         <support:BooleanToVisibilityConverter x:Key="NegativeBoolToVisibilityConverter" True="Collapsed" False="Visible" />
     </UserControl.Resources>
     <Grid>
-        <GroupBox Header="{Binding Name}">
+        <GroupBox Header="{Binding Name}" Width="140">
             <Grid>
-                <Button Width="100" Visibility="{Binding IsConnected, Converter={StaticResource NegativeBoolToVisibilityConverter}}" Command="{Binding LoginCommand}">Login</Button>
-                <Button  Width="100" Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}">Submit Jobs</Button>
+                <Button Visibility="{Binding IsConnected, Converter={StaticResource NegativeBoolToVisibilityConverter}}" Command="{Binding LoginCommand}">Login</Button>
+                <TextBlock Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}">Connected.</TextBlock>
             </Grid>
         </GroupBox>
     </Grid>

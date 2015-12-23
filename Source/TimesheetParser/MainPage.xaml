@@ -10,6 +10,9 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPage"
       DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}">
+    <Page.Resources>
+        <support:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -81,14 +84,17 @@
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5" />
+                    <Setter Property="Width" Value="100" />
+                    <Setter Property="Height" Value="20" />
                 </Style>
             </StackPanel.Resources>
 
-            <Button Name="GenerateButton" Width="100" Command="{Binding GenerateCommand}" Height="20">Generate</Button>
+            <Button Command="{Binding GenerateCommand}" Height="20">Generate</Button>
             <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle}">Distribute Idle</CheckBox>
             
             <view:CrmPluginListBox ItemsSource="{Binding CrmPlugins}" Margin="10"></view:CrmPluginListBox>
 
+            <Button Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}">Submit Jobs</Button>
             <DatePicker SelectedDate="{Binding JobsDate}" Height="20" />
         </StackPanel>
     </Grid>
