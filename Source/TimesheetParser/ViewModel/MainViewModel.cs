@@ -193,8 +193,6 @@ namespace TimesheetParser.ViewModel
                 if (jobVM.Job.JobId != 0)
                     continue;
 
-                var taskId = Convert.ToInt32(jobVM.Job.Task);
-
                 var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
                 jobVM.TaskTitle = taskHeader.Title;
 
@@ -204,7 +202,7 @@ namespace TimesheetParser.ViewModel
 
                 await crmClient.AddJob(new JobDefinition
                 {
-                    TaskId = taskId,
+                    TaskId = jobVM.Job.Task,
                     Date = JobsDate, Description = jobVM.Description,
                     Duration = (int) jobVM.Job.Duration.TotalMinutes,
                     IsBillable = taskHeader.IsBillable,

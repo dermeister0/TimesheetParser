@@ -45,6 +45,9 @@ namespace JiraApi
 
         public Task<bool> AddJob(JobDefinition job)
         {
+            var request = new RestRequest("issue/{issueId}/worklog");
+            request.AddUrlSegment("issueId", job.TaskId);
+
             throw new System.NotImplementedException();
         }
 
