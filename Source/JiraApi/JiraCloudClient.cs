@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using RestSharp;
@@ -6,23 +7,28 @@ using RestSharp.Authenticators;
 
 namespace JiraApi
 {
-    internal class ApiResult
-    {
-        public string Message { get; set; }
-        public string StatusCode { get; set; }
-    }
-
     public class JiraCloudClient : ICrm
     {
         private const string ApiUrl = "https://saritasa.atlassian.net/rest/api/2/";
 
         private string login;
         private string password;
-        private RestClient restClient;
+        private readonly RestClient restClient;
+        private readonly Regex taskRegex = new Regex(@"^[A-z0-9]+-\d+$");
 
         public JiraCloudClient()
         {
             restClient = new RestClient(ApiUrl);
+        }
+
+        public string GetName()
+        {
+            return "JIRA Cloud";
+        }
+
+        public bool IsValidTask(string taskId)
+        {
+            return taskRegex.IsMatch(taskId);
         }
 
         public async Task<bool> Login(string login, string password)

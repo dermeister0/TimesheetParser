@@ -16,7 +16,7 @@ namespace TimesheetParser
             var lines = source.Split(new[] { '\r', '\n', '\v' }, StringSplitOptions.RemoveEmptyEntries);
             Job currentJob = null;
 
-            var taskRegex = new Regex(@"#((?:[A-z0-9]+-)*\d+)");
+            var taskRegex = new Regex(@"#((?:[A-z0-9]+-)?\d+)");
             var timeRegex = new Regex(@"\d+:\d+ [AP]M");
 
             var state = ParserState.Begin;

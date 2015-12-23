@@ -10,13 +10,14 @@ namespace TimesheetParser.ViewModel
 
         public bool IsConnected { get; set; }
         public string Name { get; }
+        public ICrm Client => crmClient;
 
-        public CrmPluginViewModel(ICrm crmClient, string name)
+        public CrmPluginViewModel(ICrm crmClient)
         {
             this.crmClient = crmClient;
-            Name = name;
+            Name = crmClient.GetName();
 
-            passwordHelper = new PasswordHelper(ViewModelLocator.Current.CrmLoginVM, name);
+            passwordHelper = new PasswordHelper(ViewModelLocator.Current.CrmLoginVM, Name);
             passwordHelper.LoadCredential();
         }
     }

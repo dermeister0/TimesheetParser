@@ -121,13 +121,11 @@ namespace TimesheetParser.ViewModel
                 var assembly = Assembly.LoadFile(file);
                 var type = assembly.GetExportedTypes().FirstOrDefault(t => typeof (ICrm).IsAssignableFrom(t) && t.IsClass);
 
-                if (type != null)
-                {
-                    var crmClient = Activator.CreateInstance(type) as ICrm;
-                    var name = Path.GetFileName(file).Replace(".dll", "");
+                if (type == null)
+                    continue;
 
-                    plugins.Add(new CrmPluginViewModel(crmClient, name));
-                }
+                var crmClient = Activator.CreateInstance(type) as ICrm;
+                plugins.Add(new CrmPluginViewModel(crmClient));
             }
 
             CrmPlugins = plugins;
@@ -182,29 +180,33 @@ namespace TimesheetParser.ViewModel
         {
             foreach (var jobVM in Jobs)
             {
-                // Handle numeric ids only for now.
-                if (string.IsNullOrEmpty(jobVM.Job.Task) || jobVM.Job.Task.Contains('-'))
-                    continue;
-
                 // Job is submitted already.
                 if (jobVM.Job.JobId != 0)
                     continue;
 
-                // @@ var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
-                // @@ jobVM.TaskTitle = taskHeader.Title;
-
-                jobVM.IsTaskCopied = true;
-                jobVM.IsDescriptionCopied = true;
-                jobVM.IsDurationCopied = true;
-                // @@ 
-                /*await crmClient.AddJob(new JobDefinition
+                foreach (var plugin in CrmPlugins)
                 {
-                    TaskId = jobVM.Job.Task,
-                    Date = JobsDate, Description = jobVM.Description,
-                    Duration = (int) jobVM.Job.Duration.TotalMinutes,
-                    IsBillable = taskHeader.IsBillable,
-                });*/
-                jobVM.Job.JobId = 1; // @@
+                    if (!plugin.Client.IsValidTask(jobVM.Job.Task))
+                        continue;
+
+                    // @@ var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
+                    // @@ jobVM.TaskTitle = taskHeader.Title;
+
+                    jobVM.IsTaskCopied = true;
+                    jobVM.IsDescriptionCopied = true;
+                    jobVM.IsDurationCopied = true;
+                    // @@ 
+                    /*await crmClient.AddJob(new JobDefinition
+                    {
+                        TaskId = jobVM.Job.Task,
+                        Date = JobsDate, Description = jobVM.Description,
+                        Duration = (int) jobVM.Job.Duration.TotalMinutes,
+                        IsBillable = taskHeader.IsBillable,
+                    });*/
+                    jobVM.Job.JobId = 1; // @@
+
+                    break;
+                }
             }
         }
     }
