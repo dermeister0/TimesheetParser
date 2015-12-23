@@ -37,6 +37,10 @@
       <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.0.5184.0\lib\net40\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
