@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using RestSharp;
 using RestSharp.Authenticators;
+using RestSharp.Deserializers;
 
 namespace JiraApi
 {
@@ -49,17 +50,32 @@ namespace JiraApi
             return Task.FromResult(false);
         }
 
-        public Task<bool> AddJob(JobDefinition job)
+        public async Task<bool> AddJob(JobDefinition job)
         {
-            var request = new RestRequest("issue/{issueId}/worklog");
+            var request = new RestRequest("issue/{issueId}/worklog", Method.POST) { RequestFormat = DataFormat.Json };
             request.AddUrlSegment("issueId", job.TaskId);
+            request.AddBody(new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date });
 
-            throw new System.NotImplementedException();
+            var response = await restClient.ExecuteTaskAsync(request);
+
+            return response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK;
         }
 
-        public Task<TaskHeader> GetTaskHeader(string taskId)
+        public async Task<TaskHeader> GetTaskHeader(string taskId)
         {
-            throw new System.NotImplementedException();
+            var request = new RestRequest("issue/{issueId}?fields=summary");
+            request.AddUrlSegment("issueId", taskId);
+
+            var response = await restClient.ExecuteTaskAsync(request);
+
+            var title = string.Empty;
+            if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
+            {
+                var content = SimpleJson.DeserializeObject<IssueSummaryResponse>(response.Content);
+                title = content.fields["summary"];
+            }
+
+            return new TaskHeader() { Title = title };
         }
     }
 }
