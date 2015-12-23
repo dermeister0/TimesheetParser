@@ -72,8 +72,8 @@
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.0.5086.1, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.0.5086.1\lib\net40\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
+    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.0.5184.0, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.0.5184.0\lib\net40\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">

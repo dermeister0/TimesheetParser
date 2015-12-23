@@ -178,7 +178,7 @@ namespace TimesheetParser.ViewModel
         private async void Connect(LoginMessage message)
         {
             passwordHelper.SaveCredential();
-            IsConnected = await crmClient.Login(message.Login, message.Password);
+            IsConnected = await crmClient.Login(message.Login, message.Password.ConvertToUnsecureString());
         }
 
         private async void SubmitJobs_Executed()

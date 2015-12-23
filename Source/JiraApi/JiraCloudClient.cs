@@ -1,12 +1,11 @@
-﻿using System.Security;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 
 namespace JiraApi
 {
     class JiraCloudClient : ICrm
     {
-        public Task<bool> Login(string login, SecureString password)
+        public Task<bool> Login(string login, string password)
         {
             throw new System.NotImplementedException();
         }
