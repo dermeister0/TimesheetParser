@@ -13,22 +13,18 @@ using Heavysoft.TimesheetParser.PluginInterfaces;
 using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Messages;
 using TimesheetParser.Services;
-using TimesheetParser.Support;
 
 namespace TimesheetParser.ViewModel
 {
     internal class MainViewModel : ViewModelBase
     {
-        private ICrm crmClient;
         private IEnumerable<JobViewModel> jobs;
         private readonly string crmToken = null;
         private bool isConnected;
         private string sourceText;
         private string resultText;
         private bool distributeIdle;
-        private TaskInfoService taskInfoService;
         private DateTime jobsDate;
-        private PasswordHelper passwordHelper;
 
         public MainViewModel()
         {
@@ -82,7 +78,6 @@ namespace TimesheetParser.ViewModel
             }
         }
 
-        public string CrmPlugin { get; set; } = "None";
         public string Title { get; set; }
 
         public bool IsConnected
@@ -109,6 +104,8 @@ namespace TimesheetParser.ViewModel
             }
         }
 
+        public IReadOnlyCollection<CrmPluginViewModel> CrmPlugins { get; set; }
+
         public void LoadPlugins()
         {
             var pluginsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
@@ -117,6 +114,8 @@ namespace TimesheetParser.ViewModel
                 Directory.CreateDirectory(pluginsDir);
             }
 
+            var plugins = new List<CrmPluginViewModel>();
+
             foreach (var file in Directory.GetFiles(pluginsDir, "*.dll"))
             {
                 var assembly = Assembly.LoadFile(file);
@@ -124,18 +123,16 @@ namespace TimesheetParser.ViewModel
 
                 if (type != null)
                 {
-                    crmClient = Activator.CreateInstance(type) as ICrm;
+                    var crmClient = Activator.CreateInstance(type) as ICrm;
+                    var name = Path.GetFileName(file).Replace(".dll", "");
 
-                    CrmPlugin = Path.GetFileName(file).Replace(".dll", "");
-                    
-                    passwordHelper = new PasswordHelper(ViewModelLocator.Current.CrmLoginVM, CrmPlugin);
-                    passwordHelper.LoadCredential();
-
-                    break;
+                    plugins.Add(new CrmPluginViewModel(crmClient, name));
                 }
             }
 
-            taskInfoService = new TaskInfoService(crmClient);
+            CrmPlugins = plugins;
+
+            // @@ taskInfoService = new TaskInfoService(crmClient);
         }
 
         public async Task CheckConnection()
@@ -143,7 +140,7 @@ namespace TimesheetParser.ViewModel
             if (string.IsNullOrEmpty(crmToken))
                 return;
 
-            IsConnected = await crmClient.Login(crmToken);
+            // @@ IsConnected = await crmClient.Login(crmToken);
         }
 
         private void GenerateCommand_Executed()
@@ -177,8 +174,8 @@ namespace TimesheetParser.ViewModel
 
         private async void Connect(LoginMessage message)
         {
-            passwordHelper.SaveCredential();
-            IsConnected = await crmClient.Login(message.Login, message.Password.ConvertToUnsecureString());
+            // @@ passwordHelper.SaveCredential();
+            // @@ IsConnected = await crmClient.Login(message.Login, message.Password.ConvertToUnsecureString());
         }
 
         private async void SubmitJobs_Executed()
@@ -193,20 +190,20 @@ namespace TimesheetParser.ViewModel
                 if (jobVM.Job.JobId != 0)
                     continue;
 
-                var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
-                jobVM.TaskTitle = taskHeader.Title;
+                // @@ var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
+                // @@ jobVM.TaskTitle = taskHeader.Title;
 
                 jobVM.IsTaskCopied = true;
                 jobVM.IsDescriptionCopied = true;
                 jobVM.IsDurationCopied = true;
-
-                await crmClient.AddJob(new JobDefinition
+                // @@ 
+                /*await crmClient.AddJob(new JobDefinition
                 {
                     TaskId = jobVM.Job.Task,
                     Date = JobsDate, Description = jobVM.Description,
                     Duration = (int) jobVM.Job.Duration.TotalMinutes,
                     IsBillable = taskHeader.IsBillable,
-                });
+                });*/
                 jobVM.Job.JobId = 1; // @@
             }
         }
