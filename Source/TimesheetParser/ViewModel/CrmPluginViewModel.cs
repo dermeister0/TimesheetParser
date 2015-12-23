@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -16,8 +17,18 @@ namespace TimesheetParser.ViewModel
         private readonly ICrm crmClient;
         private readonly TaskInfoService taskInfoService;
         private bool isBusy;
+        private bool isConnected;
 
-        public bool IsConnected { get; set; }
+        public bool IsConnected
+        {
+            get { return isConnected; }
+            set
+            {
+                isConnected = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string Name { get; }
         public ICrm Client => crmClient;
 
@@ -40,10 +51,8 @@ namespace TimesheetParser.ViewModel
             return taskInfoService.GetTaskHeader(taskId);
         }
 
-        public async void CheckConnection()
+        private async Task DoLogin()
         {
-            passwordHelper.LoadCredential();
-
             var password = passwordHelper.Password.ConvertToUnsecureString();
             if (!string.IsNullOrEmpty(passwordHelper.Login) && !string.IsNullOrEmpty(password))
             {
@@ -51,6 +60,11 @@ namespace TimesheetParser.ViewModel
                 try
                 {
                     IsConnected = await crmClient.Login(passwordHelper.Login, password);
+
+                    if (!isConnected)
+                    {
+                        passwordHelper.DeleteCredential();
+                    }
                 }
                 finally
                 {
@@ -59,11 +73,30 @@ namespace TimesheetParser.ViewModel
             }
         }
 
+        public async void CheckConnection()
+        {
+            passwordHelper.LoadCredential();
+            await DoLogin();
+        }
+
+        public async void CheckConnection(string login, SecureString password)
+        {
+            passwordHelper.Login = login;
+            passwordHelper.Password = password;
+            await DoLogin();
+
+            if (isConnected)
+            {
+                passwordHelper.SaveCredential();
+            }
+        }
+
         private void LoginCommand_Executed()
         {
             var crmLoginVM = ViewModelLocator.Current.CrmLoginVM;
             crmLoginVM.Login = passwordHelper.Login;
             crmLoginVM.Password = passwordHelper.Password;
+            crmLoginVM.SourcePlugin = this;
 
             var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
             navigationService.NavigateTo("CrmLoginPage.xaml");

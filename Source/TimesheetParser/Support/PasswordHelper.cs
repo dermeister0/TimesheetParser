@@ -7,8 +7,8 @@ namespace TimesheetParser.Support
     {
         private readonly string pluginName;
 
-        public string Login { get; private set; }
-        public SecureString Password { get; private set; }
+        public string Login { get; set; }
+        public SecureString Password { get; set; }
 
         public PasswordHelper(string pluginName)
         {
@@ -34,6 +34,12 @@ namespace TimesheetParser.Support
                 SecurePassword = Password
             };
             credential.Save();
+        }
+
+        public void DeleteCredential()
+        {
+            var credential = new Credential() { Target = GetTarget() };
+            credential.Delete();
         }
 
         private string GetTarget()

@@ -1,10 +1,8 @@
 ﻿using System.Security;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
-using TimesheetParser.Messages;
 
 namespace TimesheetParser.ViewModel
 {
@@ -18,10 +16,14 @@ namespace TimesheetParser.ViewModel
         public string Login { get; set; }
         public SecureString Password { get; set; }
         public ICommand LoginCommand { get; set; }
+        public CrmPluginViewModel SourcePlugin { get; set; }
 
         private void LoginCommand_Executed()
         {
-            Messenger.Default.Send(new LoginMessage { Login = Login, Password = Password });
+            if (SourcePlugin != null)
+            {
+                SourcePlugin.CheckConnection(Login, Password);
+            }
 
             var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
             navigationService.NavigateTo("MainPage.xaml");

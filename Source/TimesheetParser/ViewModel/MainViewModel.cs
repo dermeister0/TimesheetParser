@@ -6,11 +6,9 @@ using System.Reflection;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using Microsoft.Practices.ServiceLocation;
-using TimesheetParser.Messages;
 
 namespace TimesheetParser.ViewModel
 {
@@ -29,10 +27,7 @@ namespace TimesheetParser.ViewModel
             JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
-            CrmLoginCommand = new RelayCommand(CrmLoginCommand_Executed);
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed);
-
-            Messenger.Default.Register<LoginMessage>(this, Connect);
         }
 
         public IEnumerable<JobViewModel> Jobs
@@ -88,7 +83,6 @@ namespace TimesheetParser.ViewModel
         }
 
         public ICommand GenerateCommand { get; set; }
-        public ICommand CrmLoginCommand { get; set; }
         public ICommand SubmitJobsCommand { get; set; }
 
         public DateTime JobsDate
@@ -157,18 +151,6 @@ namespace TimesheetParser.ViewModel
 
                 jobVM.IsOdd = isOdd;
             }
-        }
-
-        private void CrmLoginCommand_Executed()
-        {
-            var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-            navigationService.NavigateTo("CrmLoginPage.xaml");
-        }
-
-        private async void Connect(LoginMessage message)
-        {
-            // @@ passwordHelper.SaveCredential();
-            // @@ IsConnected = await crmClient.Login(message.Login, message.Password.ConvertToUnsecureString());
         }
 
         private async void SubmitJobs_Executed()
