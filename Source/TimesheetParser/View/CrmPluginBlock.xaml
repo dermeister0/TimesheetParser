@@ -14,7 +14,7 @@
     <Grid>
         <GroupBox Header="{Binding Name}">
             <Grid>
-                <Button Width="100" Visibility="{Binding IsConnected, Converter={StaticResource NegativeBoolToVisibilityConverter}}" Command="{Binding CrmLoginCommand}">Login</Button>
+                <Button Width="100" Visibility="{Binding IsConnected, Converter={StaticResource NegativeBoolToVisibilityConverter}}" Command="{Binding LoginCommand}">Login</Button>
                 <Button  Width="100" Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}">Submit Jobs</Button>
             </Grid>
         </GroupBox>

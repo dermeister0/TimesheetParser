@@ -1,16 +1,17 @@
-﻿using CredentialManagement;
-using TimesheetParser.ViewModel;
+﻿using System.Security;
+using CredentialManagement;
 
 namespace TimesheetParser.Support
 {
     internal class PasswordHelper
     {
         private readonly string pluginName;
-        private readonly CrmLoginViewModel crmLoginVM;
 
-        public PasswordHelper(CrmLoginViewModel crmLoginVM, string pluginName)
+        public string Login { get; private set; }
+        public SecureString Password { get; private set; }
+
+        public PasswordHelper(string pluginName)
         {
-            this.crmLoginVM = crmLoginVM;
             this.pluginName = pluginName;
         }
 
@@ -19,8 +20,8 @@ namespace TimesheetParser.Support
             var credential = new Credential() { Target = GetTarget() };
             credential.Load();
 
-            crmLoginVM.Login = credential.Username;
-            crmLoginVM.Password = credential.SecurePassword;
+            Login = credential.Username;
+            Password = credential.SecurePassword;
         }
 
         public void SaveCredential()
@@ -29,8 +30,8 @@ namespace TimesheetParser.Support
             {
                 Target = GetTarget(),
                 PersistanceType = PersistanceType.LocalComputer,
-                Username = crmLoginVM.Login,
-                SecurePassword = crmLoginVM.Password
+                Username = Login,
+                SecurePassword = Password
             };
             credential.Save();
         }

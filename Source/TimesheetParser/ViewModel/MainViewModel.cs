@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -12,14 +11,12 @@ using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Messages;
-using TimesheetParser.Services;
 
 namespace TimesheetParser.ViewModel
 {
     internal class MainViewModel : ViewModelBase
     {
         private IEnumerable<JobViewModel> jobs;
-        private readonly string crmToken = null;
         private bool isConnected;
         private string sourceText;
         private string resultText;
@@ -129,16 +126,14 @@ namespace TimesheetParser.ViewModel
             }
 
             CrmPlugins = plugins;
-
-            // @@ taskInfoService = new TaskInfoService(crmClient);
         }
 
-        public async Task CheckConnection()
+        public void CheckConnection()
         {
-            if (string.IsNullOrEmpty(crmToken))
-                return;
-
-            // @@ IsConnected = await crmClient.Login(crmToken);
+            foreach (var pluginVM in CrmPlugins)
+            {
+                pluginVM.CheckConnection();
+            }
         }
 
         private void GenerateCommand_Executed()
@@ -184,25 +179,26 @@ namespace TimesheetParser.ViewModel
                 if (jobVM.Job.JobId != 0)
                     continue;
 
-                foreach (var plugin in CrmPlugins)
+                foreach (var pluginVM in CrmPlugins)
                 {
-                    if (!plugin.Client.IsValidTask(jobVM.Job.Task))
+                    if (!pluginVM.Client.IsValidTask(jobVM.Job.Task))
                         continue;
 
-                    // @@ var taskHeader = await taskInfoService.GetTaskHeader(jobVM.Job.Task);
-                    // @@ jobVM.TaskTitle = taskHeader.Title;
+                    var taskHeader = await pluginVM.GetTaskHeader(jobVM.Job.Task);
+                    jobVM.TaskTitle = taskHeader.Title;
 
                     jobVM.IsTaskCopied = true;
                     jobVM.IsDescriptionCopied = true;
                     jobVM.IsDurationCopied = true;
-                    // @@ 
-                    /*await crmClient.AddJob(new JobDefinition
+
+                    await pluginVM.Client.AddJob(new JobDefinition
                     {
                         TaskId = jobVM.Job.Task,
-                        Date = JobsDate, Description = jobVM.Description,
+                        Date = JobsDate,
+                        Description = jobVM.Description,
                         Duration = (int) jobVM.Job.Duration.TotalMinutes,
                         IsBillable = taskHeader.IsBillable,
-                    });*/
+                    });
                     jobVM.Job.JobId = 1; // @@
 
                     break;
