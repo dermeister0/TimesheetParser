@@ -54,11 +54,18 @@ namespace JiraApi
         {
             var request = new RestRequest("issue/{issueId}/worklog", Method.POST) { RequestFormat = DataFormat.Json };
             request.AddUrlSegment("issueId", job.TaskId);
-            request.AddBody(new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date });
+            request.AddBody(new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") });
 
             var response = await restClient.ExecuteTaskAsync(request);
 
-            return response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK;
+            if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.Created)
+            {
+                var content = SimpleJson.DeserializeObject<WorkLogResponse>(response.Content);
+                var id = content.id; // @@
+
+                return true;
+            }
+            return false;
         }
 
         public async Task<TaskHeader> GetTaskHeader(string taskId)
