@@ -185,3 +185,4 @@ FakesAssemblies/
 *.bak
 HeavysoftVersion.cs
 nuget.exe
+*.orig

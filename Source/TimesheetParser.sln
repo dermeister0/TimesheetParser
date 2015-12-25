@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser", "Timeshee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heavysoft.TimesheetParser.PluginInterfaces", "Heavysoft.TimesheetParser.PluginInterfaces\Heavysoft.TimesheetParser.PluginInterfaces.csproj", "{C5C5E5BB-04CC-4A6D-AEE1-B8FAD6658220}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraApi", "JiraApi\JiraApi.csproj", "{BF8E25CB-70E6-45F9-8620-2BDF8D3E7295}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser.Win10", "TimesheetParser.Win10\TimesheetParser.Win10.csproj", "{BF7E365B-B6A3-48D1-8169-3385FF63E5A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser.Business", "TimesheetParser.Business\TimesheetParser.Business.csproj", "{F4BF5A97-D10B-4267-8DC0-7C6270532A5E}"
@@ -49,6 +51,10 @@ Global
 		{C5C5E5BB-04CC-4A6D-AEE1-B8FAD6658220}.Debug|x86.Build.0 = Debug|Any CPU
 		{C5C5E5BB-04CC-4A6D-AEE1-B8FAD6658220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5C5E5BB-04CC-4A6D-AEE1-B8FAD6658220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF8E25CB-70E6-45F9-8620-2BDF8D3E7295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF8E25CB-70E6-45F9-8620-2BDF8D3E7295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF8E25CB-70E6-45F9-8620-2BDF8D3E7295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF8E25CB-70E6-45F9-8620-2BDF8D3E7295}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C5C5E5BB-04CC-4A6D-AEE1-B8FAD6658220}.Release|ARM.ActiveCfg = Release|Any CPU
 		{C5C5E5BB-04CC-4A6D-AEE1-B8FAD6658220}.Release|ARM.Build.0 = Release|Any CPU
 		{C5C5E5BB-04CC-4A6D-AEE1-B8FAD6658220}.Release|x64.ActiveCfg = Release|Any CPU

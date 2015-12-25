@@ -4,7 +4,7 @@ namespace Heavysoft.TimesheetParser.PluginInterfaces
 {
     public class JobDefinition
     {
-        public int TaskId { get; set; }
+        public string TaskId { get; set; }
 
         public DateTime Date { get; set; }
 
