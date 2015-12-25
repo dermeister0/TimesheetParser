@@ -10,6 +10,7 @@ using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business;
 using TimesheetParser.Business.Messages;
 using System.Windows;
+using GalaSoft.MvvmLight.Messaging;
 using TimesheetParser.Business.ViewModel;
 
 namespace TimesheetParser.ViewModel

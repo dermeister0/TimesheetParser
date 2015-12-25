@@ -7,8 +7,13 @@
     RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
-            <vm:ViewModelLocator x:Key="ViewModelLocator">
-            </vm:ViewModelLocator>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/JobListView.xaml"></ResourceDictionary>
+                <ResourceDictionary>
+                    <vm:ViewModelLocator x:Key="ViewModelLocator">
+                    </vm:ViewModelLocator>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

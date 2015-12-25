@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:TimesheetParser"
+      xmlns:controls="clr-namespace:TimesheetParser.Controls"
       xmlns:support="clr-namespace:TimesheetParser.Support"
       xmlns:view="clr-namespace:TimesheetParser.View"
       mc:Ignorable="d" 
@@ -12,7 +12,6 @@
       DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}">
     <Page.Resources>
         <support:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed" />
-        <support:IsOddToBrushConverter x:Key="IsOddToBrushConverter" />
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,53 +30,7 @@
                 <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Text="{Binding ResultText}" />        
             </TabItem>
             <TabItem Header="Table View">
-                <ListView ItemsSource="{Binding Jobs}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Background="{Binding IsOdd, Converter={StaticResource IsOddToBrushConverter}}">
-                                <Grid.Resources>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Margin" Value="5" />
-                                    </Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Margin" Value="5" />
-                                    </Style>
-                                    <Style TargetType="CheckBox">
-                                        <Setter Property="Margin" Value="5" />
-                                    </Style>
-                                </Grid.Resources>
-                                
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                
-                                <CheckBox Grid.Row="0" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsTaskCopied}" />
-                                <CheckBox Grid.Row="1" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsDurationCopied}" />
-                                <CheckBox Grid.Row="2" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsDescriptionCopied}" />
-                                
-                                <Button Grid.Row="0" Grid.Column="1" Command="{Binding CopyTaskCommand}">Copy Task</Button>
-                                <Button Grid.Row="1" Grid.Column="1" Command="{Binding CopyDurationCommand}">Copy Duration</Button>
-                                <Button Grid.Row="2" Grid.Column="1" Command="{Binding CopyDescriptionCommand}">Copy Description</Button>
-
-                                <TextBlock Grid.Row="0" Grid.Column="2"><Run Text="{Binding Task, Mode=OneWay}" /> <Run Text="{Binding TaskTitle}" /></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Duration}" />
-                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Description}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+                <controls:JobListView ItemsSource="{Binding Jobs}" />
             </TabItem>
         </TabControl>
 
