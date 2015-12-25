@@ -9,6 +9,11 @@
     mc:Ignorable="d"
     DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}">
 
+    <Page.Resources>
+        <support:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed" />
+        <support:IsOddToBrushConverter x:Key="IsOddToBrushConverter" />
+    </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -21,13 +26,58 @@
 
         <RichEditBox support:RtfText.RichText="{Binding SourceText, Mode=TwoWay}" />
 
-        <Pivot Grid.Column="1">
+        <Pivot Grid.Column="1" Grid.Row="0">
             <PivotItem Header="Raw View">
                 <RichEditBox FontFamily="Consolas" IsReadOnly="True" />
             </PivotItem>
             <PivotItem Header="Table View">
                 <ListView ItemsSource="{Binding Jobs}">
-                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ListBoxBorderThemeBrush}" Background="{Binding IsOdd, Converter={StaticResource IsOddToBrushConverter}}">
+                                <Grid.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Margin" Value="5" />
+                                        <Setter Property="Width" Value="150" />
+                                    </Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="5" />
+                                    </Style>
+                                    <Style TargetType="CheckBox">
+                                        <Setter Property="Margin" Value="5" />
+                                    </Style>
+                                </Grid.Resources>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox Grid.Row="0" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsTaskCopied}" Height="32" Margin="5,5,0,5" />
+                                <CheckBox Grid.Row="1" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsDurationCopied}" Height="32" Margin="5,5,0,5" />
+                                <CheckBox Grid.Row="2" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsDescriptionCopied}" Height="32" Margin="5,5,0,5" />
+
+                                <Button Grid.Row="0" Grid.Column="1" Command="{Binding CopyTaskCommand}" Height="32" Margin="5,5,0,5">Copy Task</Button>
+                                <Button Grid.Row="1" Grid.Column="1" Command="{Binding CopyDurationCommand}" Height="32" Margin="5,5,0,5">Copy Duration</Button>
+                                <Button Grid.Row="2" Grid.Column="1" Command="{Binding CopyDescriptionCommand}" Height="32" Margin="5,5,0,5">Copy Description</Button>
+
+                                <TextBlock Grid.Row="0" Grid.Column="2"><Run Text="{Binding Task, Mode=OneWay}" /> <Run Text="{Binding TaskTitle}" /></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Duration}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Description}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </PivotItem>
         </Pivot>

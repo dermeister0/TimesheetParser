@@ -1,8 +1,10 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using TimesheetParser.Business.Model;
 
 namespace TimesheetParser.Business.ViewModel
 {
@@ -19,6 +21,16 @@ namespace TimesheetParser.Business.ViewModel
 
             // Initialize attached property.
             SourceText = string.Empty;
+
+            if (IsInDesignMode)
+            {
+                Jobs = new List<JobViewModel>()
+                {
+                    new JobViewModel(new Job() { StartTime = DateTime.Parse("12/1/2015"), Description = "Just a test.", Task = "1" }) { IsOdd = true },
+                    new JobViewModel(new Job() { StartTime = DateTime.Parse("12/2/2015"), Description = "Another job.", Task = "2" }),
+                    new JobViewModel(new Job() { StartTime = DateTime.Parse("12/3/2015"), Description = "Third job.", Task = "3" }) { IsOdd = true },
+                };
+            }
         }
 
         public IEnumerable<JobViewModel> Jobs

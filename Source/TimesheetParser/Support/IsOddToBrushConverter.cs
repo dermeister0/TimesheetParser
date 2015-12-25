@@ -5,7 +5,7 @@ namespace TimesheetParser.Support
 {
     public class IsOddToBrushConverter : BooleanConverter<Brush>
     {
-        public IsOddToBrushConverter() : base(Application.Current.Resources["LightRowBrush"] as Brush, Application.Current.Resources["DarkRowBrush"] as Brush)
+        public IsOddToBrushConverter() : base(SystemColors.ControlLightLightBrush, SystemColors.ControlBrush)
         {           
         }
     }

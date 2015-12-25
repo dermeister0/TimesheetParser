@@ -10,8 +10,6 @@
         <ResourceDictionary>
           <vm:ViewModelLocator x:Key="ViewModelLocator">
           </vm:ViewModelLocator>
-          <SolidColorBrush x:Key="LightRowBrush" Color="#FFC5CBF9" />
-          <SolidColorBrush x:Key="DarkRowBrush" Color="#FF7381F9" />
         </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>

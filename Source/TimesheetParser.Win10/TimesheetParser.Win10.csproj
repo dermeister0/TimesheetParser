@@ -102,6 +102,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\BooleanConverter.cs" />
+    <Compile Include="Support\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Support\IsOddToBrushConverter.cs" />
     <Compile Include="Support\RtfText.cs" />
   </ItemGroup>
   <ItemGroup>
