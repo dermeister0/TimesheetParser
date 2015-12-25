@@ -11,9 +11,11 @@ namespace TimesheetParser.Business.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IEnumerable<JobViewModel> jobs;
+        private bool isConnected;
         private string sourceText;
         private string resultText;
         private bool distributeIdle;
+        private DateTime jobsDate;
 
         public MainViewModel()
         {
@@ -39,6 +41,16 @@ namespace TimesheetParser.Business.ViewModel
             set
             {
                 jobs = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool IsConnected
+        {
+            get { return isConnected; }
+            set
+            {
+                isConnected = value;
                 RaisePropertyChanged();
             }
         }
@@ -73,7 +85,18 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
+        public DateTime JobsDate
+        {
+            get { return jobsDate; }
+            set
+            {
+                jobsDate = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public ICommand GenerateCommand { get; set; }
+        public ICommand SubmitJobsCommand { get; set; }
 
         private void GenerateCommand_Executed()
         {

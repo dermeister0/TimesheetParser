@@ -111,7 +111,6 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messages\LoginMessage.cs" />
     <Compile Include="Properties\HeavysoftVersion.cs" />
     <Compile Include="Services\TaskInfoService.cs" />
     <Compile Include="Support\BooleanConverter.cs" />

@@ -43,7 +43,11 @@
                 </Style>
             </StackPanel.Resources>
             
-            <Button Name="GenerateButton" Width="100" Command="{Binding GenerateCommand}">Generate</Button>
+            <Button Width="100" Command="{Binding GenerateCommand}">Generate</Button>
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle}">Distribute Idle</CheckBox>
+
+            <Button Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}">Submit Jobs</Button>
+            <DatePicker Date="{Binding JobsDate}" />
         </StackPanel>
     </Grid>
 </Page>
