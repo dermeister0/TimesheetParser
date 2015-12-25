@@ -105,7 +105,6 @@
     <Compile Include="Support\BooleanConverter.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
     <Compile Include="Support\IsOddToBrushConverter.cs" />
-    <Compile Include="Support\RtfText.cs" />
     <Compile Include="Controls\JobListView.cs" />
   </ItemGroup>
   <ItemGroup>
