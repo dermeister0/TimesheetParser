@@ -26,7 +26,8 @@ namespace TimesheetParser.Win10
 
             SimpleIoc.Default.Register<IDispatchService, DispatchService>();
 
-            SimpleIoc.Default.Register<IPasswordService, PasswordService>();
+            SimpleIoc.Default.Register<IPluginService, PluginService>();
+            SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
 
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
                 Microsoft.ApplicationInsights.WindowsCollectors.Metadata |

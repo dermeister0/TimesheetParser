@@ -1,8 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using TimesheetParser.Business.Messages;
 using TimesheetParser.Business.Model;
+using TimesheetParser.Business.Services;
 
 namespace TimesheetParser.Business.ViewModel
 {
@@ -13,10 +12,12 @@ namespace TimesheetParser.Business.ViewModel
         private bool isDurationCopied;
         private bool isTaskCopied;
         private string taskTitle;
+        private readonly IClipboardService clipboardService;
 
-        public JobViewModel(Job job)
+        public JobViewModel(Job job, IClipboardService clipboardService)
         {
             this.job = job;
+            this.clipboardService = clipboardService;
 
             CopyTaskCommand = new RelayCommand(CopyTaskCommand_Executed);
             CopyDurationCommand = new RelayCommand(CopyDurationCommand_Executed);
@@ -65,25 +66,20 @@ namespace TimesheetParser.Business.ViewModel
 
         private void CopyTaskCommand_Executed()
         {
-            SetClipboardText(job.Task);
+            clipboardService.SetText(job.Task);
             IsTaskCopied = true;
         }
 
         private void CopyDurationCommand_Executed()
         {
-            SetClipboardText(string.Format("{0:hh}:{0:mm}", job.Duration));
+            clipboardService.SetText(string.Format("{0:hh}:{0:mm}", job.Duration));
             IsDurationCopied = true;
         }
 
         private void CopyDescriptionCommand_Executed()
         {
-            SetClipboardText(job.Description);
+            clipboardService.SetText(job.Description);
             IsDescriptionCopied = true;
-        }
-
-        void SetClipboardText(string text)
-        {
-            Messenger.Default.Send(new ClipboardMessage() { Text = text });      
         }
 
         public Job Job => job;

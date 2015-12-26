@@ -18,10 +18,12 @@ namespace TimesheetParser.Business.ViewModel
         private bool distributeIdle;
         private DateTime jobsDate;
         private readonly IPluginService pluginService;
+        private readonly IClipboardService clipboardService;
 
-        public MainViewModel(IPluginService pluginService)
+        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService)
         {
             this.pluginService = pluginService;
+            this.clipboardService = clipboardService;
 
             //@@Title = "Timesheet Parser " + Assembly.GetEntryAssembly().GetName().Version;
             Title = "Timesheet Parser";
@@ -124,7 +126,7 @@ namespace TimesheetParser.Business.ViewModel
             var result = parser.Parse(SourceText, DistributeIdle);
             ResultText = result.Format();
 
-            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j)).ToList();
+            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j, clipboardService)).ToList();
 
             string previousTask = null;
             bool isOdd = false;
