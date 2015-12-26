@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using TimesheetParser.Business.ViewModel;
 
-namespace TimesheetParser
+namespace TimesheetParser.View
 {
     /// <summary>
     /// Interaction logic for CrmLoginPage.xaml

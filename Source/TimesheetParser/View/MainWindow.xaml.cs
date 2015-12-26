@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TimesheetParser.Business.ViewModel;
 
-namespace TimesheetParser
+namespace TimesheetParser.View
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml

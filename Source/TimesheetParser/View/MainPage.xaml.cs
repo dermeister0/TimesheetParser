@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace TimesheetParser
+namespace TimesheetParser.View
 {
     /// <summary>
     /// Interaction logic for MainPage.xaml
