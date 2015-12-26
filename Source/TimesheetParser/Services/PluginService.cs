@@ -9,8 +9,15 @@ using TimesheetParser.Business.ViewModel;
 
 namespace TimesheetParser.Services
 {
-    class PluginService : IPluginService
+    internal class PluginService : IPluginService
     {
+        private readonly IDispatchService dispatchService;
+
+        public PluginService(IDispatchService dispatchService)
+        {
+            this.dispatchService = dispatchService;
+        }
+
         public IReadOnlyCollection<CrmPluginViewModel> LoadPlugins()
         {
             var pluginsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
@@ -34,7 +41,7 @@ namespace TimesheetParser.Services
                     continue;
 
                 var passwordService = new PasswordService(crmClient.GetName());
-                var crmVM = new CrmPluginViewModel(crmClient, passwordService);
+                var crmVM = new CrmPluginViewModel(crmClient, passwordService, dispatchService);
                 //@@crmVM.PropertyChanged += CrmVM_PropertyChanged;
                 plugins.Add(crmVM);
             }

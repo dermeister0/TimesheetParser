@@ -24,8 +24,9 @@ namespace TimesheetParser.Win10
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<IPluginService>(() => new PluginService());
-            SimpleIoc.Default.Register<IPasswordService>(() => new PasswordService());
+            SimpleIoc.Default.Register<IDispatchService, DispatchService>();
+
+            SimpleIoc.Default.Register<IPasswordService, PasswordService>();
 
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
                 Microsoft.ApplicationInsights.WindowsCollectors.Metadata |

@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using TimesheetParser.Business.Services;
 
 namespace TimesheetParser.Business.ViewModel
 {
@@ -10,9 +11,12 @@ namespace TimesheetParser.Business.ViewModel
     {
         private string login;
         private string password;
+        private readonly IDispatchService dispatchService;
 
-        public CrmLoginViewModel()
+        public CrmLoginViewModel(IDispatchService dispatchService)
         {
+            this.dispatchService = dispatchService;
+
             LoginCommand = new RelayCommand(LoginCommand_Executed, () => !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrEmpty(Password));
         }
 
@@ -23,7 +27,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 login = value;
                 RaisePropertyChanged();
-                (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                dispatchService.InvokeOnUIThread(() => (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged());
             }
         }
 
@@ -34,7 +38,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 password = value;
                 RaisePropertyChanged();
-                (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                dispatchService.InvokeOnUIThread(() => (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged());
             }
         }
 

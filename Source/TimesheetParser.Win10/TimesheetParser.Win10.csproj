@@ -102,6 +102,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DispatchService.cs" />
     <Compile Include="Services\PasswordService.cs" />
     <Compile Include="Services\PluginService.cs" />
     <Compile Include="Support\BooleanConverter.cs" />

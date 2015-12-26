@@ -16,6 +16,19 @@ namespace TimesheetParser.Business.ViewModel
         private readonly TaskInfoService taskInfoService;
         private bool isBusy;
         private bool isConnected;
+        private readonly IDispatchService dispatchService;
+
+        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService, IDispatchService dispatchService)
+        {
+            this.crmClient = crmClient;
+            this.dispatchService = dispatchService;
+            this.passwordService = passwordService;
+            taskInfoService = new TaskInfoService(crmClient);
+
+            Name = crmClient.GetName();
+
+            LoginCommand = new RelayCommand(LoginCommand_Executed, () => !isBusy);
+        }
 
         public bool IsConnected
         {
@@ -34,7 +47,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 isBusy = value;
                 RaisePropertyChanged();
-                (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                dispatchService.InvokeOnUIThread(() => (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged());
             }
         }
 
@@ -42,18 +55,6 @@ namespace TimesheetParser.Business.ViewModel
         public ICrm Client => crmClient;
 
         public ICommand LoginCommand { get; }
-
-        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService)
-        {
-            this.crmClient = crmClient;
-            Name = crmClient.GetName();
-
-            taskInfoService = new TaskInfoService(crmClient);
-
-            this.passwordService = passwordService;
-
-            LoginCommand = new RelayCommand(LoginCommand_Executed, () => !isBusy);
-        }
 
         public Task<TaskHeader> GetTaskHeader(string taskId)
         {
