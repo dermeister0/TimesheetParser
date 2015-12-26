@@ -33,8 +33,8 @@
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.0.5184.3, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.0.5184.3\lib\net40\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
+    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.1.5186.0, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.1.5186.0\lib\portable-net451+win81\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">

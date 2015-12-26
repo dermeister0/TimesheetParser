@@ -11,6 +11,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+        "compile": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        }
+      },
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -1598,6 +1606,14 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+        "compile": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
       "Microsoft.ApplicationInsights/1.0.0": {
@@ -3279,6 +3295,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+        "compile": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        }
+      },
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -4928,6 +4952,14 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+        "compile": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
       "Microsoft.ApplicationInsights/1.0.0": {
@@ -6614,6 +6646,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+        "compile": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        }
+      },
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -8263,6 +8303,14 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+        "compile": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
       "Microsoft.ApplicationInsights/1.0.0": {
@@ -9949,6 +9997,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+        "compile": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
+        }
+      },
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -11606,6 +11662,17 @@
         "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.XML",
         "package/services/metadata/core-properties/8a82b9e5a63a439481bfa8d4ec335002.psmdcp",
         "package/services/metadata/core-properties/99be0c88b2fd41c8b07c42071005ee47.psmdcp"
+      ]
+    },
+    "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
+      "sha512": "hlDDGvvvduC7kYTTq/CwyASyv018CVOjbrwnWo2jL/52l5WKNPDPNpmk6ATbHPlegzI17431i0k/NGSq7DU3sA==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "Heavysoft.TimesheetParser.PluginInterfaces.nuspec",
+        "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll",
+        "package/services/metadata/core-properties/611c6442f7344bf690da8be8c9988bf9.psmdcp"
       ]
     },
     "Microsoft.ApplicationInsights/1.0.0": {
@@ -15143,6 +15210,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Heavysoft.TimesheetParser.PluginInterfaces >= 1.1.5186",
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
