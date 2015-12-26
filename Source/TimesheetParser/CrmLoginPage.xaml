@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
             <TextBlock>Login:</TextBlock>
-            <TextBox Text="{Binding Login}" />
+            <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock>Password:</TextBlock>
             <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" />
         </StackPanel>

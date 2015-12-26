@@ -1,19 +1,17 @@
-﻿using System.Security;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using Microsoft.Practices.ServiceLocation;
-using TimesheetParser.Services;
-using TimesheetParser.Support;
+using TimesheetParser.Business.Services;
 
-namespace TimesheetParser.ViewModel
+namespace TimesheetParser.Business.ViewModel
 {
     public class CrmPluginViewModel : ViewModelBase
     {
-        private readonly PasswordHelper passwordHelper;
+        private readonly IPasswordService passwordService;
         private readonly ICrm crmClient;
         private readonly TaskInfoService taskInfoService;
         private bool isBusy;
@@ -22,10 +20,21 @@ namespace TimesheetParser.ViewModel
         public bool IsConnected
         {
             get { return isConnected; }
-            set
+            private set
             {
                 isConnected = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        protected bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+                (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
             }
         }
 
@@ -34,14 +43,14 @@ namespace TimesheetParser.ViewModel
 
         public ICommand LoginCommand { get; }
 
-        public CrmPluginViewModel(ICrm crmClient)
+        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService)
         {
             this.crmClient = crmClient;
             Name = crmClient.GetName();
 
             taskInfoService = new TaskInfoService(crmClient);
 
-            passwordHelper = new PasswordHelper(Name);
+            this.passwordService = passwordService;
 
             LoginCommand = new RelayCommand(LoginCommand_Executed, () => !isBusy);
         }
@@ -53,49 +62,48 @@ namespace TimesheetParser.ViewModel
 
         private async Task DoLogin()
         {
-            var password = passwordHelper.Password.ConvertToUnsecureString();
-            if (!string.IsNullOrEmpty(passwordHelper.Login) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(passwordService.Login) && !string.IsNullOrEmpty(passwordService.Password))
             {
-                isBusy = true;
+                IsBusy = true;
                 try
                 {
-                    IsConnected = await crmClient.Login(passwordHelper.Login, password);
+                    IsConnected = await crmClient.Login(passwordService.Login, passwordService.Password);
 
                     if (!isConnected)
                     {
-                        passwordHelper.DeleteCredential();
+                        passwordService.DeleteCredential();
                     }
                 }
                 finally
                 {
-                    isBusy = false;
+                    IsBusy = false;
                 }
             }
         }
 
         public async void CheckConnection()
         {
-            passwordHelper.LoadCredential();
+            passwordService.LoadCredential();
             await DoLogin();
         }
 
-        public async void CheckConnection(string login, SecureString password)
+        public async void CheckConnection(string login, string password)
         {
-            passwordHelper.Login = login;
-            passwordHelper.Password = password;
+            passwordService.Login = login;
+            passwordService.Password = password;
             await DoLogin();
 
             if (isConnected)
             {
-                passwordHelper.SaveCredential();
+                passwordService.SaveCredential();
             }
         }
 
         private void LoginCommand_Executed()
         {
             var crmLoginVM = ViewModelLocator.Current.CrmLoginVM;
-            crmLoginVM.Login = passwordHelper.Login;
-            crmLoginVM.Password = passwordHelper.Password;
+            crmLoginVM.Login = passwordService.Login;
+            crmLoginVM.Password = passwordService.Password;
             crmLoginVM.SourcePlugin = this;
 
             var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();

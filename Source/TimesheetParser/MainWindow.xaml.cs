@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using TimesheetParser.ViewModel;
+using TimesheetParser.Business.ViewModel;
 
 namespace TimesheetParser
 {

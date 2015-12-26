@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TimesheetParser.ViewModel;
+using TimesheetParser.Business.ViewModel;
 
 namespace TimesheetParser
 {
@@ -19,7 +19,7 @@ namespace TimesheetParser
             var crmLoginVM = DataContext as CrmLoginViewModel;
             if (crmLoginVM != null)
             {
-                crmLoginVM.Password = ((PasswordBox) e.Source).SecurePassword;
+                crmLoginVM.Password = ((PasswordBox) e.Source).Password;
             }
         }
 
@@ -28,7 +28,7 @@ namespace TimesheetParser
             var crmLoginVM = DataContext as CrmLoginViewModel;
             if (crmLoginVM != null)
             {
-                PasswordBox.Password = crmLoginVM.Password.ConvertToUnsecureString();
+                PasswordBox.Password = crmLoginVM.Password;
             }
         }
     }

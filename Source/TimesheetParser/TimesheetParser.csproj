@@ -107,21 +107,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\JobListView.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\HeavysoftVersion.cs" />
+    <Compile Include="Services\PluginService.cs" />
     <Compile Include="Services\TaskInfoService.cs" />
     <Compile Include="Support\BooleanConverter.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
     <Compile Include="Services\MyNavigationService.cs" />
     <Compile Include="Support\IsOddToBrushConverter.cs" />
-    <Compile Include="Support\PasswordHelper.cs" />
-    <Compile Include="ViewModel\CrmLoginViewModel.cs" />
-    <Compile Include="ViewModel\CrmPluginViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Services\PasswordService.cs" />
     <Compile Include="View\CrmPluginBlock.xaml.cs">
       <DependentUpon>CrmPluginBlock.xaml</DependentUpon>
     </Compile>

@@ -1,16 +1,16 @@
-﻿using System.Security;
-using CredentialManagement;
+﻿using CredentialManagement;
+using TimesheetParser.Business.Services;
 
-namespace TimesheetParser.Support
+namespace TimesheetParser.Services
 {
-    internal class PasswordHelper
+    internal class PasswordService : IPasswordService
     {
         private readonly string pluginName;
 
         public string Login { get; set; }
-        public SecureString Password { get; set; }
+        public string Password { get; set; }
 
-        public PasswordHelper(string pluginName)
+        public PasswordService(string pluginName)
         {
             this.pluginName = pluginName;
         }
@@ -21,7 +21,7 @@ namespace TimesheetParser.Support
             credential.Load();
 
             Login = credential.Username;
-            Password = credential.SecurePassword;
+            Password = credential.Password;
         }
 
         public void SaveCredential()
@@ -31,7 +31,7 @@ namespace TimesheetParser.Support
                 Target = GetTarget(),
                 PersistanceType = PersistanceType.LocalComputer,
                 Username = Login,
-                SecurePassword = Password
+                Password = Password
             };
             credential.Save();
         }
