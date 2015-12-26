@@ -1,4 +1,5 @@
-﻿using TimesheetParser.Business.Services;
+﻿using Windows.ApplicationModel.DataTransfer;
+using TimesheetParser.Business.Services;
 
 namespace TimesheetParser.Win10.Services
 {
@@ -6,7 +7,9 @@ namespace TimesheetParser.Win10.Services
     {
         public void SetText(string text)
         {
-            throw new System.NotImplementedException();
+            var package = new DataPackage();
+            package.SetText(text);
+            Clipboard.SetContent(package);
         }
     }
 }
