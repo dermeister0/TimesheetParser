@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -25,13 +26,14 @@ namespace TimesheetParser.Business.ViewModel
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
 
-            //@@Title = "Timesheet Parser " + Assembly.GetEntryAssembly().GetName().Version;
-            Title = "Timesheet Parser";
+            Title = "Timesheet Parser " + typeof(MainViewModel).GetTypeInfo().Assembly.GetName().Version;
             JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed);
         }
+
+        #region Properties
 
         public IEnumerable<JobViewModel> Jobs
         {
@@ -100,18 +102,6 @@ namespace TimesheetParser.Business.ViewModel
 
         public IReadOnlyCollection<CrmPluginViewModel> CrmPlugins { get; set; }
 
-        private void CrmVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CrmPluginViewModel.IsConnected))
-            {
-                var crmVM = sender as CrmPluginViewModel;
-                if (crmVM != null)
-                {
-                    IsConnected |= crmVM.IsConnected;
-                }
-            }
-        }
-
         public void CheckConnection()
         {
             foreach (var pluginVM in CrmPlugins)
@@ -119,6 +109,10 @@ namespace TimesheetParser.Business.ViewModel
                 pluginVM.CheckConnection();
             }
         }
+
+        #endregion
+
+        #region Commands
 
         private void GenerateCommand_Executed()
         {
@@ -178,9 +172,27 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
+#endregion
+
         public void LoadPlugins()
         {
             CrmPlugins = pluginService.LoadPlugins();
+            foreach (var crmVM in CrmPlugins)
+            {
+                crmVM.PropertyChanged += CrmVM_PropertyChanged;
+            }
+        }
+
+        private void CrmVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CrmPluginViewModel.IsConnected))
+            {
+                var crmVM = sender as CrmPluginViewModel;
+                if (crmVM != null)
+                {
+                    IsConnected |= crmVM.IsConnected;
+                }
+            }
         }
     }
 }

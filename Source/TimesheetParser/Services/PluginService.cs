@@ -42,7 +42,6 @@ namespace TimesheetParser.Services
 
                 var passwordService = new PasswordService(crmClient.GetName());
                 var crmVM = new CrmPluginViewModel(crmClient, passwordService, dispatchService);
-                //@@crmVM.PropertyChanged += CrmVM_PropertyChanged;
                 plugins.Add(crmVM);
             }
 
