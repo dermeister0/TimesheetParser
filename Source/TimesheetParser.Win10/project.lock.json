@@ -19,6 +19,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
+      "Heavysoft.VersionGenerator/1.0.0.5": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -50,6 +51,7 @@
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
+      "Microsoft.Bcl.Build/1.0.21": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -1616,6 +1618,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
+      "Heavysoft.VersionGenerator/1.0.0.5": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -1647,6 +1650,7 @@
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
+      "Microsoft.Bcl.Build/1.0.21": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -3303,6 +3307,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
+      "Heavysoft.VersionGenerator/1.0.0.5": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -3334,6 +3339,7 @@
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
+      "Microsoft.Bcl.Build/1.0.21": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -4962,6 +4968,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
+      "Heavysoft.VersionGenerator/1.0.0.5": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -4993,6 +5000,7 @@
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
+      "Microsoft.Bcl.Build/1.0.21": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -6654,6 +6662,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
+      "Heavysoft.VersionGenerator/1.0.0.5": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -6685,6 +6694,7 @@
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
+      "Microsoft.Bcl.Build/1.0.21": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -8313,6 +8323,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
+      "Heavysoft.VersionGenerator/1.0.0.5": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -8344,6 +8355,7 @@
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
+      "Microsoft.Bcl.Build/1.0.21": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -10005,6 +10017,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
+      "Heavysoft.VersionGenerator/1.0.0.5": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -10036,6 +10049,7 @@
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
+      "Microsoft.Bcl.Build/1.0.21": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -11675,6 +11689,18 @@
         "package/services/metadata/core-properties/611c6442f7344bf690da8be8c9988bf9.psmdcp"
       ]
     },
+    "Heavysoft.VersionGenerator/1.0.0.5": {
+      "sha512": "WhobnCm5fzJ/NxUnbuWrjLGEyfaqqRqla6TVYmUrINIQao/+fePoOt3DFZqrt3GSgcTca85qX4oM3PPP+zkf9Q==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "Content/Properties/HeavysoftVersion.cs.template",
+        "Content/Properties/HeavysoftVersion.ps1",
+        "Heavysoft.VersionGenerator.nuspec",
+        "package/services/metadata/core-properties/d98132af0ba447a9b3ec58872988089a.psmdcp"
+      ]
+    },
     "Microsoft.ApplicationInsights/1.0.0": {
       "sha512": "HZ47/thX57SOuIivSvIbsR6L9CCb/Yt3IyB2i4KHmmNlf3DO+lqFwWIKDdbDNWKX+qh0Rg20/JSMPK0dwUsYYw==",
       "type": "Package",
@@ -11723,6 +11749,19 @@
         "lib/wpa81/Microsoft.ApplicationInsights.Extensibility.Windows.XML",
         "Microsoft.ApplicationInsights.WindowsApps.nuspec",
         "package/services/metadata/core-properties/4f6f732debe548beaa1183418e8d65cc.psmdcp"
+      ]
+    },
+    "Microsoft.Bcl.Build/1.0.21": {
+      "sha512": "sgHu4mIt0+NVGyI12Bj4hLPypNK55UOH+ologj2LqDCjxq3EbIxe/uAtHjY+fEwbE1dtsAHG8SXHf+V/EYbKTg==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "build/Microsoft.Bcl.Build.targets",
+        "build/Microsoft.Bcl.Build.Tasks.dll",
+        "License-Stable.rtf",
+        "Microsoft.Bcl.Build.nuspec",
+        "package/services/metadata/core-properties/642092c96f444452801a3d9f187d628b.psmdcp"
       ]
     },
     "Microsoft.CSharp/4.0.0": {
@@ -15211,9 +15250,11 @@
   "projectFileDependencyGroups": {
     "": [
       "Heavysoft.TimesheetParser.PluginInterfaces >= 1.1.5186",
+      "Heavysoft.VersionGenerator >= 1.0.0.5",
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
+      "Microsoft.Bcl.Build >= 1.0.21",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "MvvmLightLibs >= 5.2.0"
     ],

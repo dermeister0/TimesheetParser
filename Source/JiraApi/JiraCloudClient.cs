@@ -1,10 +1,10 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Heavysoft.TimesheetParser.PluginInterfaces;
-using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
+using RestSharp.Portable;
+using RestSharp.Portable.HttpClient;
 
 namespace JiraApi
 {
@@ -37,12 +37,11 @@ namespace JiraApi
             this.login = login;
             this.password = password;
 
-            restClient.Authenticator = new HttpBasicAuthenticator(this.login, this.password);
-
+            restClient.Authenticator = new HttpBasicAuthenticator(login, password);
             var request = new RestRequest("myself");
-            var response = await restClient.ExecuteTaskAsync(request);
+            var response = await (Task.Run(() => restClient.Execute(request)));
 
-            return response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK;
+            return response.IsSuccess && response.StatusCode == HttpStatusCode.OK;
         }
 
         public Task<bool> Login(string token)
@@ -52,16 +51,14 @@ namespace JiraApi
 
         public async Task<bool> AddJob(JobDefinition job)
         {
-            var request = new RestRequest("issue/{issueId}/worklog", Method.POST) { RequestFormat = DataFormat.Json };
+            var request = new RestRequest("issue/{issueId}/worklog", Method.POST);
             request.AddUrlSegment("issueId", job.TaskId);
             request.AddBody(new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") });
 
-            var response = await restClient.ExecuteTaskAsync(request);
-
-            if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.Created)
+            var response = await Task.Run(() => restClient.Execute<WorkLogResponse>(request));
+            if (response.IsSuccess && response.StatusCode == HttpStatusCode.Created)
             {
-                var content = SimpleJson.DeserializeObject<WorkLogResponse>(response.Content);
-                var id = content.id; // @@
+                var id = response.Data.id; // @@
 
                 return true;
             }
@@ -73,13 +70,12 @@ namespace JiraApi
             var request = new RestRequest("issue/{issueId}?fields=summary");
             request.AddUrlSegment("issueId", taskId);
 
-            var response = await restClient.ExecuteTaskAsync(request);
+            var response = await Task.Run(() => restClient.Execute<IssueSummaryResponse>(request));
 
             var title = string.Empty;
-            if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
+            if (response.IsSuccess && response.StatusCode == HttpStatusCode.OK)
             {
-                var content = SimpleJson.DeserializeObject<IssueSummaryResponse>(response.Content);
-                title = content.fields["summary"];
+                title = response.Data.fields["summary"];
             }
 
             return new TaskHeader() { Title = title };

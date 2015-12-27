@@ -20,6 +20,7 @@ namespace TimesheetParser.Business.ViewModel
         private DateTime jobsDate;
         private readonly IPluginService pluginService;
         private readonly IClipboardService clipboardService;
+        private IReadOnlyCollection<CrmPluginViewModel> crmPlugins;
 
         public MainViewModel(IPluginService pluginService, IClipboardService clipboardService)
         {
@@ -100,7 +101,15 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
-        public IReadOnlyCollection<CrmPluginViewModel> CrmPlugins { get; set; }
+        public IReadOnlyCollection<CrmPluginViewModel> CrmPlugins
+        {
+            get { return crmPlugins; }
+            set
+            {
+                crmPlugins = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public void CheckConnection()
         {

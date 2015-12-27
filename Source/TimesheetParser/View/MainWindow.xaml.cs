@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using TimesheetParser.Business.ViewModel;
-
-namespace TimesheetParser.View
+﻿namespace TimesheetParser.View
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
@@ -11,13 +8,6 @@ namespace TimesheetParser.View
         public MainWindow()
         {
             InitializeComponent();
-
-            var mainVM = ViewModelLocator.Current.MainVM;
-            mainVM.LoadPlugins();
-
-            Task.Run(() => mainVM.CheckConnection());
-
-            DataContext = mainVM;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Threading.Tasks;
+using System.Windows.Controls;
+using TimesheetParser.Business.ViewModel;
 
 namespace TimesheetParser.View
 {
@@ -10,6 +12,11 @@ namespace TimesheetParser.View
         public MainPage()
         {
             InitializeComponent();
+
+            var mainVM = DataContext as MainViewModel;
+            mainVM?.LoadPlugins();
+
+            Task.Run(() => mainVM?.CheckConnection());
         }
     }
 }
