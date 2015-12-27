@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Windows.Storage;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
@@ -22,10 +21,8 @@ namespace TimesheetParser.Win10.Services
         public IReadOnlyCollection<CrmPluginViewModel> LoadPlugins()
         {
             var plugins = new List<CrmPluginViewModel>();
-
             var folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
 
-            List<Assembly> assemblies = new List<Assembly>();
             foreach (StorageFile file in folder.GetFilesAsync().AsTask().Result)
             {
                 if (file.FileType == ".dll" && file.Name.Contains("Api"))
