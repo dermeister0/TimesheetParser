@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Threading;
 using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Business.Services;
 using TimesheetParser.Win10.Services;
@@ -80,6 +81,8 @@ namespace TimesheetParser.Win10
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            DispatcherHelper.Initialize();
         }
 
         /// <summary>

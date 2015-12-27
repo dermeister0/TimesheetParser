@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser", "TimesheetParser\TimesheetParser.csproj", "{B4E36119-7A3D-4F45-90FF-E998B799064E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser.Win10", "TimesheetParser.Win10\TimesheetParser.Win10.csproj", "{BF7E365B-B6A3-48D1-8169-3385FF63E5A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DEEBF362-FBF9-428C-B47F-D1092B307C45} = {DEEBF362-FBF9-428C-B47F-D1092B307C45}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser.Business", "TimesheetParser.Business\TimesheetParser.Business.csproj", "{F4BF5A97-D10B-4267-8DC0-7C6270532A5E}"
 EndProject

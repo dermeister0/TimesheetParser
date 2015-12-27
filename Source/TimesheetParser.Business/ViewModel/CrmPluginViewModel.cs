@@ -108,7 +108,7 @@ namespace TimesheetParser.Business.ViewModel
             crmLoginVM.SourcePlugin = this;
 
             var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-            navigationService.NavigateTo("CrmLoginPage.xaml");
+            navigationService.NavigateTo("/View/CrmLoginPage.xaml");
         }
     }
 }

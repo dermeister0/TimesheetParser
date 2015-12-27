@@ -9,7 +9,7 @@ namespace TimesheetParser.Win10.Services
         public string Password { get; set; }
         public void LoadCredential()
         {
-            throw new NotImplementedException();
+            // @@
         }
 
         public void SaveCredential()

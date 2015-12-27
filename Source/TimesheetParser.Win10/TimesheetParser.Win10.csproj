@@ -150,14 +150,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JiraApi\JiraApi.csproj">
-      <Project>{deebf362-fbf9-428c-b47f-d1092b307c45}</Project>
-      <Name>JiraApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TimesheetParser.Business\TimesheetParser.Business.csproj">
       <Project>{f4bf5a97-d10b-4267-8dc0-7c6270532a5e}</Project>
       <Name>TimesheetParser.Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="JiraApi">
+      <HintPath>..\Plugins\JiraApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

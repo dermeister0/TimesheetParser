@@ -50,7 +50,7 @@ namespace TimesheetParser.Business.ViewModel
             SourcePlugin?.CheckConnection(Login, Password);
 
             var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-            navigationService.NavigateTo("MainPage.xaml");
+            navigationService.NavigateTo("/View/MainPage.xaml");
         }
     }
 }
