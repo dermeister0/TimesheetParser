@@ -8,4 +8,6 @@ Import-Module "$PSScriptRoot\Scripts\BuildHelpers.psm1"
 Initialize-BuildVariables
 Invoke-NugetRestore "$PSScriptRoot\TimesheetParser.sln"
 
+$env:HVChangeset = (git 'rev-parse' 'HEAD').SubString(0, 7)
+
 Invoke-SolutionBuild "$PSScriptRoot\TimesheetParser.sln" 'Release'
