@@ -89,6 +89,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+    <HeavysoftVersionPs1>$(MSBuildProjectDirectory)\..\packages\Heavysoft.VersionGenerator.1.1.0.0\tools\HeavysoftVersion.ps1</HeavysoftVersionPs1>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
@@ -105,6 +106,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\HeavysoftVersion.cs" />
     <Compile Include="Services\ClipboardService.cs" />
     <Compile Include="Services\DispatchService.cs" />
     <Compile Include="Services\PasswordService.cs" />
@@ -118,6 +120,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Properties\HeavysoftVersion.cs.template" />
     <None Include="TimesheetParser.Win10_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +171,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Target Name="BeforeBuild">
-    <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp;{ $(ProjectDir)Properties\HeavysoftVersion.ps1 }&quot;" />
+    <Exec Command="$(PowerShellExe) -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command &quot;&amp;{ $(HeavysoftVersionPs1); exit $LastExitCode }&quot;" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

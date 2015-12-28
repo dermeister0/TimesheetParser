@@ -19,7 +19,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
-      "Heavysoft.VersionGenerator/1.0.0.5": {},
+      "Heavysoft.VersionGenerator/1.1.0": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -1675,7 +1675,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
-      "Heavysoft.VersionGenerator/1.0.0.5": {},
+      "Heavysoft.VersionGenerator/1.1.0": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -3421,7 +3421,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
-      "Heavysoft.VersionGenerator/1.0.0.5": {},
+      "Heavysoft.VersionGenerator/1.1.0": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -5139,7 +5139,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
-      "Heavysoft.VersionGenerator/1.0.0.5": {},
+      "Heavysoft.VersionGenerator/1.1.0": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -6890,7 +6890,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
-      "Heavysoft.VersionGenerator/1.0.0.5": {},
+      "Heavysoft.VersionGenerator/1.1.0": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -8608,7 +8608,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
-      "Heavysoft.VersionGenerator/1.0.0.5": {},
+      "Heavysoft.VersionGenerator/1.1.0": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -10359,7 +10359,7 @@
           "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
         }
       },
-      "Heavysoft.VersionGenerator/1.0.0.5": {},
+      "Heavysoft.VersionGenerator/1.1.0": {},
       "Microsoft.ApplicationInsights/1.0.0": {
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
@@ -12088,16 +12088,16 @@
         "package/services/metadata/core-properties/611c6442f7344bf690da8be8c9988bf9.psmdcp"
       ]
     },
-    "Heavysoft.VersionGenerator/1.0.0.5": {
-      "sha512": "WhobnCm5fzJ/NxUnbuWrjLGEyfaqqRqla6TVYmUrINIQao/+fePoOt3DFZqrt3GSgcTca85qX4oM3PPP+zkf9Q==",
+    "Heavysoft.VersionGenerator/1.1.0": {
+      "sha512": "g8K4wcfOYA9KdUMeFgMGcXVe19RWxXrKoNfEnd9scJvrcGk7EoPh//DA/itLLgwCFYl+avmGyaxqS/IntbtZaA==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
         "_rels/.rels",
+        "Content/Properties/HeavysoftVersion.cs",
         "Content/Properties/HeavysoftVersion.cs.template",
-        "Content/Properties/HeavysoftVersion.ps1",
         "Heavysoft.VersionGenerator.nuspec",
-        "package/services/metadata/core-properties/d98132af0ba447a9b3ec58872988089a.psmdcp"
+        "package/services/metadata/core-properties/cb01433e093949269e4c0acccc09a7d1.psmdcp"
       ]
     },
     "Microsoft.ApplicationInsights/1.0.0": {
@@ -15905,7 +15905,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Heavysoft.TimesheetParser.PluginInterfaces >= 1.1.5186",
-      "Heavysoft.VersionGenerator >= 1.0.0.5",
+      "Heavysoft.VersionGenerator >= 1.1.0",
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
