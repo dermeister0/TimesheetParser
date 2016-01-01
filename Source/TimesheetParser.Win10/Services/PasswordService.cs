@@ -25,6 +25,7 @@ namespace TimesheetParser.Win10.Services
                 var credential = vault.FindAllByResource(GetResource()).FirstOrDefault();
                 if (credential != null)
                 {
+                    credential.RetrievePassword();
                     Login = credential.UserName;
                     Password = credential.Password;
                 }
