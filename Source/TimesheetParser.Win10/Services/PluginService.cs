@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+#if DEBUG
 using Windows.Storage;
+#endif
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
 using TimesheetParser.Business.ViewModel;
@@ -23,27 +25,32 @@ namespace TimesheetParser.Win10.Services
         public IReadOnlyCollection<CrmPluginViewModel> LoadPlugins()
         {
             var plugins = new List<CrmPluginViewModel>();
-            var folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            // ReSharper disable once JoinDeclarationAndInitializer
+            IEnumerable<string> assemblyNames;
 
-            foreach (StorageFile file in folder.GetFilesAsync().AsTask().Result)
+#if DEBUG
+            assemblyNames = Windows.ApplicationModel.Package.Current.InstalledLocation.GetFilesAsync().AsTask().Result
+                .Where(file => file.FileType == ".dll" && file.Name.Contains("Api"))
+                .Select(file => file.Name.Substring(0, file.Name.Length - file.FileType.Length));
+#else
+            assemblyNames = new[] { "JiraApi", "SaritasaApi" };
+#endif
+
+            foreach (var name in assemblyNames)
             {
-                if (file.FileType == ".dll" && file.Name.Contains("Api"))
-                {
-                    var fileName = file.Name.Substring(0, file.Name.Length - file.FileType.Length);
-                    Assembly assembly = Assembly.Load(new AssemblyName() { Name = fileName });
-                    var type = assembly.GetExportedTypes().FirstOrDefault(t => typeof(ICrm).IsAssignableFrom(t));
+                var assembly = Assembly.Load(new AssemblyName() { Name = name });
+                var type = assembly.GetExportedTypes().FirstOrDefault(t => typeof (ICrm).IsAssignableFrom(t));
 
-                    if (type == null)
-                        continue;
+                if (type == null)
+                    continue;
 
-                    var crmClient = Activator.CreateInstance(type) as ICrm;
-                    if (crmClient == null)
-                        continue;
+                var crmClient = Activator.CreateInstance(type) as ICrm;
+                if (crmClient == null)
+                    continue;
 
-                    var passwordService = new PasswordService(crmClient.GetName());
-                    var crmVM = new CrmPluginViewModel(crmClient, passwordService, navigationService, dispatchService);
-                    plugins.Add(crmVM);
-                }
+                var passwordService = new PasswordService(crmClient.GetName());
+                var crmVM = new CrmPluginViewModel(crmClient, passwordService, navigationService, dispatchService);
+                plugins.Add(crmVM);
             }
 
             return plugins;

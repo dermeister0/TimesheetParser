@@ -9,7 +9,7 @@ namespace JiraApi
     /// <summary>
     /// The default HTTP Basic authenticator
     /// </summary>
-    public class HttpBasicAuthenticator : IAuthenticator
+    internal class HttpBasicAuthenticator : IAuthenticator
     {
         /// <summary>
         /// The authentication method ID used in HTTP authentication challenge
