@@ -9,6 +9,7 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+        <ResourceDictionary Source="Themes/CrmPluginItemsControl.xaml" />
         <ResourceDictionary Source="Themes/JobListView.xaml" />
         <ResourceDictionary>
           <vm:ViewModelLocator x:Key="ViewModelLocator">

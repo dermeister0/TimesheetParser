@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/CrmPluginItemsControl.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Themes/JobListView.xaml"></ResourceDictionary>
                 <ResourceDictionary>
                     <vm:ViewModelLocator x:Key="ViewModelLocator">

@@ -110,6 +110,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\CrmPluginItemsControl.cs" />
     <Compile Include="Controls\JobListView.cs" />
     <Compile Include="Services\ClipboardService.cs" />
     <Compile Include="View\MainPage.xaml.cs">
@@ -123,12 +124,13 @@
     <Compile Include="Services\MyNavigationService.cs" />
     <Compile Include="Support\IsOddToBrushConverter.cs" />
     <Compile Include="Services\PasswordService.cs" />
-    <Compile Include="View\CrmPluginBlock.xaml.cs">
+    <Compile Include="Controls\CrmPluginBlock.xaml.cs">
       <DependentUpon>CrmPluginBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CrmPluginListBox.xaml.cs">
-      <DependentUpon>CrmPluginListBox.xaml</DependentUpon>
-    </Compile>
+    <Page Include="Themes\CrmPluginItemsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CrmLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,11 +162,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CrmPluginBlock.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CrmPluginListBox.xaml">
+    <Page Include="Controls\CrmPluginBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -46,6 +46,8 @@
             <Button Width="100" Command="{Binding GenerateCommand}">Generate</Button>
             <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle}">Distribute Idle</CheckBox>
 
+            <controls:CrmPluginItemsControl ItemsSource="{Binding CrmPlugins}" Margin="10"></controls:CrmPluginItemsControl>
+
             <Button Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}">Submit Jobs</Button>
             <DatePicker Date="{Binding JobsDate}" />
         </StackPanel>
