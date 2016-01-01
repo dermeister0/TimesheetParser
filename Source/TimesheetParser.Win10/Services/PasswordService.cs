@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Windows.Security.Credentials;
 using TimesheetParser.Business.Services;
 
@@ -30,7 +29,7 @@ namespace TimesheetParser.Win10.Services
                     Password = credential.Password;
                 }
             }
-            catch (COMException)
+            catch (Exception)
             {
                 // No passwords are saved for this resource.
             }
