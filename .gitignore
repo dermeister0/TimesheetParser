@@ -185,3 +185,6 @@ FakesAssemblies/
 *.bak
 HeavysoftVersion.cs
 nuget.exe
+*.orig
+Source/TimesheetParser.Win10/BundleArtifacts/
+Source/Plugins/

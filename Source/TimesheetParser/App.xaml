@@ -1,4 +1,6 @@
-<Application x:Class="TimesheetParser.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:TimesheetParser" xmlns:vm="clr-namespace:TimesheetParser.ViewModel" StartupUri="MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+<Application x:Class="TimesheetParser.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="View/MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TimesheetParser.Business.ViewModel;assembly=TimesheetParser.Business">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -7,11 +9,11 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+        <ResourceDictionary Source="Themes/CrmPluginItemsControl.xaml" />
+        <ResourceDictionary Source="Themes/JobListView.xaml" />
         <ResourceDictionary>
           <vm:ViewModelLocator x:Key="ViewModelLocator">
           </vm:ViewModelLocator>
-          <SolidColorBrush x:Key="LightRowBrush" Color="#FFC5CBF9" />
-          <SolidColorBrush x:Key="DarkRowBrush" Color="#FF7381F9" />
         </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
