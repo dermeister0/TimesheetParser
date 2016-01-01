@@ -55,6 +55,7 @@
     <Compile Include="ViewModel\CrmPluginViewModel.cs" />
     <Compile Include="ViewModel\JobViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>

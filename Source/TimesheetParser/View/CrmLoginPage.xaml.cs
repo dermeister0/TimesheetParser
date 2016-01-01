@@ -26,7 +26,7 @@ namespace TimesheetParser.View
         private void CrmLoginPage_OnLoaded(object sender, RoutedEventArgs e)
         {
             var crmLoginVM = DataContext as CrmLoginViewModel;
-            if (crmLoginVM != null)
+            if (crmLoginVM?.Password != null)
             {
                 PasswordBox.Password = crmLoginVM.Password;
             }

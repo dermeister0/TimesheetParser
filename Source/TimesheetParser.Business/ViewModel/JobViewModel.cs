@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using TimesheetParser.Business.Model;
 using TimesheetParser.Business.Services;
 
@@ -14,7 +13,7 @@ namespace TimesheetParser.Business.ViewModel
         private string taskTitle;
         private readonly IClipboardService clipboardService;
 
-        public JobViewModel(Job job, IClipboardService clipboardService)
+        public JobViewModel(Job job, IClipboardService clipboardService, IDispatchService dispatchService) : base(dispatchService)
         {
             this.job = job;
             this.clipboardService = clipboardService;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
@@ -21,8 +21,9 @@ namespace TimesheetParser.Business.ViewModel
         private readonly IPluginService pluginService;
         private readonly IClipboardService clipboardService;
         private IReadOnlyCollection<CrmPluginViewModel> crmPlugins;
+        private bool initialized;
 
-        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService)
+        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IDispatchService dispatchService) : base(dispatchService)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
@@ -32,6 +33,19 @@ namespace TimesheetParser.Business.ViewModel
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed);
+        }
+
+        public void Initialize()
+        {
+            if (initialized)
+                return;
+
+            initialized = true;
+            Task.Run(() =>
+                {
+                    LoadPlugins();
+                    CheckConnection();
+                });
         }
 
         #region Properties
@@ -129,7 +143,7 @@ namespace TimesheetParser.Business.ViewModel
             var result = parser.Parse(SourceText, DistributeIdle);
             ResultText = result.Format();
 
-            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j, clipboardService)).ToList();
+            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j, clipboardService, DispatchService)).ToList();
 
             string previousTask = null;
             bool isOdd = false;
@@ -181,7 +195,7 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
-#endregion
+        #endregion
 
         public void LoadPlugins()
         {

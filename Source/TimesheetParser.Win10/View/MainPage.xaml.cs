@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using TimesheetParser.Business.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -16,9 +15,7 @@ namespace TimesheetParser.Win10.View
             this.InitializeComponent();
 
             var mainVM = DataContext as MainViewModel;
-            mainVM?.LoadPlugins();
-
-            Task.Run(() => mainVM?.CheckConnection());
+            mainVM?.Initialize();
         }
     }
 }

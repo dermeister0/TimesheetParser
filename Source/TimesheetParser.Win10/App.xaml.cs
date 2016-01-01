@@ -73,6 +73,8 @@ namespace TimesheetParser.Win10
                 Window.Current.Content = rootFrame;
             }
 
+            DispatcherHelper.Initialize();
+
             if (rootFrame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
@@ -82,8 +84,6 @@ namespace TimesheetParser.Win10
             }
             // Ensure the current window is active
             Window.Current.Activate();
-
-            DispatcherHelper.Initialize();
         }
 
         /// <summary>

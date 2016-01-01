@@ -15,14 +15,12 @@ namespace TimesheetParser.Business.ViewModel
         private bool isBusy;
         private bool isConnected;
         private readonly IPortableNavigationService navigationService;
-        private readonly IDispatchService dispatchService;
 
-        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService, IPortableNavigationService navigationService, IDispatchService dispatchService)
+        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService, IPortableNavigationService navigationService, IDispatchService dispatchService) : base(dispatchService)
         {
             this.crmClient = crmClient;
             this.passwordService = passwordService;
             this.navigationService = navigationService;
-            this.dispatchService = dispatchService;
             taskInfoService = new TaskInfoService(crmClient);
 
             Name = crmClient.GetName();
@@ -36,7 +34,7 @@ namespace TimesheetParser.Business.ViewModel
             private set
             {
                 isConnected = value;
-                dispatchService.InvokeOnUIThread(() => RaisePropertyChanged());
+                RaisePropertyChanged();
             }
         }
 
@@ -47,7 +45,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 isBusy = value;
                 RaisePropertyChanged();
-                dispatchService.InvokeOnUIThread(() => (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged());
+                RaiseCanExecuteChanged(LoginCommand);
             }
         }
 

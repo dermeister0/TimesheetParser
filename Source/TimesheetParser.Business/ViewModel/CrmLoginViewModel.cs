@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using TimesheetParser.Business.Services;
 
@@ -10,12 +9,10 @@ namespace TimesheetParser.Business.ViewModel
         private string login;
         private string password;
         private readonly IPortableNavigationService navigationService;
-        private readonly IDispatchService dispatchService;
 
-        public CrmLoginViewModel(IPortableNavigationService navigationService, IDispatchService dispatchService)
+        public CrmLoginViewModel(IPortableNavigationService navigationService, IDispatchService dispatchService) : base(dispatchService)
         {
             this.navigationService = navigationService;
-            this.dispatchService = dispatchService;
 
             LoginCommand = new RelayCommand(LoginCommand_Executed, () => !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrEmpty(Password));
         }
@@ -27,7 +24,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 login = value;
                 RaisePropertyChanged();
-                dispatchService.InvokeOnUIThread(() => (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged());
+                RaiseCanExecuteChanged(LoginCommand);
             }
         }
 
@@ -38,7 +35,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 password = value;
                 RaisePropertyChanged();
-                dispatchService.InvokeOnUIThread(() => (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged());
+                RaiseCanExecuteChanged(LoginCommand);
             }
         }
 

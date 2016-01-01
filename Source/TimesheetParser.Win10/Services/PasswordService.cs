@@ -14,7 +14,7 @@ namespace TimesheetParser.Win10.Services
 
         public void SaveCredential()
         {
-            throw new NotImplementedException();
+            // @@
         }
 
         public void DeleteCredential()
