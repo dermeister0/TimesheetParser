@@ -7,17 +7,17 @@ namespace TimesheetParser.Services
     {
         private readonly string pluginName;
 
-        public string Login { get; set; }
-        public string Password { get; set; }
-
         public PasswordService(string pluginName)
         {
             this.pluginName = pluginName;
         }
 
+        public string Login { get; set; }
+        public string Password { get; set; }
+
         public void LoadCredential()
         {
-            var credential = new Credential() { Target = GetTarget() };
+            var credential = new Credential { Target = GetTarget() };
             credential.Load();
 
             Login = credential.Username;
@@ -26,7 +26,7 @@ namespace TimesheetParser.Services
 
         public void SaveCredential()
         {
-            var credential = new Credential()
+            var credential = new Credential
             {
                 Target = GetTarget(),
                 PersistanceType = PersistanceType.LocalComputer,
@@ -38,7 +38,7 @@ namespace TimesheetParser.Services
 
         public void DeleteCredential()
         {
-            var credential = new Credential() { Target = GetTarget() };
+            var credential = new Credential { Target = GetTarget() };
             credential.Delete();
         }
 

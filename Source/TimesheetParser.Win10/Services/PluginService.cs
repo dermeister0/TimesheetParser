@@ -40,7 +40,7 @@ namespace TimesheetParser.Win10.Services
                     if (crmClient == null)
                         continue;
 
-                    var passwordService = new PasswordService();
+                    var passwordService = new PasswordService(crmClient.GetName());
                     var crmVM = new CrmPluginViewModel(crmClient, passwordService, navigationService, dispatchService);
                     plugins.Add(crmVM);
                 }
