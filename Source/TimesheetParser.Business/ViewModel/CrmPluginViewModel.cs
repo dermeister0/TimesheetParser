@@ -36,7 +36,7 @@ namespace TimesheetParser.Business.ViewModel
             private set
             {
                 isConnected = value;
-                RaisePropertyChanged();
+                dispatchService.InvokeOnUIThread(() => RaisePropertyChanged());
             }
         }
 
