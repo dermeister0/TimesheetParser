@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heavysoft.TimesheetParser.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraApi", "JiraApi\JiraApi.csproj", "{DEEBF362-FBF9-428C-B47F-D1092B307C45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser.Win10.PluginWrapper", "TimesheetParser.Win10.PluginWrapper\TimesheetParser.Win10.PluginWrapper.csproj", "{0D278353-7704-487A-9F24-D8352FFA313E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,22 @@ Global
 		{DEEBF362-FBF9-428C-B47F-D1092B307C45}.Release|x64.Build.0 = Release|Any CPU
 		{DEEBF362-FBF9-428C-B47F-D1092B307C45}.Release|x86.ActiveCfg = Release|Any CPU
 		{DEEBF362-FBF9-428C-B47F-D1092B307C45}.Release|x86.Build.0 = Release|Any CPU
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|ARM.Build.0 = Debug|ARM
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|x64.ActiveCfg = Debug|x64
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|x64.Build.0 = Debug|x64
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|x86.ActiveCfg = Debug|x86
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Debug|x86.Build.0 = Debug|x86
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|ARM.ActiveCfg = Release|ARM
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|ARM.Build.0 = Release|ARM
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|x64.ActiveCfg = Release|x64
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|x64.Build.0 = Release|x64
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|x86.ActiveCfg = Release|x86
+		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

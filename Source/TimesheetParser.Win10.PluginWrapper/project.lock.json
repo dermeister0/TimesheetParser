@@ -3,14 +3,6 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "CommonServiceLocator/1.3.0": {
-        "compile": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        }
-      },
       "FubarCoder.RestSharp.Portable.Core/3.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
@@ -32,46 +24,6 @@
         },
         "runtime": {
           "lib/.NETCore50/RestSharp.Portable.HttpClient.dll": {}
-        }
-      },
-      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-        "compile": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        }
-      },
-      "Heavysoft.VersionGenerator/1.2.1": {},
-      "Microsoft.ApplicationInsights/1.0.0": {
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
       "Microsoft.Bcl/1.1.10": {
@@ -296,21 +248,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmLightLibs/5.2.0": {
-        "dependencies": {
-          "CommonServiceLocator": "[1.3.0, )"
-        },
-        "compile": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
-        },
-        "runtime": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
         }
       },
       "Newtonsoft.Json/7.0.1": {
@@ -1677,14 +1614,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "CommonServiceLocator/1.3.0": {
-        "compile": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        }
-      },
       "FubarCoder.RestSharp.Portable.Core/3.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
@@ -1706,46 +1635,6 @@
         },
         "runtime": {
           "lib/.NETCore50/RestSharp.Portable.HttpClient.dll": {}
-        }
-      },
-      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-        "compile": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        }
-      },
-      "Heavysoft.VersionGenerator/1.2.1": {},
-      "Microsoft.ApplicationInsights/1.0.0": {
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
       "Microsoft.Bcl/1.1.10": {
@@ -2013,21 +1902,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmLightLibs/5.2.0": {
-        "dependencies": {
-          "CommonServiceLocator": "[1.3.0, )"
-        },
-        "compile": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
-        },
-        "runtime": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
         }
       },
       "Newtonsoft.Json/7.0.1": {
@@ -3441,14 +3315,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "CommonServiceLocator/1.3.0": {
-        "compile": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        }
-      },
       "FubarCoder.RestSharp.Portable.Core/3.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
@@ -3470,46 +3336,6 @@
         },
         "runtime": {
           "lib/.NETCore50/RestSharp.Portable.HttpClient.dll": {}
-        }
-      },
-      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-        "compile": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        }
-      },
-      "Heavysoft.VersionGenerator/1.2.1": {},
-      "Microsoft.ApplicationInsights/1.0.0": {
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
       "Microsoft.Bcl/1.1.10": {
@@ -3763,21 +3589,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmLightLibs/5.2.0": {
-        "dependencies": {
-          "CommonServiceLocator": "[1.3.0, )"
-        },
-        "compile": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
-        },
-        "runtime": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
         }
       },
       "Newtonsoft.Json/7.0.1": {
@@ -5177,14 +4988,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "CommonServiceLocator/1.3.0": {
-        "compile": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        }
-      },
       "FubarCoder.RestSharp.Portable.Core/3.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
@@ -5206,46 +5009,6 @@
         },
         "runtime": {
           "lib/.NETCore50/RestSharp.Portable.HttpClient.dll": {}
-        }
-      },
-      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-        "compile": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        }
-      },
-      "Heavysoft.VersionGenerator/1.2.1": {},
-      "Microsoft.ApplicationInsights/1.0.0": {
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
       "Microsoft.Bcl/1.1.10": {
@@ -5518,21 +5281,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmLightLibs/5.2.0": {
-        "dependencies": {
-          "CommonServiceLocator": "[1.3.0, )"
-        },
-        "compile": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
-        },
-        "runtime": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
         }
       },
       "Newtonsoft.Json/7.0.1": {
@@ -6946,14 +6694,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "CommonServiceLocator/1.3.0": {
-        "compile": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        }
-      },
       "FubarCoder.RestSharp.Portable.Core/3.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
@@ -6975,46 +6715,6 @@
         },
         "runtime": {
           "lib/.NETCore50/RestSharp.Portable.HttpClient.dll": {}
-        }
-      },
-      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-        "compile": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        }
-      },
-      "Heavysoft.VersionGenerator/1.2.1": {},
-      "Microsoft.ApplicationInsights/1.0.0": {
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
       "Microsoft.Bcl/1.1.10": {
@@ -7268,21 +6968,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmLightLibs/5.2.0": {
-        "dependencies": {
-          "CommonServiceLocator": "[1.3.0, )"
-        },
-        "compile": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
-        },
-        "runtime": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
         }
       },
       "Newtonsoft.Json/7.0.1": {
@@ -8682,14 +8367,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "CommonServiceLocator/1.3.0": {
-        "compile": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        }
-      },
       "FubarCoder.RestSharp.Portable.Core/3.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
@@ -8711,46 +8388,6 @@
         },
         "runtime": {
           "lib/.NETCore50/RestSharp.Portable.HttpClient.dll": {}
-        }
-      },
-      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-        "compile": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        }
-      },
-      "Heavysoft.VersionGenerator/1.2.1": {},
-      "Microsoft.ApplicationInsights/1.0.0": {
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
       "Microsoft.Bcl/1.1.10": {
@@ -9023,21 +8660,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmLightLibs/5.2.0": {
-        "dependencies": {
-          "CommonServiceLocator": "[1.3.0, )"
-        },
-        "compile": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
-        },
-        "runtime": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
         }
       },
       "Newtonsoft.Json/7.0.1": {
@@ -10451,14 +10073,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "CommonServiceLocator/1.3.0": {
-        "compile": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
-        }
-      },
       "FubarCoder.RestSharp.Portable.Core/3.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
@@ -10480,46 +10094,6 @@
         },
         "runtime": {
           "lib/.NETCore50/RestSharp.Portable.HttpClient.dll": {}
-        }
-      },
-      "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-        "compile": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll": {}
-        }
-      },
-      "Heavysoft.VersionGenerator/1.2.1": {},
-      "Microsoft.ApplicationInsights/1.0.0": {
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-        "dependencies": {
-          "Microsoft.ApplicationInsights": "[1.0.0, )",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.0.0, )"
-        },
-        "compile": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
         }
       },
       "Microsoft.Bcl/1.1.10": {
@@ -10773,21 +10347,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmLightLibs/5.2.0": {
-        "dependencies": {
-          "CommonServiceLocator": "[1.3.0, )"
-        },
-        "compile": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
-        },
-        "runtime": {
-          "lib/windows81/GalaSoft.MvvmLight.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Extras.dll": {},
-          "lib/windows81/GalaSoft.MvvmLight.Platform.dll": {}
         }
       },
       "Newtonsoft.Json/7.0.1": {
@@ -12188,21 +11747,6 @@
     }
   },
   "libraries": {
-    "CommonServiceLocator/1.3.0": {
-      "sha512": "fbjO0SNwbOFPdwVfyqv+B7gIJ2CVBOFPKqn1mDDECK7KER8jFaOdcvroFYoAHa0ktPbxi5s+15qOLnA96f8GSA==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "CommonServiceLocator.nuspec",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.pdb",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.XML",
-        "package/services/metadata/core-properties/8a82b9e5a63a439481bfa8d4ec335002.psmdcp",
-        "package/services/metadata/core-properties/99be0c88b2fd41c8b07c42071005ee47.psmdcp"
-      ]
-    },
     "FubarCoder.RestSharp.Portable.Core/3.1.0": {
       "sha512": "wk2m+ep8dhZHiQcezBj+Qg3GUlpPMQ+2IxlhiIcFR4LA7ZiIBBN7GGnAv4JyJRp4yTxoeuW3lNiJwRt6q3dWrg==",
       "type": "Package",
@@ -12257,80 +11801,6 @@
         "package/services/metadata/core-properties/b4d73b0495074b7c8af65879d89553d4.psmdcp",
         "tools/native/install.ps1",
         "tools/native/uninstall.ps1"
-      ]
-    },
-    "Heavysoft.TimesheetParser.PluginInterfaces/1.1.5186": {
-      "sha512": "hlDDGvvvduC7kYTTq/CwyASyv018CVOjbrwnWo2jL/52l5WKNPDPNpmk6ATbHPlegzI17431i0k/NGSq7DU3sA==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "Heavysoft.TimesheetParser.PluginInterfaces.nuspec",
-        "lib/portable-net451+win81/Heavysoft.TimesheetParser.PluginInterfaces.dll",
-        "package/services/metadata/core-properties/611c6442f7344bf690da8be8c9988bf9.psmdcp"
-      ]
-    },
-    "Heavysoft.VersionGenerator/1.2.1": {
-      "sha512": "+Nzs7ZfV0XJffFFMeOFMRuCH3DpfcUFeKJukeZ//2U0jkvUuQhFQnOou39gf02W33T/TJWI28TBAzdyFBrFBgw==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "Content/Properties/HeavysoftVersion.cs",
-        "Content/Properties/HeavysoftVersion.cs.template",
-        "Heavysoft.VersionGenerator.nuspec",
-        "package/services/metadata/core-properties/9c4c5727e4134f7ab76d06527dd618dd.psmdcp",
-        "tools/HeavysoftVersion.ps1"
-      ]
-    },
-    "Microsoft.ApplicationInsights/1.0.0": {
-      "sha512": "HZ47/thX57SOuIivSvIbsR6L9CCb/Yt3IyB2i4KHmmNlf3DO+lqFwWIKDdbDNWKX+qh0Rg20/JSMPK0dwUsYYw==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "lib/net40/Microsoft.ApplicationInsights.dll",
-        "lib/net40/Microsoft.ApplicationInsights.XML",
-        "lib/net45/Microsoft.ApplicationInsights.dll",
-        "lib/net45/Microsoft.ApplicationInsights.XML",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.XML",
-        "lib/wp8/Microsoft.ApplicationInsights.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.XML",
-        "Microsoft.ApplicationInsights.nuspec",
-        "package/services/metadata/core-properties/b9e7bc7ab2454491af07046165ff01d0.psmdcp"
-      ]
-    },
-    "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-      "sha512": "0qQXC+CtbyF2RPuld5pF74fxsnP6ml0LUnzQ6GL9AXXY64LPsLDsPUAymoUffo7LZvPDppZboTYX59TfVxKA7A==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "lib/net40/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "lib/net40/Microsoft.ApplicationInsights.PersistenceChannel.XML",
-        "lib/portable-win8+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.XML",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.PersistenceChannel.XML",
-        "Microsoft.ApplicationInsights.PersistenceChannel.nuspec",
-        "package/services/metadata/core-properties/dc9ebba80e7343fdbd0a39a3cdeb672c.psmdcp"
-      ]
-    },
-    "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-      "sha512": "fNCAjIwvbTV+G0dT14bgM5tptsqeSaKQaCrlq7QknOq1Xdm8ZmgsDYddMgXkvykyKLjWyU6fKuOpj6fsQJy+wQ==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll",
-        "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.XML",
-        "lib/wp8/Microsoft.ApplicationInsights.Extensibility.Windows.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.Extensibility.Windows.XML",
-        "lib/wpa81/Microsoft.ApplicationInsights.Extensibility.Windows.dll",
-        "lib/wpa81/Microsoft.ApplicationInsights.Extensibility.Windows.XML",
-        "Microsoft.ApplicationInsights.WindowsApps.nuspec",
-        "package/services/metadata/core-properties/4f6f732debe548beaa1183418e8d65cc.psmdcp"
       ]
     },
     "Microsoft.Bcl/1.1.10": {
@@ -13163,140 +12633,6 @@
         "ref/net46/Microsoft.Win32.Primitives.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
-      ]
-    },
-    "MvvmLightLibs/5.2.0": {
-      "sha512": "F16xSNXK0nE5os3lrY+G2NkFdAXPJV7Ux8A9WUxZlyLZShUdCkoe14tov9KxGmgfCuQA/IKM/NWEyN0Dac1Mog==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "lib/monoandroid1/GalaSoft.MvvmLight.dll",
-        "lib/monoandroid1/GalaSoft.MvvmLight.Extras.dll",
-        "lib/monoandroid1/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/monoandroid1/GalaSoft.MvvmLight.Extras.XML",
-        "lib/monoandroid1/GalaSoft.MvvmLight.pdb",
-        "lib/monoandroid1/GalaSoft.MvvmLight.Platform.dll",
-        "lib/monoandroid1/GalaSoft.MvvmLight.Platform.pdb",
-        "lib/monoandroid1/GalaSoft.MvvmLight.Platform.XML",
-        "lib/monoandroid1/GalaSoft.MvvmLight.XML",
-        "lib/net35/GalaSoft.MvvmLight.dll",
-        "lib/net35/GalaSoft.MvvmLight.Extras.dll",
-        "lib/net35/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/net35/GalaSoft.MvvmLight.Extras.xml",
-        "lib/net35/GalaSoft.MvvmLight.pdb",
-        "lib/net35/GalaSoft.MvvmLight.xml",
-        "lib/net35/System.Windows.Interactivity.dll",
-        "lib/net35/System.Windows.Interactivity.xml",
-        "lib/net40/GalaSoft.MvvmLight.dll",
-        "lib/net40/GalaSoft.MvvmLight.Extras.dll",
-        "lib/net40/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/net40/GalaSoft.MvvmLight.Extras.xml",
-        "lib/net40/GalaSoft.MvvmLight.pdb",
-        "lib/net40/GalaSoft.MvvmLight.xml",
-        "lib/net40/System.Windows.Interactivity.dll",
-        "lib/net40/System.Windows.Interactivity.xml",
-        "lib/net45/GalaSoft.MvvmLight.dll",
-        "lib/net45/GalaSoft.MvvmLight.Extras.dll",
-        "lib/net45/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/net45/GalaSoft.MvvmLight.Extras.xml",
-        "lib/net45/GalaSoft.MvvmLight.pdb",
-        "lib/net45/GalaSoft.MvvmLight.Platform.dll",
-        "lib/net45/GalaSoft.MvvmLight.Platform.pdb",
-        "lib/net45/GalaSoft.MvvmLight.Platform.xml",
-        "lib/net45/GalaSoft.MvvmLight.xml",
-        "lib/net45/System.Windows.Interactivity.dll",
-        "lib/portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10/GalaSoft.MvvmLight.dll",
-        "lib/portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10/GalaSoft.MvvmLight.Extras.dll",
-        "lib/portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10/GalaSoft.MvvmLight.Extras.XML",
-        "lib/portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10/GalaSoft.MvvmLight.pdb",
-        "lib/portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10/GalaSoft.MvvmLight.XML",
-        "lib/SL4/GalaSoft.MvvmLight.dll",
-        "lib/SL4/GalaSoft.MvvmLight.Extras.dll",
-        "lib/SL4/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/SL4/GalaSoft.MvvmLight.Extras.xml",
-        "lib/SL4/GalaSoft.MvvmLight.pdb",
-        "lib/SL4/GalaSoft.MvvmLight.xml",
-        "lib/SL4/System.Windows.Interactivity.dll",
-        "lib/SL4/System.Windows.Interactivity.xml",
-        "lib/sl4-wp71/GalaSoft.MvvmLight.dll",
-        "lib/sl4-wp71/GalaSoft.MvvmLight.Extras.dll",
-        "lib/sl4-wp71/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/sl4-wp71/GalaSoft.MvvmLight.Extras.xml",
-        "lib/sl4-wp71/GalaSoft.MvvmLight.pdb",
-        "lib/sl4-wp71/GalaSoft.MvvmLight.xml",
-        "lib/sl4-wp71/Microsoft.Practices.ServiceLocation.dll",
-        "lib/sl4-wp71/Microsoft.Practices.ServiceLocation.xml",
-        "lib/sl4-wp71/System.Windows.Interactivity.dll",
-        "lib/sl4-wp71/System.Windows.Interactivity.xml",
-        "lib/SL5/GalaSoft.MvvmLight.dll",
-        "lib/SL5/GalaSoft.MvvmLight.Extras.dll",
-        "lib/SL5/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/SL5/GalaSoft.MvvmLight.Extras.xml",
-        "lib/SL5/GalaSoft.MvvmLight.pdb",
-        "lib/SL5/GalaSoft.MvvmLight.xml",
-        "lib/SL5/System.Windows.Interactivity.dll",
-        "lib/windows8/GalaSoft.MvvmLight.dll",
-        "lib/windows8/GalaSoft.MvvmLight.Extras.dll",
-        "lib/windows8/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/windows8/GalaSoft.MvvmLight.Extras.xml",
-        "lib/windows8/GalaSoft.MvvmLight.pdb",
-        "lib/windows8/GalaSoft.MvvmLight.Platform.dll",
-        "lib/windows8/GalaSoft.MvvmLight.Platform.pdb",
-        "lib/windows8/GalaSoft.MvvmLight.Platform.pri",
-        "lib/windows8/GalaSoft.MvvmLight.Platform.xml",
-        "lib/windows8/GalaSoft.MvvmLight.xml",
-        "lib/windows81/GalaSoft.MvvmLight.dll",
-        "lib/windows81/GalaSoft.MvvmLight.Extras.dll",
-        "lib/windows81/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/windows81/GalaSoft.MvvmLight.Extras.xml",
-        "lib/windows81/GalaSoft.MvvmLight.pdb",
-        "lib/windows81/GalaSoft.MvvmLight.Platform.dll",
-        "lib/windows81/GalaSoft.MvvmLight.Platform.pdb",
-        "lib/windows81/GalaSoft.MvvmLight.Platform.pri",
-        "lib/windows81/GalaSoft.MvvmLight.Platform.xml",
-        "lib/windows81/GalaSoft.MvvmLight.xml",
-        "lib/wp8/GalaSoft.MvvmLight.dll",
-        "lib/wp8/GalaSoft.MvvmLight.Extras.dll",
-        "lib/wp8/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/wp8/GalaSoft.MvvmLight.Extras.xml",
-        "lib/wp8/GalaSoft.MvvmLight.pdb",
-        "lib/wp8/GalaSoft.MvvmLight.Platform.dll",
-        "lib/wp8/GalaSoft.MvvmLight.Platform.pdb",
-        "lib/wp8/GalaSoft.MvvmLight.Platform.xml",
-        "lib/wp8/GalaSoft.MvvmLight.xml",
-        "lib/wp8/System.Windows.Interactivity.dll",
-        "lib/wp81/GalaSoft.MvvmLight.dll",
-        "lib/wp81/GalaSoft.MvvmLight.Extras.dll",
-        "lib/wp81/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/wp81/GalaSoft.MvvmLight.Extras.xml",
-        "lib/wp81/GalaSoft.MvvmLight.pdb",
-        "lib/wp81/GalaSoft.MvvmLight.Platform.dll",
-        "lib/wp81/GalaSoft.MvvmLight.Platform.pdb",
-        "lib/wp81/GalaSoft.MvvmLight.Platform.xml",
-        "lib/wp81/GalaSoft.MvvmLight.xml",
-        "lib/wp81/System.Windows.Interactivity.dll",
-        "lib/wpa81/GalaSoft.MvvmLight.dll",
-        "lib/wpa81/GalaSoft.MvvmLight.Extras.dll",
-        "lib/wpa81/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/wpa81/GalaSoft.MvvmLight.Extras.XML",
-        "lib/wpa81/GalaSoft.MvvmLight.pdb",
-        "lib/wpa81/GalaSoft.MvvmLight.Platform.dll",
-        "lib/wpa81/GalaSoft.MvvmLight.Platform.pdb",
-        "lib/wpa81/GalaSoft.MvvmLight.Platform.pri",
-        "lib/wpa81/GalaSoft.MvvmLight.Platform.XML",
-        "lib/wpa81/GalaSoft.MvvmLight.XML",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.dll",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.Extras.dll",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.Extras.pdb",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.Extras.XML",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.pdb",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.Platform.dll",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.Platform.XML",
-        "lib/xamarin.ios10/GalaSoft.MvvmLight.XML",
-        "MvvmLightLibs.nuspec",
-        "package/services/metadata/core-properties/2416d2969a834c638aba3851d652cc13.psmdcp"
       ]
     },
     "Newtonsoft.Json/7.0.1": {
@@ -16062,13 +15398,10 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Heavysoft.TimesheetParser.PluginInterfaces >= 1.1.5186",
-      "Heavysoft.VersionGenerator >= 1.2.1",
-      "Microsoft.ApplicationInsights >= 1.0.0",
-      "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
-      "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
+      "FubarCoder.RestSharp.Portable.HttpClient >= 3.1.0",
+      "Microsoft.Net.Http >= 2.2.29",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "MvvmLightLibs >= 5.2.0"
+      "PCLCrypto >= 1.0.86"
     ],
     "UAP,Version=v10.0": []
   }
