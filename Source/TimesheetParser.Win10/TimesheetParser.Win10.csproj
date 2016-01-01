@@ -106,7 +106,10 @@
       <DependentUpon>CrmPluginBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CrmPluginItemsControl.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="View\CrmLoginPage.xaml.cs">
+      <DependentUpon>CrmLoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="Services\DispatchService.cs" />
     <Compile Include="Services\PasswordService.cs" />
     <Compile Include="Services\PluginService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Support\BooleanConverter.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
     <Compile Include="Support\IsOddToBrushConverter.cs" />
@@ -146,7 +150,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="View\CrmLoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

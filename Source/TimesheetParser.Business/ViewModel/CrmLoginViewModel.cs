@@ -1,8 +1,6 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
-using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Business.Services;
 
 namespace TimesheetParser.Business.ViewModel
@@ -11,10 +9,12 @@ namespace TimesheetParser.Business.ViewModel
     {
         private string login;
         private string password;
+        private readonly IPortableNavigationService navigationService;
         private readonly IDispatchService dispatchService;
 
-        public CrmLoginViewModel(IDispatchService dispatchService)
+        public CrmLoginViewModel(IPortableNavigationService navigationService, IDispatchService dispatchService)
         {
+            this.navigationService = navigationService;
             this.dispatchService = dispatchService;
 
             LoginCommand = new RelayCommand(LoginCommand_Executed, () => !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrEmpty(Password));
@@ -49,8 +49,7 @@ namespace TimesheetParser.Business.ViewModel
         {
             SourcePlugin?.CheckConnection(Login, Password);
 
-            var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-            navigationService.NavigateTo("/View/MainPage.xaml");
+            navigationService.NavigateTo(Location.Main);
         }
     }
 }

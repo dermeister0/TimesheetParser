@@ -121,7 +121,7 @@
     <Compile Include="Services\PluginService.cs" />
     <Compile Include="Support\BooleanConverter.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Services\MyNavigationService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Support\IsOddToBrushConverter.cs" />
     <Compile Include="Services\PasswordService.cs" />
     <Compile Include="Controls\CrmPluginBlock.xaml.cs">

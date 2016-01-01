@@ -25,6 +25,7 @@ namespace TimesheetParser.Win10
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SimpleIoc.Default.Register<IPortableNavigationService, NavigationService>();
             SimpleIoc.Default.Register<IDispatchService, DispatchService>();
 
             SimpleIoc.Default.Register<IPluginService, PluginService>();
@@ -77,7 +78,7 @@ namespace TimesheetParser.Win10
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(View.MainPage), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();

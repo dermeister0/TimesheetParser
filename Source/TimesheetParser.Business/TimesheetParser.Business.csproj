@@ -49,6 +49,7 @@
     <Compile Include="Services\IDispatchService.cs" />
     <Compile Include="Services\IPasswordService.cs" />
     <Compile Include="Services\IPluginService.cs" />
+    <Compile Include="Services\IPortableNavigationService.cs" />
     <Compile Include="Services\TaskInfoService.cs" />
     <Compile Include="ViewModel\CrmLoginViewModel.cs" />
     <Compile Include="ViewModel\CrmPluginViewModel.cs" />

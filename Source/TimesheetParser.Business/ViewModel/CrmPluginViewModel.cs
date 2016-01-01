@@ -2,9 +2,7 @@
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
-using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Business.Services;
 
 namespace TimesheetParser.Business.ViewModel
@@ -16,13 +14,15 @@ namespace TimesheetParser.Business.ViewModel
         private readonly TaskInfoService taskInfoService;
         private bool isBusy;
         private bool isConnected;
+        private readonly IPortableNavigationService navigationService;
         private readonly IDispatchService dispatchService;
 
-        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService, IDispatchService dispatchService)
+        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService, IPortableNavigationService navigationService, IDispatchService dispatchService)
         {
             this.crmClient = crmClient;
-            this.dispatchService = dispatchService;
             this.passwordService = passwordService;
+            this.navigationService = navigationService;
+            this.dispatchService = dispatchService;
             taskInfoService = new TaskInfoService(crmClient);
 
             Name = crmClient.GetName();
@@ -107,8 +107,7 @@ namespace TimesheetParser.Business.ViewModel
             crmLoginVM.Password = passwordService.Password;
             crmLoginVM.SourcePlugin = this;
 
-            var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-            navigationService.NavigateTo("/View/CrmLoginPage.xaml");
+            navigationService.NavigateTo(Location.Login);
         }
     }
 }
