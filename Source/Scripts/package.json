@@ -1,0 +1,17 @@
+{
+  "name": "timesheet-parser-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Der_Meister",
+  "license": "MIT",
+  "dependencies": {
+    "svg2png": "^2.0.0"
+  },
+  "devDependencies": {
+    "gm": "^1.21.1"
+  }
+}

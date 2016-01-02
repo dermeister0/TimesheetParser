@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TimesheetParser</RootNamespace>
     <AssemblyName>TimesheetParser</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -29,6 +29,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,10 +52,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>TimesheetParser.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\TimesheetParser.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+    <HeavysoftVersionPs1>$(MSBuildProjectDirectory)\..\packages\Heavysoft.VersionGenerator.*\tools\HeavysoftVersion.ps1</HeavysoftVersionPs1>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -72,8 +75,8 @@
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.0.5184.3, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.0.5184.3\lib\net40\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
+    <Reference Include="Heavysoft.TimesheetParser.PluginInterfaces, Version=1.1.5186.0, Culture=neutral, PublicKeyToken=5fa2b04d48ca6cd0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Heavysoft.TimesheetParser.PluginInterfaces.1.1.5186.0\lib\portable-net451+win81\Heavysoft.TimesheetParser.PluginInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
@@ -85,6 +88,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -106,36 +110,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Controls\CrmPluginItemsControl.cs" />
+    <Compile Include="Controls\JobListView.cs" />
+    <Compile Include="Services\ClipboardService.cs" />
+    <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messages\LoginMessage.cs" />
     <Compile Include="Properties\HeavysoftVersion.cs" />
-    <Compile Include="Services\TaskInfoService.cs" />
+    <Compile Include="Services\DispatchService.cs" />
+    <Compile Include="Services\PluginService.cs" />
     <Compile Include="Support\BooleanConverter.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Services\MyNavigationService.cs" />
-    <Compile Include="Support\PasswordHelper.cs" />
-    <Compile Include="ViewModel\CrmLoginViewModel.cs" />
-    <Compile Include="ViewModel\CrmPluginViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\CrmPluginBlock.xaml.cs">
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Support\IsOddToBrushConverter.cs" />
+    <Compile Include="Services\PasswordService.cs" />
+    <Compile Include="Controls\CrmPluginBlock.xaml.cs">
       <DependentUpon>CrmPluginBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CrmPluginListBox.xaml.cs">
-      <DependentUpon>CrmPluginListBox.xaml</DependentUpon>
-    </Compile>
-    <Page Include="CrmLoginPage.xaml">
+    <Page Include="Themes\CrmPluginItemsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="View\CrmLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -143,28 +147,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CrmLoginPage.xaml.cs">
+    <Compile Include="View\CrmLoginPage.xaml.cs">
       <DependentUpon>CrmLoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Job.cs" />
-    <Compile Include="ViewModel\JobViewModel.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\CrmPluginBlock.xaml">
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\JobListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CrmPluginListBox.xaml">
+    <Page Include="Controls\CrmPluginBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser.cs" />
-    <Compile Include="ParseResult.cs" />
-    <Compile Include="ParserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -184,7 +187,6 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\HeavysoftVersion.cs.template" />
-    <None Include="Properties\HeavysoftVersion.ps1" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -207,11 +209,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TimesheetParser.ico" />
+    <Resource Include="Assets\TimesheetParser.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimesheetParser.Business\TimesheetParser.Business.csproj">
+      <Project>{f4bf5a97-d10b-4267-8dc0-7c6270532a5e}</Project>
+      <Name>TimesheetParser.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">
-    <Exec Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp;{ $(ProjectDir)Properties\HeavysoftVersion.ps1 }&quot;" />
+    <Exec Command="$(PowerShellExe) -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command &quot;&amp;{ $(HeavysoftVersionPs1); exit $LastExitCode }&quot;" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
