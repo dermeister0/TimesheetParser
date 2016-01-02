@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mahappsControls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" Width="800" MinWidth="700" Height="600" MinHeight="300"
-        Title="{Binding Title}" Icon="/Assets/TimesheetParser.ico">
+        Title="{Binding Title}" Icon="/Assets/TimesheetParser.ico"
+        DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}">
 <Frame Source="MainPage.xaml" NavigationUIVisibility="Hidden">
     
 </Frame>

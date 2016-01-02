@@ -28,7 +28,8 @@ namespace TimesheetParser.Business.ViewModel
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
 
-            Title = "Timesheet Parser " + typeof(MainViewModel).GetTypeInfo().Assembly.GetName().Version;
+            var version = typeof (MainViewModel).GetTypeInfo().Assembly.GetName().Version;
+            Title = $"Timesheet Parser {version.Major}.{version.Minor}";
             JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
