@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Heavysoft")]
 [assembly: AssemblyProduct("TimesheetParser")]
-[assembly: AssemblyCopyright("Copyright © Der_Meister 2015")]
+[assembly: AssemblyCopyright("Copyright © Der_Meister 2015-2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
