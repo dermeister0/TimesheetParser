@@ -44,7 +44,7 @@
             </StackPanel.Resources>
             
             <Button Width="100" Command="{Binding GenerateCommand}">Generate</Button>
-            <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle}">Distribute Idle</CheckBox>
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle, Mode=TwoWay}">Distribute Idle</CheckBox>
 
             <controls:CrmPluginItemsControl ItemsSource="{Binding CrmPlugins}" Margin="10"></controls:CrmPluginItemsControl>
 
