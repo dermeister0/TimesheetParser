@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
+using System;
+using System.Net.Http;
 
 namespace TimesheetParser.Business.ViewModel
 {
@@ -71,6 +74,20 @@ namespace TimesheetParser.Business.ViewModel
                     if (!isConnected)
                     {
                         passwordService.DeleteCredential();
+                    }
+                }
+                catch (AggregateException ae)
+                {
+                    foreach (var e in ae.InnerExceptions)
+                    {
+                        if (e is HttpRequestException)
+                        {
+                            IsConnected = false;
+                        }
+                        else
+                        {
+                            throw e;
+                        }
                     }
                 }
                 finally
