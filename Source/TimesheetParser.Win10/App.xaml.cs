@@ -6,9 +6,11 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Business.Services;
 using TimesheetParser.Win10.Services;
+using NavigationService = TimesheetParser.Win10.Services.NavigationService;
 
 namespace TimesheetParser.Win10
 {
@@ -27,6 +29,7 @@ namespace TimesheetParser.Win10
 
             SimpleIoc.Default.Register<IPortableNavigationService, NavigationService>();
             SimpleIoc.Default.Register<IDispatchService, DispatchService>();
+            SimpleIoc.Default.Register<IDialogService, DialogService>();
 
             SimpleIoc.Default.Register<IPluginService, PluginService>();
             SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
@@ -36,6 +39,16 @@ namespace TimesheetParser.Win10
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            UnhandledException += App_UnhandledException;
+        }
+
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var title = e.Message ?? "Error";
+            var message = $"{e.Exception.Message}\n\nhttps://github.com/dermeister0/TimesheetParser/issues";
+
+            DispatcherHelper.CheckBeginInvokeOnUI(() => { SimpleIoc.Default.GetInstance<IDialogService>().ShowError(message, title, "OK", null); });
+            e.Handled = true;
         }
 
         /// <summary>
