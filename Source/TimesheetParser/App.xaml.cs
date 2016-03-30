@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.Practices.ServiceLocation;
@@ -23,6 +24,25 @@ namespace TimesheetParser
             SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
 
             DispatcherHelper.Initialize();
+
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            ShowError(e.Exception.ToString());
+            e.Handled = true;
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            ShowError(e.ExceptionObject.ToString());
+        }
+
+        void ShowError(string message)
+        {
+            MessageBox.Show($"{message}\n\nhttps://github.com/dermeister0/TimesheetParser/issues", "Error");
         }
     }
 }
