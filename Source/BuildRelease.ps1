@@ -9,7 +9,8 @@ Initialize-BuildVariables
 Invoke-NugetRestore "$PSScriptRoot\TimesheetParser.sln"
 
 # dnvm use -r clr -arch x86 1.0.0-rc1-update1
-# Note: The command updates %homepath%\.dnx\packages instead of %homepath%\.nuget\packages.
+# Note: The command updates %homepath%\.dnx\packages by default instead of %homepath%\.nuget\packages.
+# $env:DNX_PACKAGES = "$homePath\.nuget\packages"
 # dnu restore
 
 $env:HVChangeset = (git 'rev-parse' 'HEAD').SubString(0, 7)
