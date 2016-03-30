@@ -8,6 +8,10 @@ Import-Module "$PSScriptRoot\Scripts\BuildHelpers.psm1"
 Initialize-BuildVariables
 Invoke-NugetRestore "$PSScriptRoot\TimesheetParser.sln"
 
+# dnvm use -r clr -arch x86 1.0.0-rc1-update1
+# Note: The command updates %homepath%\.dnx\packages instead of %homepath%\.nuget\packages.
+# dnu restore
+
 $env:HVChangeset = (git 'rev-parse' 'HEAD').SubString(0, 7)
 
 Invoke-SolutionBuild "$PSScriptRoot\TimesheetParser.sln" 'Release'
