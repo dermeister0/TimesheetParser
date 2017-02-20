@@ -166,7 +166,7 @@ namespace TimesheetParser.Business.ViewModel
             foreach (var jobVM in Jobs)
             {
                 // Job is submitted already.
-                if (jobVM.Job.JobId != 0)
+                if (jobVM.JobId != 0)
                     continue;
 
                 foreach (var pluginVM in CrmPlugins.Where(p => p.IsConnected))
@@ -189,7 +189,7 @@ namespace TimesheetParser.Business.ViewModel
                         Duration = (int)jobVM.Job.Duration.TotalMinutes,
                         IsBillable = taskHeader.IsBillable,
                     });
-                    jobVM.Job.JobId = 1; // @@
+                    jobVM.JobId = 1; // @@
 
                     break;
                 }

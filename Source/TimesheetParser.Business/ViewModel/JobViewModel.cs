@@ -18,6 +18,8 @@ namespace TimesheetParser.Business.ViewModel
             this.job = job;
             this.clipboardService = clipboardService;
 
+            jobId = job.JobId;
+
             CopyTaskCommand = new RelayCommand(CopyTaskCommand_Executed);
             CopyDurationCommand = new RelayCommand(CopyDurationCommand_Executed);
             CopyDescriptionCommand = new RelayCommand(CopyDescriptionCommand_Executed);
@@ -69,6 +71,22 @@ namespace TimesheetParser.Business.ViewModel
         /// </summary>
         public RelayCommand SkipCommand { get; set; }
 
+        private int jobId;
+
+        /// <summary>
+        /// Id of created job.
+        /// </summary>
+        public int JobId
+        {
+            get { return jobId; }
+            set
+            {
+                jobId = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(IsJobProcessed));
+            }
+        }
+
         private void CopyTaskCommand_Executed()
         {
             clipboardService.SetText(job.Task);
@@ -102,12 +120,11 @@ namespace TimesheetParser.Business.ViewModel
         /// <summary>
         /// Returns true if job is sent to server or skipped.
         /// </summary>
-        public bool IsJobProcessed => job.JobId > 0;
+        public bool IsJobProcessed => JobId > 0;
 
         private void SkipCommand_Executed()
         {
-            job.JobId = 1; // @@
-            RaisePropertyChanged(nameof(IsJobProcessed));
+            JobId = 1; // @@
         }
     }
 }
