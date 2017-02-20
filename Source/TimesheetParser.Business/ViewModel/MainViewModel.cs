@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -181,14 +182,23 @@ namespace TimesheetParser.Business.ViewModel
                     jobVM.IsDescriptionCopied = true;
                     jobVM.IsDurationCopied = true;
 
-                    await pluginVM.Client.AddJob(new JobDefinition
+                    try
                     {
-                        TaskId = jobVM.Job.Task,
-                        Date = JobsDate,
-                        Description = jobVM.Description,
-                        Duration = (int)jobVM.Job.Duration.TotalMinutes,
-                        IsBillable = taskHeader.IsBillable,
-                    });
+                        await pluginVM.Client.AddJob(new JobDefinition
+                        {
+                            TaskId = jobVM.Job.Task,
+                            Date = JobsDate,
+                            Description = jobVM.Description,
+                            Duration = (int)jobVM.Job.Duration.TotalMinutes,
+                            IsBillable = taskHeader.IsBillable,
+                        });
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.ToString());
+                        jobVM.TaskTitle = "ERROR " + jobVM.TaskTitle;
+                    }
                     jobVM.JobId = 1; // @@
 
                     break;
