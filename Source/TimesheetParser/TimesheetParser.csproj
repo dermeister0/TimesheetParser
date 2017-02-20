@@ -113,6 +113,7 @@
     <Compile Include="Controls\CrmPluginItemsControl.cs" />
     <Compile Include="Controls\JobListView.cs" />
     <Compile Include="Services\ClipboardService.cs" />
+    <Compile Include="Support\BooleanToVisibilityNegativeConverter.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
