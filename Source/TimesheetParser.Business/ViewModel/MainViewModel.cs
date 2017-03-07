@@ -23,18 +23,19 @@ namespace TimesheetParser.Business.ViewModel
         private readonly IClipboardService clipboardService;
         private IReadOnlyCollection<CrmPluginViewModel> crmPlugins;
         private bool initialized;
+        private bool isProcessing;
 
         public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IDispatchService dispatchService) : base(dispatchService)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
 
-            var version = typeof (MainViewModel).GetTypeInfo().Assembly.GetName().Version;
+            var version = typeof(MainViewModel).GetTypeInfo().Assembly.GetName().Version;
             Title = $"Timesheet Parser {version.Major}.{version.Minor}";
             JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
-            SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed);
+            SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed, SubmitJobs_CanExecute);
         }
 
         public void Initialize()
@@ -59,6 +60,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 jobs = value;
                 RaisePropertyChanged();
+                RaiseCanExecuteChanged(SubmitJobsCommand);
             }
         }
 
@@ -127,6 +129,17 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
+        public bool IsProcessing
+        {
+            get { return isProcessing; }
+            set
+            {
+                isProcessing = value;
+                RaisePropertyChanged();
+                RaiseCanExecuteChanged(SubmitJobsCommand);
+            }
+        }
+
         public void CheckConnection()
         {
             foreach (var pluginVM in CrmPlugins)
@@ -135,7 +148,7 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Commands
 
@@ -164,49 +177,62 @@ namespace TimesheetParser.Business.ViewModel
 
         private async void SubmitJobs_Executed()
         {
-            foreach (var jobVM in Jobs)
+            try
             {
-                // Job is submitted already.
-                if (jobVM.JobId != 0)
-                    continue;
+                IsProcessing = true;
 
-                foreach (var pluginVM in CrmPlugins.Where(p => p.IsConnected))
+                foreach (var jobVM in Jobs)
                 {
-                    if (!pluginVM.Client.IsValidTask(jobVM.Job.Task))
+                    // Job is submitted already.
+                    if (jobVM.JobId != 0)
                         continue;
 
-                    var taskHeader = await pluginVM.GetTaskHeader(jobVM.Job.Task);
-                    jobVM.TaskTitle = taskHeader.Title;
-
-                    jobVM.IsTaskCopied = true;
-                    jobVM.IsDescriptionCopied = true;
-                    jobVM.IsDurationCopied = true;
-
-                    try
+                    foreach (var pluginVM in CrmPlugins.Where(p => p.IsConnected))
                     {
-                        await pluginVM.Client.AddJob(new JobDefinition
+                        if (!pluginVM.Client.IsValidTask(jobVM.Job.Task))
+                            continue;
+
+                        var taskHeader = await pluginVM.GetTaskHeader(jobVM.Job.Task);
+                        jobVM.TaskTitle = taskHeader.Title;
+
+                        jobVM.IsTaskCopied = true;
+                        jobVM.IsDescriptionCopied = true;
+                        jobVM.IsDurationCopied = true;
+
+                        try
                         {
-                            TaskId = jobVM.Job.Task,
-                            Date = JobsDate,
-                            Description = jobVM.Description,
-                            Duration = (int)jobVM.Job.Duration.TotalMinutes,
-                            IsBillable = taskHeader.IsBillable,
-                        });
+                            await pluginVM.Client.AddJob(new JobDefinition
+                            {
+                                TaskId = jobVM.Job.Task,
+                                Date = JobsDate,
+                                Description = jobVM.Description,
+                                Duration = (int)jobVM.Job.Duration.TotalMinutes,
+                                IsBillable = taskHeader.IsBillable,
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            jobVM.TaskTitle = "ERROR " + jobVM.TaskTitle;
+                        }
+                        jobVM.JobId = 1; // @@
 
+                        break;
                     }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex.ToString());
-                        jobVM.TaskTitle = "ERROR " + jobVM.TaskTitle;
-                    }
-                    jobVM.JobId = 1; // @@
-
-                    break;
                 }
+            }
+            finally
+            {
+                IsProcessing = false;
             }
         }
 
-        #endregion
+        private bool SubmitJobs_CanExecute()
+        {
+            return jobs != null && jobs.Any() && !isProcessing;
+        }
+
+        #endregion Commands
 
         public void LoadPlugins()
         {
