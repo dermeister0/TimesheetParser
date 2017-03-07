@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TimesheetParser.Win10.Themes"
     xmlns:support="using:TimesheetParser.Win10.Support"
     xmlns:controls="using:TimesheetParser.Win10.Controls">
 
     <support:IsOddToBrushConverter x:Key="IsOddToBrushConverter" />
+    <support:BooleanToVisibilityNegativeConverter x:Key="BooleanToVisibilityNegativeConverter" />
 
     <Style TargetType="controls:JobListView">
         <Setter Property="Template">
@@ -42,6 +43,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <CheckBox Grid.Row="0" Grid.Column="0" IsEnabled="False" VerticalAlignment="Center" IsChecked="{Binding IsTaskCopied}" Height="32" Margin="5,5,0,5" />
@@ -55,6 +57,10 @@
                                         <TextBlock Grid.Row="0" Grid.Column="2"><Run Text="{Binding Task, Mode=OneWay}" /> <Run Text="{Binding TaskTitle}" /></TextBlock>
                                         <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Duration}" />
                                         <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Description}" />
+
+                                        <CheckBox Grid.Row="0" Grid.Column="3" IsEnabled="False" IsChecked="{Binding IsJobProcessed, Mode=OneWay}" />
+                                        <Button Grid.Row="1" Grid.Column="3" Content="Skip" Command="{Binding SkipCommand}"
+                                                Visibility="{Binding IsJobProcessed, Converter={StaticResource BooleanToVisibilityNegativeConverter}}" />
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

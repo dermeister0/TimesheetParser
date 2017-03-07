@@ -108,6 +108,7 @@
       <DependentUpon>CrmPluginBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CrmPluginItemsControl.cs" />
+    <Compile Include="Support\BooleanToVisibilityNegativeConverter.cs" />
     <Compile Include="View\CrmLoginPage.xaml.cs">
       <DependentUpon>CrmLoginPage.xaml</DependentUpon>
     </Compile>
