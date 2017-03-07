@@ -10,7 +10,7 @@ namespace TimesheetParser.Business.ViewModel
         private string password;
         private readonly IPortableNavigationService navigationService;
 
-        public CrmLoginViewModel(IPortableNavigationService navigationService, IDispatchService dispatchService) : base(dispatchService)
+        public CrmLoginViewModel(IPortableNavigationService navigationService)
         {
             this.navigationService = navigationService;
 

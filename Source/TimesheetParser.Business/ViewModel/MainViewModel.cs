@@ -24,7 +24,7 @@ namespace TimesheetParser.Business.ViewModel
         private IReadOnlyCollection<CrmPluginViewModel> crmPlugins;
         private bool initialized;
 
-        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IDispatchService dispatchService) : base(dispatchService)
+        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
@@ -142,7 +142,7 @@ namespace TimesheetParser.Business.ViewModel
             var result = parser.Parse(SourceText, DistributeIdle);
             ResultText = result.Format();
 
-            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j, clipboardService, DispatchService)).ToList();
+            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j, clipboardService)).ToList();
 
             string previousTask = null;
             bool isOdd = false;
