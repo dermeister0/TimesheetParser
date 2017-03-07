@@ -29,7 +29,7 @@ namespace TimesheetParser.Business.ViewModel
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
 
-            var version = typeof (MainViewModel).GetTypeInfo().Assembly.GetName().Version;
+            var version = typeof(MainViewModel).GetTypeInfo().Assembly.GetName().Version;
             Title = $"Timesheet Parser {version.Major}.{version.Minor}";
             JobsDate = DateTime.Now;
 
@@ -43,11 +43,8 @@ namespace TimesheetParser.Business.ViewModel
                 return;
 
             initialized = true;
-            Task.Run(() =>
-                {
-                    LoadPlugins();
-                    CheckConnection();
-                });
+            LoadPlugins();
+            CheckConnection();
         }
 
         #region Properties
@@ -135,7 +132,7 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Commands
 
@@ -192,7 +189,6 @@ namespace TimesheetParser.Business.ViewModel
                             Duration = (int)jobVM.Job.Duration.TotalMinutes,
                             IsBillable = taskHeader.IsBillable,
                         });
-
                     }
                     catch (Exception ex)
                     {
@@ -206,7 +202,7 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
-        #endregion
+        #endregion Commands
 
         public void LoadPlugins()
         {
