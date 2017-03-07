@@ -12,12 +12,10 @@ namespace TimesheetParser.Services
     internal class PluginService : IPluginService
     {
         private readonly IPortableNavigationService navigationService;
-        private readonly IDispatchService dispatchService;
 
-        public PluginService(IPortableNavigationService navigationService, IDispatchService dispatchService)
+        public PluginService(IPortableNavigationService navigationService)
         {
             this.navigationService = navigationService;
-            this.dispatchService = dispatchService;
         }
 
         public IReadOnlyCollection<CrmPluginViewModel> LoadPlugins()
@@ -43,7 +41,7 @@ namespace TimesheetParser.Services
                     continue;
 
                 var passwordService = new PasswordService(crmClient.GetName());
-                var crmVM = new CrmPluginViewModel(crmClient, passwordService, navigationService, dispatchService);
+                var crmVM = new CrmPluginViewModel(crmClient, passwordService, navigationService);
                 plugins.Add(crmVM);
             }
 

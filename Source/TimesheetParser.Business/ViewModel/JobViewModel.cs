@@ -13,7 +13,7 @@ namespace TimesheetParser.Business.ViewModel
         private string taskTitle;
         private readonly IClipboardService clipboardService;
 
-        public JobViewModel(Job job, IClipboardService clipboardService, IDispatchService dispatchService) : base(dispatchService)
+        public JobViewModel(Job job, IClipboardService clipboardService)
         {
             this.job = job;
             this.clipboardService = clipboardService;

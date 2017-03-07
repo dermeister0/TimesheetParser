@@ -39,7 +39,7 @@ namespace JiraApi
 
             restClient.Authenticator = new HttpBasicAuthenticator(login, password);
             var request = new RestRequest("myself");
-            var response = await (Task.Run(() => restClient.Execute(request)));
+            var response = await restClient.Execute(request);
 
             return response.IsSuccess && response.StatusCode == HttpStatusCode.OK;
         }
@@ -55,7 +55,7 @@ namespace JiraApi
             request.AddUrlSegment("issueId", job.TaskId);
             request.AddBody(new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") });
 
-            var response = await Task.Run(() => restClient.Execute<WorkLogResponse>(request));
+            var response = await restClient.Execute<WorkLogResponse>(request);
             if (response.IsSuccess && response.StatusCode == HttpStatusCode.Created)
             {
                 var id = response.Data.id; // @@
@@ -70,7 +70,7 @@ namespace JiraApi
             var request = new RestRequest("issue/{issueId}?fields=summary");
             request.AddUrlSegment("issueId", taskId);
 
-            var response = await Task.Run(() => restClient.Execute<IssueSummaryResponse>(request));
+            var response = await restClient.Execute<IssueSummaryResponse>(request);
 
             var title = string.Empty;
             if (response.IsSuccess && response.StatusCode == HttpStatusCode.OK)
