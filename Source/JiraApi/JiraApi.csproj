@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>dotnet</TargetFramework>
+    <TargetFramework>netstandard1.4</TargetFramework>
     <AssemblyName>JiraApi</AssemblyName>
     <PackageId>JiraApi</PackageId>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net452+win81</PackageTargetFallback>
@@ -22,14 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Heavysoft.TimesheetParser.PluginInterfaces\Heavysoft.TimesheetParser.PluginInterfaces.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FubarCoder.RestSharp.Portable" Version="3.1.0" />
+    <PackageReference Include="Heavysoft.TimesheetParser.PluginInterfaces" Version="1.1.5186" />
     <PackageReference Include="Heavysoft.VersionGenerator" Version="1.2.1" />
-    <PackageReference Include="Microsoft.NETCore" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
 </Project>
