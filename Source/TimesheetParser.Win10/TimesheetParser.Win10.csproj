@@ -142,6 +142,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.2.3</Version>
     </PackageReference>
+    <PackageReference Include="NETStandard.Library">
+      <Version>1.6.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\CrmPluginBlock.xaml">
@@ -173,6 +176,10 @@
     <ProjectReference Include="..\TimesheetParser.Business\TimesheetParser.Business.csproj">
       <Project>{f4bf5a97-d10b-4267-8dc0-7c6270532a5e}</Project>
       <Name>TimesheetParser.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimesheetParser.Win10.PluginWrapper\TimesheetParser.Win10.PluginWrapper.csproj">
+      <Project>{0d278353-7704-487a-9f24-d8352ffa313e}</Project>
+      <Name>TimesheetParser.Win10.PluginWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
