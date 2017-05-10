@@ -13,6 +13,6 @@
 
 using System.Reflection;
 
-[assembly: AssemblyVersion("{major}.0.0.0")]
+[assembly: AssemblyVersion("{major}.{minor}.0.0")]
 [assembly: AssemblyFileVersion("{major}.{minor}.{patch}.{build}")]
 [assembly: AssemblyInformationalVersion("{major}.{minor}.{patch}+{build}{changeset}")]
