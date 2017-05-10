@@ -32,9 +32,6 @@ namespace TimesheetParser.Win10
             SimpleIoc.Default.Register<IPluginService, PluginService>();
             SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
 
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
