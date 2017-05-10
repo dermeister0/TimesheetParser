@@ -19,7 +19,7 @@ namespace TimesheetParser.Business.ViewModel
         private bool isConnected;
         private readonly IPortableNavigationService navigationService;
 
-        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService, IPortableNavigationService navigationService, IDispatchService dispatchService) : base(dispatchService)
+        public CrmPluginViewModel(ICrm crmClient, IPasswordService passwordService, IPortableNavigationService navigationService)
         {
             this.crmClient = crmClient;
             this.passwordService = passwordService;

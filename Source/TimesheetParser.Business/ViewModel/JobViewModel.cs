@@ -13,14 +13,17 @@ namespace TimesheetParser.Business.ViewModel
         private string taskTitle;
         private readonly IClipboardService clipboardService;
 
-        public JobViewModel(Job job, IClipboardService clipboardService, IDispatchService dispatchService) : base(dispatchService)
+        public JobViewModel(Job job, IClipboardService clipboardService)
         {
             this.job = job;
             this.clipboardService = clipboardService;
 
+            jobId = job.JobId;
+
             CopyTaskCommand = new RelayCommand(CopyTaskCommand_Executed);
             CopyDurationCommand = new RelayCommand(CopyDurationCommand_Executed);
             CopyDescriptionCommand = new RelayCommand(CopyDescriptionCommand_Executed);
+            SkipCommand = new RelayCommand(SkipCommand_Executed);
         }
 
         public string Task => "#" + job.Task;
@@ -63,6 +66,27 @@ namespace TimesheetParser.Business.ViewModel
         public RelayCommand CopyDurationCommand { get; set; }
         public RelayCommand CopyDescriptionCommand { get; set; }
 
+        /// <summary>
+        /// Skips job (it'll not be sent to server).
+        /// </summary>
+        public RelayCommand SkipCommand { get; set; }
+
+        private int jobId;
+
+        /// <summary>
+        /// Id of created job.
+        /// </summary>
+        public int JobId
+        {
+            get { return jobId; }
+            set
+            {
+                jobId = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(IsJobProcessed));
+            }
+        }
+
         private void CopyTaskCommand_Executed()
         {
             clipboardService.SetText(job.Task);
@@ -91,6 +115,16 @@ namespace TimesheetParser.Business.ViewModel
                 taskTitle = value;
                 RaisePropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// Returns true if job is sent to server or skipped.
+        /// </summary>
+        public bool IsJobProcessed => JobId > 0;
+
+        private void SkipCommand_Executed()
+        {
+            JobId = 1; // @@
         }
     }
 }

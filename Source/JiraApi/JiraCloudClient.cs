@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Heavysoft.TimesheetParser.PluginInterfaces;
-using RestSharp.Portable;
-using RestSharp.Portable.HttpClient;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace JiraApi
 {
@@ -14,13 +15,7 @@ namespace JiraApi
 
         private string login;
         private string password;
-        private readonly RestClient restClient;
         private readonly Regex taskRegex = new Regex(@"^[A-z0-9]+-\d+$");
-
-        public JiraCloudClient()
-        {
-            restClient = new RestClient(ApiUrl);
-        }
 
         public string GetName()
         {
@@ -32,16 +27,23 @@ namespace JiraApi
             return taskRegex.IsMatch(taskId);
         }
 
+        HttpClient GetClient()
+        {
+            var authValue = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{login}:{password}")));
+            var client = new HttpClient { DefaultRequestHeaders = { Authorization = authValue } };
+            return client;
+        }
+
         public async Task<bool> Login(string login, string password)
         {
             this.login = login;
             this.password = password;
 
-            restClient.Authenticator = new HttpBasicAuthenticator(login, password);
-            var request = new RestRequest("myself");
-            var response = await (Task.Run(() => restClient.Execute(request)));
-
-            return response.IsSuccess && response.StatusCode == HttpStatusCode.OK;
+            using (var client = GetClient())
+            {
+                var response = await client.GetAsync(ApiUrl + "myself");
+                return response.IsSuccessStatusCode;
+            }
         }
 
         public Task<bool> Login(string token)
@@ -51,31 +53,37 @@ namespace JiraApi
 
         public async Task<bool> AddJob(JobDefinition job)
         {
-            var request = new RestRequest("issue/{issueId}/worklog", Method.POST);
-            request.AddUrlSegment("issueId", job.TaskId);
-            request.AddBody(new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") });
+            var url = ApiUrl + $"{job.TaskId}/worklog";
+            var body = new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") };
 
-            var response = await Task.Run(() => restClient.Execute<WorkLogResponse>(request));
-            if (response.IsSuccess && response.StatusCode == HttpStatusCode.Created)
+            using (var client = GetClient())
             {
-                var id = response.Data.id; // @@
+                var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(body)));
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = JsonConvert.DeserializeObject<WorkLogResponse>(await response.Content.ReadAsStringAsync());
+                    var id = content.id; // @@
 
-                return true;
+                    return true;
+                }
             }
+
             return false;
         }
 
         public async Task<TaskHeader> GetTaskHeader(string taskId)
         {
-            var request = new RestRequest("issue/{issueId}?fields=summary");
-            request.AddUrlSegment("issueId", taskId);
-
-            var response = await Task.Run(() => restClient.Execute<IssueSummaryResponse>(request));
-
+            var url = ApiUrl + $"issue/{taskId}?fields=summary";
             var title = string.Empty;
-            if (response.IsSuccess && response.StatusCode == HttpStatusCode.OK)
+
+            using (var client = GetClient())
             {
-                title = response.Data.fields["summary"];
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = JsonConvert.DeserializeObject<IssueSummaryResponse>(await response.Content.ReadAsStringAsync());
+                    title = content.fields["summary"];
+                }
             }
 
             return new TaskHeader() { Title = title };

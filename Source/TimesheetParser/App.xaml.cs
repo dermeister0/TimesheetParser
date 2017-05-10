@@ -18,7 +18,6 @@ namespace TimesheetParser
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<IPortableNavigationService, NavigationService>();
-            SimpleIoc.Default.Register<IDispatchService, DispatchService>();
 
             SimpleIoc.Default.Register<IPluginService, PluginService>();
             SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
@@ -40,7 +39,7 @@ namespace TimesheetParser
             ShowError(e.ExceptionObject.ToString());
         }
 
-        void ShowError(string message)
+        private void ShowError(string message)
         {
             MessageBox.Show($"{message}\n\nhttps://github.com/dermeister0/TimesheetParser/issues", "Error");
         }

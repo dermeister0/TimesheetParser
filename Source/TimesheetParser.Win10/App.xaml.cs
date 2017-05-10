@@ -28,15 +28,10 @@ namespace TimesheetParser.Win10
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<IPortableNavigationService, NavigationService>();
-            SimpleIoc.Default.Register<IDispatchService, DispatchService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
-
             SimpleIoc.Default.Register<IPluginService, PluginService>();
             SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
 
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
@@ -58,7 +53,6 @@ namespace TimesheetParser.Win10
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -104,7 +98,7 @@ namespace TimesheetParser.Win10
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
