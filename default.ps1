@@ -1,3 +1,12 @@
+# Requires psake to run, see README.md for more details.
+
+# Publish:
+# Install AWS SDK for .NET:
+# https://aws.amazon.com/sdk-for-net/
+#
+# Execute this statement before first publish:
+# Set-AWSCredentials -AccessKey ******************** -SecretKey **************************************** -StoreAs TimesheetParser
+
 Framework 4.6
 $InformationPreference = 'Continue'
 $env:PSModulePath += ";$PSScriptRoot\Scripts\Modules"

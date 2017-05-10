@@ -33,5 +33,5 @@ Task copy-plugins `
 
 Task clean `
 {
-    Exec { git clean -xdf -e packages/ -e nuget.exe }
+    Exec { git clean -xdf -e packages/ -e nuget.exe -e Releases/ }
 }
