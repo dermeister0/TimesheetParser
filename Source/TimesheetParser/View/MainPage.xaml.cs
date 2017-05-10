@@ -1,4 +1,5 @@
 ﻿using Squirrel;
+using System;
 using System.Configuration;
 using System.Windows.Controls;
 using TimesheetParser.Business.ViewModel;
@@ -17,7 +18,16 @@ namespace TimesheetParser.View
             var mainVM = DataContext as MainViewModel;
             mainVM?.Initialize();
 
-            UpdateApp();
+#if !DEBUG
+            try
+            {
+                UpdateApp();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Write to log.
+            }
+#endif
         }
 
         private async void UpdateApp()
