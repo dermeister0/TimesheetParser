@@ -17,6 +17,7 @@ Task build-app -depends pre-build `
 {
     $env:HVMajor = Exec { GitVersion.exe /showvariable Major }
     $env:HVMinor = Exec { GitVersion.exe /showvariable Minor }
+    $env:HVPatch = Exec { GitVersion.exe /showvariable Patch }
     $env:HVChangeset = (Exec { GitVersion.exe /showvariable Sha }).SubString(0, 7)
     Exec { &"$src\packages\Heavysoft.VersionGenerator.*\tools\HeavysoftVersion.ps1" }
 
@@ -28,12 +29,6 @@ Task copy-plugins `
     $pluginsDir = "$src\TimesheetParser\bin\$Configuration\Plugins"
     New-Item -ItemType Directory $pluginsDir -ErrorAction SilentlyContinue
     Copy-Item "$src\Plugins\netstandard1.4\*" -Include *.dll, *.pdb $pluginsDir -Force
-}
-
-Task nuget-pack `
-{
-    Install-NugetCli $tools
-    Exec { &"$tools\nuget.exe" 'Pack' "$src\Heavysoft.TimesheetParser.PluginInterfaces\Heavysoft.TimesheetParser.PluginInterfaces.csproj" -Prop Configuration=Release }
 }
 
 Task clean `
