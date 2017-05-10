@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using Squirrel;
+using System.Configuration;
+using System.Windows.Controls;
 using TimesheetParser.Business.ViewModel;
 
 namespace TimesheetParser.View
@@ -14,6 +16,16 @@ namespace TimesheetParser.View
 
             var mainVM = DataContext as MainViewModel;
             mainVM?.Initialize();
+
+            UpdateApp();
+        }
+
+        private async void UpdateApp()
+        {
+            using (var manager = new UpdateManager(ConfigurationManager.AppSettings["UpdateRoot"]))
+            {
+                await manager.UpdateApp();
+            }
         }
     }
 }
