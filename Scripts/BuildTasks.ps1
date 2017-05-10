@@ -1,5 +1,6 @@
 $root = $PSScriptRoot
 $src = Resolve-Path "$root\..\Source"
+$tools = Resolve-Path "$root\..\Tools"
 
 Task pre-build `
 {
@@ -8,7 +9,7 @@ Task pre-build `
     Invoke-NugetRestore "$src\TimesheetParser.sln"
 }
 
-Task build -depends build-app, copy-plugins `
+Task build -depends build-app, copy-plugins -description "* Build project and copy plugins." `
 {
 }
 
@@ -23,5 +24,11 @@ Task copy-plugins `
 {
     $pluginsDir = "$src\TimesheetParser\bin\$Configuration\Plugins"
     New-Item -ItemType Directory $pluginsDir -ErrorAction SilentlyContinue
-    Copy-Item "$src\JiraApi\bin\Debug\netstandard1.4\*" $pluginsDir
+    Copy-Item "$src\Plugins\netstandard1.4\*" $pluginsDir -Force
+}
+
+Task nuget-pack `
+{
+    Install-NugetCli $tools
+    Exec { &"$tools\nuget.exe" 'Pack' "$src\Heavysoft.TimesheetParser.PluginInterfaces\Heavysoft.TimesheetParser.PluginInterfaces.csproj" -Prop Configuration=Release }
 }
