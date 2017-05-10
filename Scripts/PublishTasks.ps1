@@ -20,6 +20,7 @@ Task pack-plugininterfaces -depends download-nuget -description "* Pack Heavysof
 
 Task pack-app -depends build, download-nuget `
 {
+    Update-VariablesInFile "$src\TimesheetParser\TimesheetParser.nuspec" @{Version=$NugetVersion}
     Exec { &"$tools\nuget.exe" 'Pack' "$src\TimesheetParser\TimesheetParser.nuspec" }
 }
 

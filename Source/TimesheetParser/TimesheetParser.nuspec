@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>TimesheetParser</id>
-        <version>1.11.0</version>
+        <version>$(Version)</version>
         <title>Timesheet Parser</title>
         <authors>Heavysoft</authors>
         <owners>Heavysoft</owners>
@@ -11,47 +11,6 @@
         <copyright>Copyright © 2015-2017 Der_Meister</copyright>
     </metadata>
     <files>
-        <file src="bin\Release\Plugins\JiraApi.dll" target="lib\net45\Plugins\JiraApi.dll" />
-        <file src="bin\Release\Plugins\SaritasaApi.dll" target="lib\net45\Plugins\SaritasaApi.dll" />
-        <file src="bin\Release\CredentialManagement.dll" target="lib\net45\CredentialManagement.dll" />
-        <file src="bin\Release\DeltaCompressionDotNet.dll" target="lib\net45\DeltaCompressionDotNet.dll" />
-        <file src="bin\Release\DeltaCompressionDotNet.MsDelta.dll" target="lib\net45\DeltaCompressionDotNet.MsDelta.dll" />
-        <file src="bin\Release\DeltaCompressionDotNet.PatchApi.dll" target="lib\net45\DeltaCompressionDotNet.PatchApi.dll" />
-        <file src="bin\Release\GalaSoft.MvvmLight.dll" target="lib\net45\GalaSoft.MvvmLight.dll" />
-        <file src="bin\Release\GalaSoft.MvvmLight.Extras.dll" target="lib\net45\GalaSoft.MvvmLight.Extras.dll" />
-        <file src="bin\Release\GalaSoft.MvvmLight.Platform.dll" target="lib\net45\GalaSoft.MvvmLight.Platform.dll" />
-        <file src="bin\Release\Heavysoft.TimesheetParser.PluginInterfaces.dll" target="lib\net45\Heavysoft.TimesheetParser.PluginInterfaces.dll" />
-        <file src="bin\Release\ICSharpCode.SharpZipLib.dll" target="lib\net45\ICSharpCode.SharpZipLib.dll" />
-        <file src="bin\Release\MahApps.Metro.dll" target="lib\net45\MahApps.Metro.dll" />
-        <file src="bin\Release\Microsoft.Practices.ServiceLocation.dll" target="lib\net45\Microsoft.Practices.ServiceLocation.dll" />
-        <file src="bin\Release\Microsoft.Win32.Primitives.dll" target="lib\net45\Microsoft.Win32.Primitives.dll" />
-        <file src="bin\Release\Mono.Cecil.dll" target="lib\net45\Mono.Cecil.dll" />
-        <file src="bin\Release\Mono.Cecil.Mdb.dll" target="lib\net45\Mono.Cecil.Mdb.dll" />
-        <file src="bin\Release\Mono.Cecil.Pdb.dll" target="lib\net45\Mono.Cecil.Pdb.dll" />
-        <file src="bin\Release\Mono.Cecil.Rocks.dll" target="lib\net45\Mono.Cecil.Rocks.dll" />
-        <file src="bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
-        <file src="bin\Release\NuGet.Squirrel.dll" target="lib\net45\NuGet.Squirrel.dll" />
-        <file src="bin\Release\Splat.dll" target="lib\net45\Splat.dll" />
-        <file src="bin\Release\Squirrel.dll" target="lib\net45\Squirrel.dll" />
-        <file src="bin\Release\System.AppContext.dll" target="lib\net45\System.AppContext.dll" />
-        <file src="bin\Release\System.Console.dll" target="lib\net45\System.Console.dll" />
-        <file src="bin\Release\System.Diagnostics.DiagnosticSource.dll" target="lib\net45\System.Diagnostics.DiagnosticSource.dll" />
-        <file src="bin\Release\System.Globalization.Calendars.dll" target="lib\net45\System.Globalization.Calendars.dll" />
-        <file src="bin\Release\System.IO.Compression.dll" target="lib\net45\System.IO.Compression.dll" />
-        <file src="bin\Release\System.IO.Compression.ZipFile.dll" target="lib\net45\System.IO.Compression.ZipFile.dll" />
-        <file src="bin\Release\System.IO.FileSystem.dll" target="lib\net45\System.IO.FileSystem.dll" />
-        <file src="bin\Release\System.IO.FileSystem.Primitives.dll" target="lib\net45\System.IO.FileSystem.Primitives.dll" />
-        <file src="bin\Release\System.Net.Http.dll" target="lib\net45\System.Net.Http.dll" />
-        <file src="bin\Release\System.Net.Sockets.dll" target="lib\net45\System.Net.Sockets.dll" />
-        <file src="bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll" target="lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll" />
-        <file src="bin\Release\System.Security.Cryptography.Algorithms.dll" target="lib\net45\System.Security.Cryptography.Algorithms.dll" />
-        <file src="bin\Release\System.Security.Cryptography.Encoding.dll" target="lib\net45\System.Security.Cryptography.Encoding.dll" />
-        <file src="bin\Release\System.Security.Cryptography.Primitives.dll" target="lib\net45\System.Security.Cryptography.Primitives.dll" />
-        <file src="bin\Release\System.Security.Cryptography.X509Certificates.dll" target="lib\net45\System.Security.Cryptography.X509Certificates.dll" />
-        <file src="bin\Release\System.Windows.Interactivity.dll" target="lib\net45\System.Windows.Interactivity.dll" />
-        <file src="bin\Release\System.Xml.ReaderWriter.dll" target="lib\net45\System.Xml.ReaderWriter.dll" />
-        <file src="bin\Release\TimesheetParser.Business.dll" target="lib\net45\TimesheetParser.Business.dll" />
-        <file src="bin\Release\TimesheetParser.exe" target="lib\net45\TimesheetParser.exe" />
-        <file src="bin\Release\TimesheetParser.exe.config" target="lib\net45\TimesheetParser.exe.config" />
+        <file src="bin\Release\*.*" target="lib\net45\" exclude="bin\Release\*.pdb;bin\Release\*.xml;bin\Release\*.vshost.*" />
     </files>
 </package>
