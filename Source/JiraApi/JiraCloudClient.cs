@@ -53,7 +53,7 @@ namespace JiraApi
 
         public async Task<bool> AddJob(JobDefinition job)
         {
-            var url = ApiUrl + $"{job.TaskId}/worklog";
+            var url = ApiUrl + $"issue/{job.TaskId}/worklog";
             var body = new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") };
 
             using (var client = GetClient())
