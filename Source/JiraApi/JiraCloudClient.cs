@@ -27,7 +27,7 @@ namespace JiraApi
             return taskRegex.IsMatch(taskId);
         }
 
-        HttpClient GetClient()
+        private HttpClient GetClient()
         {
             var authValue = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{login}:{password}")));
             var client = new HttpClient { DefaultRequestHeaders = { Authorization = authValue } };
@@ -53,12 +53,12 @@ namespace JiraApi
 
         public async Task<bool> AddJob(JobDefinition job)
         {
-            var url = ApiUrl + $"{job.TaskId}/worklog";
+            var url = ApiUrl + $"issue/{job.TaskId}/worklog";
             var body = new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") };
 
             using (var client = GetClient())
             {
-                var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(body)));
+                var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json"));
                 if (response.IsSuccessStatusCode)
                 {
                     var content = JsonConvert.DeserializeObject<WorkLogResponse>(await response.Content.ReadAsStringAsync());
