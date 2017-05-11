@@ -10,7 +10,7 @@ services:
       - Version
       - NugetVersion
       - Changeset
-      - DockerWorkspace=C:\\Workspace
+      - ReleaseDir=C:\\Workspace\\Releases
     command: ["psake", "release-app"]
 
 networks:

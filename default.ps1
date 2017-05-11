@@ -24,6 +24,8 @@ Properties `
     $Version = $env:Version
     $NugetVersion = $env:NugetVersion
     $Changeset = $env:Changeset
+
+    $ReleaseDir = $env:ReleaseDir
 }
 
 TaskSetup `
