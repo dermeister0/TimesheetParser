@@ -1,0 +1,19 @@
+version: '3'
+services:
+  installer:
+    build:
+      context: .
+    volumes:
+      - .:C:/Workspace
+    entrypoint: cmd /C
+    environment:
+      - Version
+      - NugetVersion
+      - Changeset
+      - DockerWorkspace=C:\\Workspace
+    command: ["psake", "release-app"]
+
+networks:
+  default:
+    external:
+      name: nat

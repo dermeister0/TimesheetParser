@@ -12,8 +12,7 @@ RUN `
     choco install psake -y; `
     if ($LASTEXITCODE) { exit $LASTEXITCODE };
 
-RUN cinst visualstudio2017community -y
-RUN cinst visualstudio2017-workload-manageddesktop -y
+RUN cinst visualstudio2017community visualstudio2017-workload-manageddesktop -y
 
 ENTRYPOINT cmd /C
 WORKDIR C:/Build
@@ -21,7 +20,8 @@ WORKDIR C:/Build
 COPY . C:/Build
 
 ENV Version=0.0.0 `
-    NugetVersion=0.0.0
+    NugetVersion=0.0.0 `
+    Changeset=0000000
 
 COPY ./Scripts C:/Build/Scripts
 COPY ./default.ps1 C:/Build/
