@@ -17,8 +17,9 @@ namespace TimesheetParser.Business
             var lines = source.Split(new[] { '\r', '\n', '\v' }, StringSplitOptions.RemoveEmptyEntries);
             Job currentJob = null;
 
-            var taskRegex = new Regex(@"#((?:[A-z0-9]+-)?\d+)");
-            var timeRegex = new Regex(@"\d+:\d+ [AP]M");
+            var taskRegex = new Regex(@"^\s*#((?:[A-z0-9]+-)?\d+)\s*$");
+            var timeRegex1 = new Regex(@"^\s*\d+:\d+ [AP]M\s*$");
+            var timeRegex2 = new Regex(@"^\s*\d+:\d+\s*$");
 
             var state = ParserState.Begin;
 
@@ -29,7 +30,8 @@ namespace TimesheetParser.Business
                     continue;
 
                 var taskMatch = taskRegex.Match(line);
-                var timeMatch = timeRegex.Match(line);
+                var timeMatch1 = timeRegex1.Match(line);
+                var timeMatch2 = timeRegex2.Match(line);
 
                 if (taskMatch.Success)
                 {
@@ -48,9 +50,9 @@ namespace TimesheetParser.Business
                     currentJob.Task = taskMatch.Groups[1].Value;
                     state = ParserState.TaskFound;
                 }
-                else if (timeMatch.Success)
+                else if (timeMatch1.Success || timeMatch2.Success)
                 {
-                    var time = DateTime.Parse(timeMatch.Groups[0].Value);
+                    var time = DateTime.Parse(line);
                     if (currentJob != null)
                     {
                         currentJob.EndTime = time;
