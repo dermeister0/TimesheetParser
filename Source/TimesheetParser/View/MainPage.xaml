@@ -8,7 +8,7 @@
       xmlns:view="clr-namespace:TimesheetParser.View"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="MainPage"
+      Title="MainPage" FocusManager.FocusedElement="{Binding ElementName=JobsTextBox}"
       DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}">
     <Page.Resources>
         <support:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed" />
