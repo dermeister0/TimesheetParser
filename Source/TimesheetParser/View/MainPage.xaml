@@ -8,13 +8,15 @@
       xmlns:view="clr-namespace:TimesheetParser.View"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="MainPage"
+      Title="MainPage" FocusManager.FocusedElement="{Binding ElementName=JobsTextBox}"
       DataContext="{Binding MainVM, Source={StaticResource ViewModelLocator}}">
     <Page.Resources>
         <support:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed" />
     </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -22,10 +24,19 @@
             <ColumnDefinition Width="50*" />
             <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
-        
-        <TextBox Grid.Row="0" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding SourceText}" />
-        
-        <TabControl Grid.Row="0" Grid.Column="1">
+
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+            <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Insert Current Timestamp (Ctrl+T)"
+                    Command="{Binding InsertCurrentTimestampCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}">11:14</Button>
+        </StackPanel>
+
+        <TextBox x:Name="JobsTextBox" Grid.Row="1" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding SourceText}">
+            <TextBox.InputBindings>
+                <KeyBinding Modifiers="Ctrl" Key="T" Command="{Binding InsertCurrentTimestampCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <TabControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
             <TabItem Header="Raw View">
                 <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Text="{Binding ResultText}" />        
             </TabItem>
@@ -34,7 +45,7 @@
             </TabItem>
         </TabControl>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5" />
