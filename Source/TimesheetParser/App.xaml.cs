@@ -21,6 +21,7 @@ namespace TimesheetParser
 
             SimpleIoc.Default.Register<IPluginService, PluginService>();
             SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
+            SimpleIoc.Default.Register<UpdateService, UpdateService>();
 
             DispatcherHelper.Initialize();
 

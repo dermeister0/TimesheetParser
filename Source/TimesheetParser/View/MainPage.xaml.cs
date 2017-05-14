@@ -1,8 +1,7 @@
-﻿using Squirrel;
-using System;
-using System.Configuration;
+﻿using GalaSoft.MvvmLight.Ioc;
 using System.Windows.Controls;
 using TimesheetParser.Business.ViewModel;
+using TimesheetParser.Services;
 
 namespace TimesheetParser.View
 {
@@ -18,24 +17,8 @@ namespace TimesheetParser.View
             var mainVM = DataContext as MainViewModel;
             mainVM?.Initialize();
 
-#if !DEBUG
-            try
-            {
-                UpdateApp();
-            }
-            catch (Exception ex)
-            {
-                // TODO: Write to log.
-            }
-#endif
-        }
-
-        private async void UpdateApp()
-        {
-            using (var manager = new UpdateManager(ConfigurationManager.AppSettings["UpdateRoot"]))
-            {
-                await manager.UpdateApp();
-            }
+            var updateService = SimpleIoc.Default.GetInstance<UpdateService>();
+            updateService.UpdateApp();
         }
     }
 }
