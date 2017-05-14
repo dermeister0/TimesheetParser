@@ -7,9 +7,10 @@ namespace TimesheetParser.Services
     /// <summary>
     /// Application update service.
     /// </summary>
-    public class UpdateService
+    internal sealed class UpdateService : IDisposable
     {
         private bool updatesChecked;
+        private UpdateManager updateManager;
 
         /// <summary>
         /// Downloads new version of application in background.
@@ -25,16 +26,19 @@ namespace TimesheetParser.Services
                 }
                 updatesChecked = true;
 
-                using (var manager = new UpdateManager(ConfigurationManager.AppSettings["UpdateRoot"]))
-                {
-                    await manager.UpdateApp();
-                }
+                updateManager = new UpdateManager(ConfigurationManager.AppSettings["UpdateRoot"]);
+                await updateManager.UpdateApp();
             }
             catch (Exception)
             {
                 // TODO: Write to log.
             }
 #endif
+        }
+
+        public void Dispose()
+        {
+            updateManager?.Dispose();
         }
     }
 }
