@@ -15,6 +15,7 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -22,10 +23,14 @@
             <ColumnDefinition Width="50*" />
             <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+            <Button Style="{StaticResource PanelButtonStyle}" Click="TimestampButton_Click" ToolTip="Insert Current Timestamp">11:14</Button>
+        </StackPanel>
         
-        <TextBox Grid.Row="0" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding SourceText}" />
-        
-        <TabControl Grid.Row="0" Grid.Column="1">
+        <TextBox x:Name="JobsTextBox" Grid.Row="1" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding SourceText}" />
+
+        <TabControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
             <TabItem Header="Raw View">
                 <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Text="{Binding ResultText}" />        
             </TabItem>
@@ -34,7 +39,7 @@
             </TabItem>
         </TabControl>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5" />
