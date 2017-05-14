@@ -25,9 +25,10 @@
             <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
             <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Insert Current Timestamp (Ctrl+T)"
                     Command="{Binding InsertCurrentTimestampCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}">11:14</Button>
+            <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Show Help" Command="{Binding HelpCommand}">Help</Button>
         </StackPanel>
 
         <TextBox x:Name="JobsTextBox" Grid.Row="1" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding SourceText}">
@@ -46,20 +47,12 @@
         </TabControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="5" />
-                    <Setter Property="Width" Value="100" />
-                    <Setter Property="Height" Value="20" />
-                </Style>
-            </StackPanel.Resources>
-
-            <Button Command="{Binding GenerateCommand}" Height="20">Generate</Button>
+            <Button Command="{Binding GenerateCommand}" Style="{StaticResource LowButtonStyle}">Generate</Button>
             <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle}">Distribute Idle</CheckBox>
             
             <controls:CrmPluginItemsControl ItemsSource="{Binding CrmPlugins}" Margin="10"></controls:CrmPluginItemsControl>
 
-            <Button Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}">Submit Jobs</Button>
+            <Button Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding SubmitJobsCommand}" Style="{StaticResource LowButtonStyle}">Submit Jobs</Button>
             <DatePicker SelectedDate="{Binding JobsDate}" Height="20" />
         </StackPanel>
     </Grid>

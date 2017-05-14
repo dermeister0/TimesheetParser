@@ -23,11 +23,13 @@ namespace TimesheetParser.Business.ViewModel
         private IReadOnlyCollection<CrmPluginViewModel> crmPlugins;
         private bool initialized;
         private bool isProcessing;
+        private readonly IPortableNavigationService navigationService;
 
-        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService)
+        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IPortableNavigationService navigationService)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
+            this.navigationService = navigationService;
 
             var version = AppVersion.Get().ProductVersion.Split('+')[0];
             Title = $"Timesheet Parser {version}";
@@ -35,6 +37,7 @@ namespace TimesheetParser.Business.ViewModel
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed, SubmitJobs_CanExecute);
+            HelpCommand = new RelayCommand(HelpCommand_Executed);
         }
 
         public void Initialize()
@@ -104,6 +107,7 @@ namespace TimesheetParser.Business.ViewModel
 
         public ICommand GenerateCommand { get; set; }
         public ICommand SubmitJobsCommand { get; set; }
+        public ICommand HelpCommand { get; set; }
 
         public DateTime JobsDate
         {
@@ -225,6 +229,11 @@ namespace TimesheetParser.Business.ViewModel
         private bool SubmitJobs_CanExecute()
         {
             return jobs != null && jobs.Any() && !isProcessing;
+        }
+
+        private void HelpCommand_Executed()
+        {
+            navigationService.NavigateTo(Location.Help);
         }
 
         #endregion Commands

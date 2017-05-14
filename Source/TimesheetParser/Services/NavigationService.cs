@@ -15,7 +15,8 @@ namespace TimesheetParser.Services
             pagesByKey = new Dictionary<Location, Uri>
                 {
                     [Location.Main] = new Uri("/View/MainPage.xaml", UriKind.Relative),
-                    [Location.Login] = new Uri("/View/CrmLoginPage.xaml", UriKind.Relative)
+                    [Location.Login] = new Uri("/View/CrmLoginPage.xaml", UriKind.Relative),
+                    [Location.Help] = new Uri("/View/HelpPage.xaml", UriKind.Relative),
                 };
         }
 
