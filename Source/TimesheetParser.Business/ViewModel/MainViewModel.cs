@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
+using TimesheetParser.Business.Support;
 
 namespace TimesheetParser.Business.ViewModel
 {
@@ -30,8 +29,8 @@ namespace TimesheetParser.Business.ViewModel
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
 
-            var version = typeof(MainViewModel).GetTypeInfo().Assembly.GetName().Version;
-            Title = $"Timesheet Parser {version.Major}.{version.Minor}";
+            var version = AppVersion.Get().ProductVersion.Split('+')[0];
+            Title = $"Timesheet Parser {version}";
             JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
