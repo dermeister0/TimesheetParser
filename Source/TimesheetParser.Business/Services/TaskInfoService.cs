@@ -15,28 +15,25 @@ namespace TimesheetParser.Business.Services
             this.crmClient = crmClient;
         }
 
-        public Task<TaskHeader> GetTaskHeader(string taskId)
+        public async Task<TaskHeader> GetTaskHeader(string taskId)
         {
-            return Task.Run(async () =>
+            lock (lockObject)
+            {
+                if (taskHeaders.ContainsKey(taskId))
+                    return taskHeaders[taskId];
+            }
+
+            var taskHeader = await crmClient.GetTaskHeader(taskId);
+            if (taskHeader != null)
             {
                 lock (lockObject)
                 {
-                    if (taskHeaders.ContainsKey(taskId))
-                        return taskHeaders[taskId];
+                    if (!taskHeaders.ContainsKey(taskId))
+                        taskHeaders[taskId] = taskHeader;
                 }
+            }
 
-                var taskHeader = await crmClient.GetTaskHeader(taskId);
-                if (taskHeader != null)
-                {
-                    lock (lockObject)
-                    {
-                        if (!taskHeaders.ContainsKey(taskId))
-                            taskHeaders[taskId] = taskHeader;
-                    }
-                }
-
-                return taskHeader;
-            });
+            return taskHeader;
         }
     }
 }

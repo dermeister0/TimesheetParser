@@ -57,9 +57,9 @@ namespace TimesheetParser.Business.ViewModel
 
         public ICommand LoginCommand { get; }
 
-        public Task<TaskHeader> GetTaskHeader(string taskId)
+        public async Task<TaskHeader> GetTaskHeader(string taskId)
         {
-            return taskInfoService.GetTaskHeader(taskId);
+            return await taskInfoService.GetTaskHeader(taskId);
         }
 
         private async Task DoLogin()
