@@ -3,7 +3,8 @@
     public enum Location
     {
         Main,
-        Login
+        Login,
+        Help
     }
 
     public interface IPortableNavigationService

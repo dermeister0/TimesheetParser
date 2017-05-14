@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
+using TimesheetParser.Business.Support;
 
 namespace TimesheetParser.Business.ViewModel
 {
@@ -24,18 +23,21 @@ namespace TimesheetParser.Business.ViewModel
         private IReadOnlyCollection<CrmPluginViewModel> crmPlugins;
         private bool initialized;
         private bool isProcessing;
+        private readonly IPortableNavigationService navigationService;
 
-        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService)
+        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IPortableNavigationService navigationService)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
+            this.navigationService = navigationService;
 
-            var version = typeof(MainViewModel).GetTypeInfo().Assembly.GetName().Version;
-            Title = $"Timesheet Parser {version.Major}.{version.Minor}";
+            var version = AppVersion.Get().ProductVersion.Split('+')[0];
+            Title = $"Timesheet Parser {version}";
             JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed, SubmitJobs_CanExecute);
+            HelpCommand = new RelayCommand(HelpCommand_Executed);
         }
 
         public void Initialize()
@@ -105,6 +107,7 @@ namespace TimesheetParser.Business.ViewModel
 
         public ICommand GenerateCommand { get; set; }
         public ICommand SubmitJobsCommand { get; set; }
+        public ICommand HelpCommand { get; set; }
 
         public DateTime JobsDate
         {
@@ -226,6 +229,11 @@ namespace TimesheetParser.Business.ViewModel
         private bool SubmitJobs_CanExecute()
         {
             return jobs != null && jobs.Any() && !isProcessing;
+        }
+
+        private void HelpCommand_Executed()
+        {
+            navigationService.NavigateTo(Location.Help);
         }
 
         #endregion Commands

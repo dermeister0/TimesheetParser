@@ -21,11 +21,13 @@ namespace TimesheetParser
 
             SimpleIoc.Default.Register<IPluginService, PluginService>();
             SimpleIoc.Default.Register<IClipboardService, ClipboardService>();
+            SimpleIoc.Default.Register<UpdateService, UpdateService>();
 
             DispatcherHelper.Initialize();
 
             DispatcherUnhandledException += App_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -37,6 +39,11 @@ namespace TimesheetParser
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             ShowError(e.ExceptionObject.ToString());
+        }
+
+        private void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            SimpleIoc.Default.GetInstance<UpdateService>().Dispose();
         }
 
         private void ShowError(string message)

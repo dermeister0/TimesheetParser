@@ -1,0 +1,126 @@
+﻿<Page x:Class="TimesheetParser.View.HelpPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TimesheetParser.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="HelpPage"
+      DataContext="{Binding HelpVM, Source={StaticResource ViewModelLocator}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Style="{StaticResource LowButtonStyle}" Command="{Binding BackCommand}">Back</Button>
+        </StackPanel>
+
+        <FlowDocumentScrollViewer Grid.Row="1">
+            <FlowDocument Background="#EFEFEF">
+                <FlowDocument.Resources>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Stretch" Value="None" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                    </Style>
+                </FlowDocument.Resources>
+                <Paragraph>
+                    1. Sign in to necessary issue trackers.
+                </Paragraph>
+                <BlockUIContainer>
+                    <Image Source="/Assets/Help/Login.png" />
+                </BlockUIContainer>
+                <Paragraph>
+                    2. Write a list of jobs with timestamps and task numbers in the special format. Example:
+                </Paragraph>
+                <Paragraph Margin="100,0,0,10" FontFamily="Verdana">
+                    9:00 AM
+                    <LineBreak/>
+                    #108099
+                    <LineBreak/>
+                    Use dotnet migrate to convert project.json files.
+                    <LineBreak/>
+                    9:18 AM
+                    <LineBreak/>
+                    #108099
+                    <LineBreak/>
+                    Convert libs to .NET Standard 1.4, switch from RestSharp to HttpClient.
+                    <LineBreak/>
+                    9:42 AM
+                    <LineBreak/>
+                    #108099
+                    <LineBreak/>
+                    Fix Win10 projects #6
+                    <LineBreak/>
+                    10:15 AM
+                    <LineBreak/>
+                    Idle.
+                    <LineBreak/>
+                    10:26 AM
+                    <LineBreak/>
+                    #TP-440
+                    <LineBreak/>
+                    Start Psake integration.
+                    <LineBreak/>
+                    11:13 AM
+                    <LineBreak/>
+                    #108099
+                    <LineBreak/>
+                    Add NETStandard.Library.
+                    <LineBreak/>
+                    12:02 PM
+                    <LineBreak/>
+                    Lunch.
+                    <LineBreak/>
+                    12:48 PM
+                    <LineBreak/>
+                    #108099
+                    <LineBreak/>
+                    Add NETStandard.Library to Win10 project, update PluginWrapper.
+                    <LineBreak/>
+                    1:33 PM
+                    <LineBreak/>
+                    Idle.
+                    <LineBreak/>
+                    1:47 PM
+                    <LineBreak/>
+                    #108099
+                    <LineBreak/>
+                    Fix build tasks, add Newtonsoft.Json reference.
+                    <LineBreak/>
+                    2:12 PM
+                    <LineBreak/>
+                    #TP-441
+                    <LineBreak/>
+                    Add initial Dockerfile.
+                    <LineBreak/>
+                    2:57 PM
+                </Paragraph>
+                <Paragraph>
+                    3. Click
+                    <Run FontWeight="Bold">Generate</Run>
+                    button.
+                </Paragraph>
+                <Paragraph>4. Make sure you don't have wrong lines and task numbers are set for all required jobs.</Paragraph>
+                <BlockUIContainer>
+                    <Image Source="/Assets/Help/Generate.png" />
+                </BlockUIContainer>
+                <Paragraph>
+                    5. You may use
+                    <Run FontWeight="Bold">Distribute Idle</Run>
+                    check-box. It will distribute "Idle." jobs across all tasks.
+                </Paragraph>
+                <Paragraph>
+                    6. Click
+                    <Run FontWeight="Bold">Submit Jobs</Run>
+                    and switch to
+                    <Run FontWeight="Bold">Table View</Run>
+                    to make sure all jobs are uploaded.
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</Page>

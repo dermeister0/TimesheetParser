@@ -200,7 +200,11 @@
     <Compile Include="Controls\CrmPluginItemsControl.cs" />
     <Compile Include="Controls\JobListView.cs" />
     <Compile Include="Services\ClipboardService.cs" />
+    <Compile Include="Services\UpdateService.cs" />
     <Compile Include="Support\BooleanToVisibilityNegativeConverter.cs" />
+    <Compile Include="View\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -219,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CrmLoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HelpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,6 +313,10 @@
       <Project>{f4bf5a97-d10b-4267-8dc0-7c6270532a5e}</Project>
       <Name>TimesheetParser.Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Help\Generate.png" />
+    <Resource Include="Assets\Help\Login.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

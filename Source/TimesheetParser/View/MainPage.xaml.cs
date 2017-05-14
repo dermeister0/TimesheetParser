@@ -1,8 +1,10 @@
-﻿using Squirrel;
+﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using System;
-using System.Configuration;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TimesheetParser.Business.ViewModel;
+using TimesheetParser.Services;
 
 namespace TimesheetParser.View
 {
@@ -18,24 +20,22 @@ namespace TimesheetParser.View
             var mainVM = DataContext as MainViewModel;
             mainVM?.Initialize();
 
-#if !DEBUG
-            try
-            {
-                UpdateApp();
-            }
-            catch (Exception ex)
-            {
-                // TODO: Write to log.
-            }
-#endif
+            var updateService = SimpleIoc.Default.GetInstance<UpdateService>();
+            updateService.UpdateApp();
+
+            InsertCurrentTimestampCommand = new RelayCommand(InsertCurrentTimestampCommand_Executed);
         }
 
-        private async void UpdateApp()
+        /// <summary>
+        /// Command for Insert Current Timestamp button.
+        /// </summary>
+        public ICommand InsertCurrentTimestampCommand { get; }
+
+        private void InsertCurrentTimestampCommand_Executed()
         {
-            using (var manager = new UpdateManager(ConfigurationManager.AppSettings["UpdateRoot"]))
-            {
-                await manager.UpdateApp();
-            }
+            JobsTextBox.SelectedText = DateTime.Now.ToShortTimeString();
+            JobsTextBox.CaretIndex += JobsTextBox.SelectedText.Length;
+            JobsTextBox.SelectionLength = 0;
         }
     }
 }
