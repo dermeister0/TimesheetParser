@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser", "TimesheetParser\TimesheetParser.csproj", "{B4E36119-7A3D-4F45-90FF-E998B799064E}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraApi", "JiraApi\JiraApi.csproj", "{DEEBF362-FBF9-428C-B47F-D1092B307C45}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser.Win10.PluginWrapper", "TimesheetParser.Win10.PluginWrapper\TimesheetParser.Win10.PluginWrapper.csproj", "{0D278353-7704-487A-9F24-D8352FFA313E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimesheetParser.DataLayer", "TimesheetParser.DataLayer\TimesheetParser.DataLayer.csproj", "{97722912-28A2-4319-8137-80CA49E34B03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +132,22 @@ Global
 		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|x64.Build.0 = Release|Any CPU
 		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|x86.ActiveCfg = Release|Any CPU
 		{0D278353-7704-487A-9F24-D8352FFA313E}.Release|x86.Build.0 = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|ARM.Build.0 = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|x64.Build.0 = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Debug|x86.Build.0 = Debug|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|ARM.ActiveCfg = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|ARM.Build.0 = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|x64.ActiveCfg = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|x64.Build.0 = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|x86.ActiveCfg = Release|Any CPU
+		{97722912-28A2-4319-8137-80CA49E34B03}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
