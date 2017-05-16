@@ -37,7 +37,6 @@ namespace TimesheetParser.Business.ViewModel
 
             var version = AppVersion.Get().ProductVersion.Split('+')[0];
             Title = $"Timesheet Parser {version}";
-            JobsDate = DateTime.Now;
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed, SubmitJobs_CanExecute);
@@ -53,7 +52,8 @@ namespace TimesheetParser.Business.ViewModel
             LoadPlugins();
             CheckConnection();
             MigrateDb();
-            LoadTimesheet();
+
+            JobsDate = DateTime.Now;
         }
 
         #region Properties
@@ -122,6 +122,8 @@ namespace TimesheetParser.Business.ViewModel
             {
                 jobsDate = value;
                 RaisePropertyChanged();
+
+                LoadTimesheet();
             }
         }
 
