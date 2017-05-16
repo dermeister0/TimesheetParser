@@ -23,4 +23,8 @@
     <PackageReference Include="MvvmLightLibs" Version="5.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TimesheetParser.DataLayer\TimesheetParser.DataLayer.csproj" />
+  </ItemGroup>
+
 </Project>

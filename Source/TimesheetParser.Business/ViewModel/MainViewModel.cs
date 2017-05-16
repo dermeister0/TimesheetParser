@@ -7,6 +7,8 @@ using GalaSoft.MvvmLight.Command;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
 using TimesheetParser.Business.Support;
+using TimesheetParser.DataLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace TimesheetParser.Business.ViewModel
 {
@@ -24,12 +26,14 @@ namespace TimesheetParser.Business.ViewModel
         private bool initialized;
         private bool isProcessing;
         private readonly IPortableNavigationService navigationService;
+        private readonly AppDbContext dbContext;
 
-        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IPortableNavigationService navigationService)
+        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IPortableNavigationService navigationService, AppDbContext dbContext)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
             this.navigationService = navigationService;
+            this.dbContext = dbContext;
 
             var version = AppVersion.Get().ProductVersion.Split('+')[0];
             Title = $"Timesheet Parser {version}";
@@ -48,6 +52,8 @@ namespace TimesheetParser.Business.ViewModel
             initialized = true;
             LoadPlugins();
             CheckConnection();
+            MigrateDb();
+            LoadTimesheet();
         }
 
         #region Properties
@@ -257,6 +263,16 @@ namespace TimesheetParser.Business.ViewModel
                     IsConnected |= crmVM.IsConnected;
                 }
             }
+        }
+
+        private void MigrateDb()
+        {
+            dbContext.Database.Migrate();
+        }
+
+        private void LoadTimesheet()
+        {
+            var timesheet = dbContext.Timesheets.Where(t => t.Date == JobsDate).FirstOrDefault();
         }
     }
 }

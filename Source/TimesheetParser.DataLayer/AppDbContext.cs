@@ -6,7 +6,7 @@ namespace TimesheetParser.DataLayer
     /// <summary>
     /// Main app DB context.
     /// </summary>
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         /// <summary>
         /// Default constructor.
@@ -33,7 +33,10 @@ namespace TimesheetParser.DataLayer
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite("Development.db");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=Migrations.db");
+            }
         }
     }
 }
