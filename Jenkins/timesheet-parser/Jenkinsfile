@@ -12,9 +12,9 @@ pipeline {
             }
         }
 
-        stage ('Build SaritasaApi') {
+        stage ('Clean') {
             steps {
-                echo '.'
+                bat script: 'psake clean'
             }
         }
 
