@@ -1,6 +1,6 @@
 $root = $PSScriptRoot
 $src = Resolve-Path "$root\..\Source"
-$tools = Resolve-Path "$root\..\Tools"
+$workspace = Resolve-Path "$root\.."
 
 Task pre-build `
 {
@@ -26,9 +26,24 @@ Task build -depends build-wpf -description "* Build projects." `
 {
 }
 
-Task build-wpf -depends pre-build `
+Task build-wpf -depends pre-build, build-saritasa-api `
 {
     Invoke-ProjectBuild "$src\TimesheetParser\TimesheetParser.csproj" -Configuration $Configuration -Target 'Restore;Build'
+}
+
+Task build-saritasa-api `
+{
+    $crmWorkspace = "$workspace\CRM"
+    if (!(Test-Path $crmWorkspace))
+    {
+        Write-Information 'CRM plugin is not found.'
+        return
+    }
+
+    Push-Location $crmWorkspace
+    Exec { psake build -properties "@{Configuration='$Configuration'}" }
+    Copy-Item "$crmWorkspace\src\FarSaritasa\SaritasaApi\bin\$Configuration\netstandard1.4\*" -Include *.dll, *.pdb "$src\Plugins\netstandard1.4"
+    Pop-Location
 }
 
 Task clean `
