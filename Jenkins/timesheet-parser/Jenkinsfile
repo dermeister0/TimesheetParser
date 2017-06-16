@@ -14,11 +14,13 @@ pipeline {
 
         stage ('Build SaritasaApi') {
             steps {
+                echo '.'
             }
         }
 
         stage ('Publish Installer') {
             steps {
+                echo '.'
             }
         }
     }
