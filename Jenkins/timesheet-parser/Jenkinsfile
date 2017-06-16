@@ -20,7 +20,7 @@ pipeline {
 
         stage ('Publish Installer') {
             steps {
-                echo '.'
+                bat script: 'docker-compose run --rm installer'
             }
         }
     }
