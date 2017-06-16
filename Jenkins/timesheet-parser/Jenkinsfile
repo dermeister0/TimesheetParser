@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ('Git') {
             steps {
-                ws ('CRM') {
+                dir ('CRM') {
                     checkout([$class: 'GitSCM', branches: [[name: env.GitBranch]],
                         extensions: [[$class: 'CloneOption', timeout: 45]],
                         userRemoteConfigs: [[url: 'ssh://gitblit.saritasa.com/anton/crm-dotnet.git']]])
