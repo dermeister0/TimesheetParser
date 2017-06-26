@@ -193,7 +193,15 @@ namespace TimesheetParser.Business.ViewModel
                             continue;
 
                         var taskHeader = await pluginVM.GetTaskHeader(jobVM.Job.Task);
-                        jobVM.TaskTitle = taskHeader.Title;
+                        if (taskHeader != null)
+                        {
+                            jobVM.TaskTitle = taskHeader.Title;
+                        }
+                        else
+                        {
+                            jobVM.TaskTitle = "ERROR";
+                            continue;
+                        }
 
                         jobVM.IsTaskCopied = true;
                         jobVM.IsDescriptionCopied = true;
