@@ -28,6 +28,19 @@ Task copy-plugins `
 
 Task pack-app -depends build-wpf, copy-plugins, download-nuget `
 {
+    $branchName = Exec { GitVersion.exe /showvariable BranchName }
+    if ($branchName -ne 'master')
+    {
+        throw "Releases should be based on master branch."
+    }
+
+    $preReleaseTag = Exec { GitVersion.exe /showvariable PreReleaseTag }
+    if ($preReleaseTag)
+    {
+        $majorMinorPatch = Exec { GitVersion.exe /showvariable MajorMinorPatch }
+        throw "Production releases without tag are not allowed. Suggested tag: $majorMinorPatch"
+    }
+
     Update-VariablesInFile "$src\TimesheetParser\TimesheetParser.nuspec" @{Version=$NugetVersion}
     Exec { &"$tools\nuget.exe" 'Pack' "$src\TimesheetParser\TimesheetParser.nuspec" }
 }
@@ -49,11 +62,11 @@ Task release-app -depends pack-app `
     Import-Module "${env:ProgramFiles(x86)}\AWS Tools\PowerShell\AWSPowerShell\AWSPowerShell.psd1"
 
     Set-AWSCredentials -ProfileName TimesheetParser
-    
+
     UploadFile "$releases\RELEASES"
     UploadFile "$releases\Setup.exe"
     UploadFile "$releases\Setup.msi"
-    
+
     Get-Item "$releases\TimesheetParser-$NugetVersion-*.nupkg" | % { UploadFile $_.FullName }
 }
 
