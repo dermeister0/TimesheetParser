@@ -4,6 +4,8 @@ using TimesheetParser.Business.Services;
 
 namespace TimesheetParser.Business.ViewModel
 {
+    public enum JobStatus { New, Success, Failure }
+
     public class JobViewModel : ViewModelBase
     {
         private readonly Job job;
@@ -12,6 +14,7 @@ namespace TimesheetParser.Business.ViewModel
         private bool isTaskCopied;
         private string taskTitle;
         private readonly IClipboardService clipboardService;
+        private JobStatus status;
 
         public JobViewModel(Job job, IClipboardService clipboardService)
         {
@@ -84,6 +87,19 @@ namespace TimesheetParser.Business.ViewModel
                 jobId = value;
                 RaisePropertyChanged();
                 RaisePropertyChanged(nameof(IsJobProcessed));
+            }
+        }
+
+        /// <summary>
+        /// Job status.
+        /// </summary>
+        public JobStatus Status
+        {
+            get => status;
+            set
+            {
+                status = value;
+                RaisePropertyChanged();
             }
         }
 
