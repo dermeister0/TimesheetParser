@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
 using TimesheetParser.Business.Services;
 using TimesheetParser.Business.Support;
@@ -24,12 +25,18 @@ namespace TimesheetParser.Business.ViewModel
         private bool initialized;
         private bool isProcessing;
         private readonly IPortableNavigationService navigationService;
+        private readonly IDialogService dialogService;
 
-        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IPortableNavigationService navigationService)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IPortableNavigationService navigationService,
+            IDialogService dialogService)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
             this.navigationService = navigationService;
+            this.dialogService = dialogService;
 
             var version = AppVersion.Get().ProductVersion.Split('+')[0];
             Title = $"Timesheet Parser {version}";
@@ -181,7 +188,9 @@ namespace TimesheetParser.Business.ViewModel
             {
                 IsProcessing = true;
 
-                foreach (var jobVM in Jobs.Where(j => j.Status != JobStatus.Success))
+                var jobsToSend = Jobs.Where(j => j.Status != JobStatus.Success);
+
+                foreach (var jobVM in jobsToSend)
                 {
                     // Job is submitted already.
                     if (jobVM.JobId != 0)
@@ -229,6 +238,11 @@ namespace TimesheetParser.Business.ViewModel
                         jobVM.Status = jobAdded ? JobStatus.Success : JobStatus.Failure;
                         break;
                     }
+                }
+
+                if (jobsToSend.Any(j => j.Status == JobStatus.Failure))
+                {
+                    await dialogService.ShowMessage("Some jobs are failed to send.", null);
                 }
             }
             finally
