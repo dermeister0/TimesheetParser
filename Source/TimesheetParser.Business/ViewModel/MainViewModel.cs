@@ -207,9 +207,11 @@ namespace TimesheetParser.Business.ViewModel
                         jobVM.IsDescriptionCopied = true;
                         jobVM.IsDurationCopied = true;
 
+                        bool jobAdded;
+
                         try
                         {
-                            await pluginVM.Client.AddJob(new JobDefinition
+                            jobAdded = await pluginVM.Client.AddJob(new JobDefinition
                             {
                                 TaskId = jobVM.Job.Task,
                                 Date = JobsDate,
@@ -221,8 +223,14 @@ namespace TimesheetParser.Business.ViewModel
                         catch (Exception ex)
                         {
                             Debug.WriteLine(ex.ToString());
+                            jobAdded = false;
+                        }
+
+                        if (!jobAdded)
+                        {
                             jobVM.TaskTitle = "ERROR " + jobVM.TaskTitle;
                         }
+
                         jobVM.JobId = 1; // @@
                         break;
                     }
