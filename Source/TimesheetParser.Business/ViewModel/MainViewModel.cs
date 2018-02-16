@@ -181,7 +181,7 @@ namespace TimesheetParser.Business.ViewModel
             {
                 IsProcessing = true;
 
-                foreach (var jobVM in Jobs)
+                foreach (var jobVM in Jobs.Where(j => j.Status != JobStatus.Success))
                 {
                     // Job is submitted already.
                     if (jobVM.JobId != 0)
@@ -226,12 +226,7 @@ namespace TimesheetParser.Business.ViewModel
                             jobAdded = false;
                         }
 
-                        if (!jobAdded)
-                        {
-                            jobVM.TaskTitle = "ERROR " + jobVM.TaskTitle;
-                        }
-
-                        jobVM.JobId = 1; // @@
+                        jobVM.Status = jobAdded ? JobStatus.Success : JobStatus.Failure;
                         break;
                     }
                 }

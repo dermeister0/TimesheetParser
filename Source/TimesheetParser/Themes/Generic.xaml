@@ -15,4 +15,8 @@
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="20" />
     </Style>
+
+    <SolidColorBrush x:Key="BlackBrush">#000000</SolidColorBrush>
+    <SolidColorBrush x:Key="GreenBrush">#4CAF50</SolidColorBrush>
+    <SolidColorBrush x:Key="RedBrush">#F44336</SolidColorBrush>
 </ResourceDictionary>
