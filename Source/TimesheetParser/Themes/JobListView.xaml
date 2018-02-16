@@ -4,6 +4,7 @@
                     xmlns:controls="clr-namespace:TimesheetParser.Controls">
     <support:IsOddToBrushConverter x:Key="IsOddToBrushConverter" />
     <support:BooleanToVisibilityNegativeConverter x:Key="BooleanToVisibilityNegativeConverter" />
+    <support:JobStatusToBrushConverter x:Key="JobStatusToBrushConverter" />
 
     <Style TargetType="{x:Type controls:JobListView}">
         <Setter Property="Template">
@@ -46,7 +47,10 @@
                                     <Button Grid.Row="1" Grid.Column="1" Command="{Binding CopyDurationCommand}">Copy Duration</Button>
                                     <Button Grid.Row="2" Grid.Column="1" Command="{Binding CopyDescriptionCommand}">Copy Description</Button>
 
-                                    <TextBlock Grid.Row="0" Grid.Column="2"><Run Text="{Binding Task, Mode=OneWay}" /> <Run Text="{Binding TaskTitle}" /></TextBlock>
+                                    <TextBlock Grid.Row="0" Grid.Column="2"
+                                               Foreground="{Binding Status, Converter={StaticResource JobStatusToBrushConverter}}">
+                                        <Run Text="{Binding Task, Mode=OneWay}" /> <Run Text="{Binding TaskTitle}" />
+                                    </TextBlock>
                                     <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Duration}" />
                                     <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Description}" />
 

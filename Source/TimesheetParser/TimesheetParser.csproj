@@ -200,8 +200,10 @@
     <Compile Include="Controls\CrmPluginItemsControl.cs" />
     <Compile Include="Controls\JobListView.cs" />
     <Compile Include="Services\ClipboardService.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\UpdateService.cs" />
     <Compile Include="Support\BooleanToVisibilityNegativeConverter.cs" />
+    <Compile Include="Support\JobStatusToBrushConverter.cs" />
     <Compile Include="View\HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
