@@ -14,12 +14,14 @@ namespace TimesheetParser.Business.ViewModel
         private bool isTaskCopied;
         private string taskTitle;
         private readonly IClipboardService clipboardService;
+        private readonly ISettingsService settingsService;
         private JobStatus status;
 
-        public JobViewModel(Job job, IClipboardService clipboardService)
+        public JobViewModel(Job job, IClipboardService clipboardService, ISettingsService settingsService)
         {
             this.job = job;
             this.clipboardService = clipboardService;
+            this.settingsService = settingsService;
 
             jobId = job.JobId;
 
@@ -30,7 +32,7 @@ namespace TimesheetParser.Business.ViewModel
         }
 
         public string Task => "#" + job.Task;
-        public string Duration => job.TimeDescription;
+        public string Duration => job.GetTimeDescription(this.settingsService.Get<DurationFormat>("DurationFormat"));
         public string Description => job.Description;
 
         public bool IsTaskCopied

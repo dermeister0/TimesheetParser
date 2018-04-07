@@ -22,5 +22,17 @@ namespace TimesheetParser.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
+        public global::TimesheetParser.Business.DurationFormat DurationFormat {
+            get {
+                return ((global::TimesheetParser.Business.DurationFormat)(this["DurationFormat"]));
+            }
+            set {
+                this["DurationFormat"] = value;
+            }
+        }
     }
 }

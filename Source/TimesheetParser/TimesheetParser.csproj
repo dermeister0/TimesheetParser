@@ -201,6 +201,7 @@
     <Compile Include="Controls\JobListView.cs" />
     <Compile Include="Services\ClipboardService.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\UpdateService.cs" />
     <Compile Include="Support\BooleanToVisibilityNegativeConverter.cs" />
     <Compile Include="Support\JobStatusToBrushConverter.cs" />

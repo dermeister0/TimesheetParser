@@ -28,6 +28,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
             <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Insert Current Timestamp (Ctrl+T)"
                     Command="{Binding InsertCurrentTimestampCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}">11:14</Button>
+            <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Duration Format" Command="{Binding SwitchDurationFormatCommand}" Content="{Binding DurationFormatText}"></Button>
             <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Show Help" Command="{Binding HelpCommand}">Help</Button>
         </StackPanel>
 
@@ -48,7 +49,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <Button Command="{Binding GenerateCommand}" Style="{StaticResource LowButtonStyle}">Generate</Button>
-            <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle}">Distribute Idle</CheckBox>
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding DistributeIdle}" Command="{Binding GenerateCommand}">Distribute Idle</CheckBox>
             
             <controls:CrmPluginItemsControl ItemsSource="{Binding CrmPlugins}" Margin="10"></controls:CrmPluginItemsControl>
 
