@@ -24,6 +24,7 @@ namespace TimesheetParser.View
             updateService.UpdateApp();
 
             InsertCurrentTimestampCommand = new RelayCommand(InsertCurrentTimestampCommand_Executed);
+            InsertIdleCommand = new RelayCommand(InsertIdleCommand_Executed);
         }
 
         /// <summary>
@@ -31,9 +32,22 @@ namespace TimesheetParser.View
         /// </summary>
         public ICommand InsertCurrentTimestampCommand { get; }
 
+        /// <summary>
+        /// Command for Insert 'Idle.' And Current Timestamp button.
+        /// </summary>
+        public ICommand InsertIdleCommand { get; }
+
         private void InsertCurrentTimestampCommand_Executed()
         {
-            JobsTextBox.SelectedText = DateTime.Now.ToShortTimeString();
+            JobsTextBox.SelectedText = DateTime.Now.ToShortTimeString() + Environment.NewLine;
+            JobsTextBox.CaretIndex += JobsTextBox.SelectedText.Length;
+            JobsTextBox.SelectionLength = 0;
+        }
+
+        private void InsertIdleCommand_Executed()
+        {
+            JobsTextBox.SelectedText = "Idle." + Environment.NewLine + 
+                DateTime.Now.ToShortTimeString() + Environment.NewLine;
             JobsTextBox.CaretIndex += JobsTextBox.SelectedText.Length;
             JobsTextBox.SelectionLength = 0;
         }

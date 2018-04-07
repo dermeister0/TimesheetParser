@@ -28,12 +28,15 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
             <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Insert Current Timestamp (Ctrl+T)"
                     Command="{Binding InsertCurrentTimestampCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}">11:14</Button>
+            <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Insert 'Idle.' And Current Timestamp (Ctrl+I)"
+                    Command="{Binding InsertIdleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}">Idle.</Button>
             <Button Style="{StaticResource PanelButtonStyle}" ToolTip="Show Help" Command="{Binding HelpCommand}">Help</Button>
         </StackPanel>
 
         <TextBox x:Name="JobsTextBox" Grid.Row="1" Grid.Column="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding SourceText}">
             <TextBox.InputBindings>
                 <KeyBinding Modifiers="Ctrl" Key="T" Command="{Binding InsertCurrentTimestampCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" />
+                <KeyBinding Modifiers="Ctrl" Key="I" Command="{Binding InsertIdleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" />
             </TextBox.InputBindings>
         </TextBox>
 
