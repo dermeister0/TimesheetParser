@@ -50,7 +50,7 @@ namespace TimesheetParser.Business
             }
 
             var totalMinutes = jobs.Sum(j => j.Duration.TotalMinutes);
-            sb.AppendFormat("Total duration: {0:hh}:{0:mm}\n", TimeSpan.FromMinutes(totalMinutes));
+            sb.AppendFormat("Total duration: {0:0.##'h'}\n", TimeSpan.FromMinutes(totalMinutes).TotalHours);
             sb.AppendLine("---------------------");
             sb.AppendLine();
         }
