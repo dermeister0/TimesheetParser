@@ -39,15 +39,19 @@ namespace TimesheetParser.View
 
         private void InsertCurrentTimestampCommand_Executed()
         {
-            JobsTextBox.SelectedText = DateTime.Now.ToShortTimeString() + Environment.NewLine;
-            JobsTextBox.CaretIndex += JobsTextBox.SelectedText.Length;
-            JobsTextBox.SelectionLength = 0;
+            InsertToEnd(DateTime.Now.ToShortTimeString() + Environment.NewLine);
         }
 
         private void InsertIdleCommand_Executed()
         {
-            JobsTextBox.SelectedText = "Idle." + Environment.NewLine + 
-                DateTime.Now.ToShortTimeString() + Environment.NewLine;
+            InsertToEnd("Idle." + Environment.NewLine + 
+                DateTime.Now.ToShortTimeString() + Environment.NewLine);
+        }
+
+        private void InsertToEnd(string text)
+        {
+            JobsTextBox.CaretIndex = JobsTextBox.Text.Length;
+            JobsTextBox.SelectedText = text;
             JobsTextBox.CaretIndex += JobsTextBox.SelectedText.Length;
             JobsTextBox.SelectionLength = 0;
         }
