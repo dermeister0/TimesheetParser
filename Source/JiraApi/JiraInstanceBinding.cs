@@ -13,5 +13,7 @@ namespace JiraApi
         public string JiraInstance { get; set; }
 
         public string TempoToken { get; set; }
+
+        public string TempoJobType { get; set; }
     }
 }

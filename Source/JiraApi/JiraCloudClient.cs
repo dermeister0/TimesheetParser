@@ -18,6 +18,7 @@ namespace JiraApi
         private readonly Regex taskRegex = new Regex(@"^([A-z0-9]+)-\d+$", RegexOptions.Compiled);
 
         private JiraSettings jiraSettings;
+        private string accountId;
 
         public string GetName()
         {
@@ -52,6 +53,9 @@ namespace JiraApi
                     {
                         return false;
                     }
+
+                    var content = JsonConvert.DeserializeObject<JiraMyselfResponse>(await response.Content.ReadAsStringAsync());
+                    accountId = content.AccountId;
                 }
             }
 
@@ -100,7 +104,7 @@ namespace JiraApi
 
             if (!string.IsNullOrEmpty(binding.TempoToken))
             {
-                return new TempoJobPoster();
+                return new TempoJobPoster(accountId, binding.TempoToken, binding.TempoJobType);
             }
             else
             {
