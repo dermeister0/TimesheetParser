@@ -1,0 +1,4 @@
+Expand-PsakeConfiguration `
+@{
+    Configuration = 'Release'
+}
