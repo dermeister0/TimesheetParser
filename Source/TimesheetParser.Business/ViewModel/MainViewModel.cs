@@ -242,7 +242,7 @@ namespace TimesheetParser.Business.ViewModel
 
                 if (jobsToSend.Any(j => j.Status == JobStatus.Failure))
                 {
-                    await dialogService.ShowMessage("Some jobs are failed to send.", null);
+                    await dialogService.ShowMessage("Some jobs failed to send.", null);
                 }
             }
             finally

@@ -6,13 +6,13 @@ Here are steps you need to do to set up environment to be able to develop. You n
 - [Visual Studio 2017](https://www.visualstudio.com/downloads/)
 - [psake](https://github.com/psake/psake)
 - [Git](https://git-scm.com/)
-- [GitVersion](https://gitversion.readthedocs.io/)
 
 You can easily install most software with Chocolatey package manager. To do that run `PowerShell` as administrator and type commands:
 
 ```
 PS> iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
-PS> choco install psake git gitversion.portable
+PS> choco install psake --version=4.7.3
+PS> choco install git
 ```
 
 Task Runner
