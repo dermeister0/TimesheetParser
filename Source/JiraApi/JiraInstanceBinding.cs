@@ -11,5 +11,7 @@ namespace JiraApi
         public Regex CachedRegex { get; set; }
 
         public string JiraInstance { get; set; }
+
+        public string TempoToken { get; set; }
     }
 }

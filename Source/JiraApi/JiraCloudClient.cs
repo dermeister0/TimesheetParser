@@ -63,7 +63,7 @@ namespace JiraApi
             return Task.FromResult(false);
         }
 
-        private string GetApiUrl(string taskId)
+        private JiraInstanceBinding GetJiraBinding(string taskId)
         {
             var project = taskRegex.Match(taskId).Groups[1].Value;
 
@@ -73,15 +73,22 @@ namespace JiraApi
             {
                 if (projectPattern.CachedRegex.IsMatch(project))
                 {
-                    return projectPattern.JiraInstance;
+                    return projectPattern;
                 }
             }
 
             throw new Exception($"Jira binding not defined: {project}");
         }
 
+        private string GetApiUrl(string taskId)
+        {
+            return GetJiraBinding(taskId).JiraInstance;
+        }
+
         public async Task<bool> AddJob(JobDefinition job)
         {
+            var poster = GetJobPoster(job.TaskId);
+
             var url = GetApiUrl(job.TaskId) + $"issue/{job.TaskId}/worklog";
             var body = new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") };
 
@@ -98,6 +105,20 @@ namespace JiraApi
             }
 
             return false;
+        }
+
+        private IJobPoster GetJobPoster(string taskId)
+        {
+            var binding = GetJiraBinding(taskId);
+
+            if (!string.IsNullOrEmpty(binding.TempoToken))
+            {
+                return new TempoJobPoster();
+            }
+            else
+            {
+                return new JiraJobPoster(binding.JiraInstance);
+            }
         }
 
         public async Task<TaskHeader> GetTaskHeader(string taskId)
