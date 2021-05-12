@@ -6,16 +6,18 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
+using System.IO;
+using System.Collections.Generic;
 
 namespace JiraApi
 {
     public class JiraCloudClient : ICrm
     {
-        private const string ApiUrl = "https://saritasa.atlassian.net/rest/api/2/";
-
         private string login;
         private string password;
-        private readonly Regex taskRegex = new Regex(@"^[A-z0-9]+-\d+$");
+        private readonly Regex taskRegex = new Regex(@"^([A-z0-9]+)-\d+$", RegexOptions.Compiled);
+
+        private JiraSettings jiraSettings;
 
         public string GetName()
         {
@@ -36,14 +38,24 @@ namespace JiraApi
 
         public async Task<bool> Login(string login, string password)
         {
+            LoadSettings();
+
             this.login = login;
             this.password = password;
 
-            using (var client = GetClient())
+            foreach (var projectPattern in jiraSettings.Projects)
             {
-                var response = await client.GetAsync(ApiUrl + "myself");
-                return response.IsSuccessStatusCode;
+                using (var client = GetClient())
+                {
+                    var response = await client.GetAsync(projectPattern.JiraInstance + "myself");
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        return false;
+                    }
+                }
             }
+
+            return true;
         }
 
         public Task<bool> Login(string token)
@@ -51,9 +63,26 @@ namespace JiraApi
             return Task.FromResult(false);
         }
 
+        private string GetApiUrl(string taskId)
+        {
+            var project = taskRegex.Match(taskId).Groups[1].Value;
+
+            // TODO: Add cache.
+
+            foreach (var projectPattern in jiraSettings.Projects)
+            {
+                if (projectPattern.CachedRegex.IsMatch(project))
+                {
+                    return projectPattern.JiraInstance;
+                }
+            }
+
+            throw new Exception($"Jira binding not defined: {project}");
+        }
+
         public async Task<bool> AddJob(JobDefinition job)
         {
-            var url = ApiUrl + $"issue/{job.TaskId}/worklog";
+            var url = GetApiUrl(job.TaskId) + $"issue/{job.TaskId}/worklog";
             var body = new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") };
 
             using (var client = GetClient())
@@ -73,7 +102,7 @@ namespace JiraApi
 
         public async Task<TaskHeader> GetTaskHeader(string taskId)
         {
-            var url = ApiUrl + $"issue/{taskId}?fields=summary";
+            var url = GetApiUrl(taskId) + $"issue/{taskId}?fields=summary";
             var title = string.Empty;
 
             using (var client = GetClient())
@@ -87,6 +116,33 @@ namespace JiraApi
             }
 
             return new TaskHeader() { Title = title };
+        }
+
+        private string GetSettingsFileName()
+        {
+            return Path.Combine(Environment.GetEnvironmentVariable("LocalAppData"), "TimesheetParser", "JiraApi.json");
+        }
+
+        private void LoadSettings()
+        {
+            var fileName = GetSettingsFileName();
+            if (!File.Exists(fileName))
+            {
+                jiraSettings = new JiraSettings { Projects = new List<JiraInstanceBinding>() };
+                return;
+            }
+
+            jiraSettings = JsonConvert.DeserializeObject<JiraSettings>(File.ReadAllText(fileName));
+
+            foreach (var projectPattern in jiraSettings.Projects)
+            {
+                projectPattern.CachedRegex = new Regex(projectPattern.ProjectRegex, RegexOptions.Compiled);
+            }
+        }
+
+        private void SaveSettings()
+        {
+            File.WriteAllText(GetSettingsFileName(), JsonConvert.SerializeObject(jiraSettings));
         }
     }
 }
