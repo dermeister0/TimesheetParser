@@ -18,6 +18,7 @@ namespace JiraApi
         private readonly Regex taskRegex = new Regex(@"^([A-z0-9]+)-\d+$", RegexOptions.Compiled);
 
         private JiraSettings jiraSettings;
+        private string accountId;
 
         public string GetName()
         {
@@ -52,6 +53,9 @@ namespace JiraApi
                     {
                         return false;
                     }
+
+                    var content = JsonConvert.DeserializeObject<JiraMyselfResponse>(await response.Content.ReadAsStringAsync());
+                    accountId = content.AccountId;
                 }
             }
 
@@ -63,7 +67,7 @@ namespace JiraApi
             return Task.FromResult(false);
         }
 
-        private string GetApiUrl(string taskId)
+        private JiraInstanceBinding GetJiraBinding(string taskId)
         {
             var project = taskRegex.Match(taskId).Groups[1].Value;
 
@@ -73,31 +77,39 @@ namespace JiraApi
             {
                 if (projectPattern.CachedRegex.IsMatch(project))
                 {
-                    return projectPattern.JiraInstance;
+                    return projectPattern;
                 }
             }
 
             throw new Exception($"Jira binding not defined: {project}");
         }
 
+        private string GetApiUrl(string taskId)
+        {
+            return GetJiraBinding(taskId).JiraInstance;
+        }
+
         public async Task<bool> AddJob(JobDefinition job)
         {
-            var url = GetApiUrl(job.TaskId) + $"issue/{job.TaskId}/worklog";
-            var body = new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") };
-
+            var poster = GetJobPoster(job.TaskId);
             using (var client = GetClient())
             {
-                var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json"));
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = JsonConvert.DeserializeObject<WorkLogResponse>(await response.Content.ReadAsStringAsync());
-                    var id = content.id; // @@
-
-                    return true;
-                }
+                return await poster.SendAsync(job, client);
             }
+        }
 
-            return false;
+        private IJobPoster GetJobPoster(string taskId)
+        {
+            var binding = GetJiraBinding(taskId);
+
+            if (!string.IsNullOrEmpty(binding.TempoToken))
+            {
+                return new TempoJobPoster(accountId, binding.TempoToken, binding.TempoJobType);
+            }
+            else
+            {
+                return new JiraJobPoster(binding.JiraInstance);
+            }
         }
 
         public async Task<TaskHeader> GetTaskHeader(string taskId)

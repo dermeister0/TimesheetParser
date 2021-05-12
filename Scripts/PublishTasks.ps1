@@ -1,9 +1,3 @@
-Properties `
-{
-    $Version = $null
-    $NugetVersion = $null
-}
-
 $root = $PSScriptRoot
 $src = Resolve-Path "$root\..\Source"
 $tools = Resolve-Path "$root\..\Tools"
@@ -41,7 +35,7 @@ Task pack-app -depends build-wpf, copy-plugins, download-nuget `
         throw "Production releases without tag are not allowed. Suggested tag: $majorMinorPatch"
     }
 
-    Update-VariablesInFile "$src\TimesheetParser\TimesheetParser.nuspec" @{Version=$NugetVersion}
+    Update-VariablesInFile "$src\TimesheetParser\TimesheetParser.nuspec" @{Version=$MajorMinorPatch}
     Exec { &"$tools\nuget.exe" 'Pack' "$src\TimesheetParser\TimesheetParser.nuspec" }
 }
 
@@ -55,7 +49,7 @@ Task release-app -depends pack-app `
     Exec `
         {
             &"$src\packages\squirrel.windows.*\tools\Squirrel.exe" `
-            --releasify="TimesheetParser.$NugetVersion.nupkg" `
+            --releasify="TimesheetParser.$MajorMinorPatch.nupkg" `
             --releaseDir=$ReleaseDir
         }
 
@@ -67,7 +61,7 @@ Task release-app -depends pack-app `
     UploadFile "$releases\Setup.exe"
     UploadFile "$releases\Setup.msi"
 
-    Get-Item "$releases\TimesheetParser-$NugetVersion-*.nupkg" | % { UploadFile $_.FullName }
+    Get-Item "$releases\TimesheetParser-$MajorMinorPatch-*.nupkg" | % { UploadFile $_.FullName }
 }
 
 function UploadFile([string] $FileName)

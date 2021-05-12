@@ -2,17 +2,17 @@ $root = $PSScriptRoot
 $src = Resolve-Path "$root\..\Source"
 $workspace = Resolve-Path "$root\.."
 
-Task pre-build `
+Task pre-build -depends get-version `
 {
     Initialize-MSBuild
 
-    Invoke-NugetRestore "$src\TimesheetParser.sln"
+    Invoke-NugetRestore -SolutionPath "$src\TimesheetParser.sln"
 
-    $values = $NugetVersion.Split('.')
+    $values = $MajorMinorPatch.Split('.')
     $env:HVMajor = $values[0]
     $env:HVMinor = $values[1]
     $env:HVPatch = $values[2]
-    $env:HVChangeset = $Changeset
+    $env:HVChangeset = Exec { git rev-parse HEAD }
 
     if ($env:HVChangeset.Length -gt 7)
     {

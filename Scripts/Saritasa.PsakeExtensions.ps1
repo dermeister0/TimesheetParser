@@ -1,6 +1,6 @@
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.1.3
 
 .GUID a55519ec-c877-4480-8496-6c87ca097332
 
@@ -41,17 +41,19 @@ Checks file existence and dot-sources it.
 The file should contain Expand-PsakeConfiguration call.
 Call Import-PsakeConfigurationFile from TaskSetup block.
 .EXAMPLE
-# default.ps1
+Import-PsakeConfigurationFile ".\Config.$Environment.ps1"
+
+# psakefile.ps1
 TaskSetup `
 {
-    Import-PsakeConfigurationFile ".\Config.$configuration.ps1"
+    Import-PsakeConfigurationFile ".\Config.$Environment.ps1"
 }
 
-# Config.Debug.ps1
+# Config.Development.ps1
 
 Expand-PsakeConfiguration `
 @{
-    serverHost = 'dev.example.com'
+    ServerHost = 'dev.example.com'
 }
 #>
 function Import-PsakeConfigurationFile
@@ -59,13 +61,13 @@ function Import-PsakeConfigurationFile
     param
     (
         [Parameter(Mandatory = $true)]
+        [AllowEmptyString()]
         [string] $Path
     )
 
-    $fileName = Resolve-Path $Path
-    if (Test-Path $fileName)
+    if ($Path -and (Test-Path $Path))
     {
-        . $fileName
+        . (Resolve-Path $Path)
     }
 }
 
@@ -96,11 +98,10 @@ function Expand-PsakeConfiguration
     $maxScope = $i - 1
     $cmdLineScope = $maxScope - 2
     $propertiesScope = $cmdLineScope - 3
-    
+
     # Override properties from passed hashtable.
     foreach ($key in $NewConfiguration.Keys)
     {
-        Write-Debug "Set1: $key = $($NewConfiguration.$key)"
         Set-Variable -Name $key -Value $NewConfiguration.$key -Scope $propertiesScope | Out-Null
     }
 
@@ -108,10 +109,8 @@ function Expand-PsakeConfiguration
     $properties = (Get-Variable 'properties' -Scope $cmdLineScope).Value
     foreach ($key in $properties.keys)
     {
-        Write-Debug "Set2: $key"
         if (Test-Path "variable:\$key")
         {
-            Write-Debug "Set3: $key = $($properties.$key)"
             Set-Variable -Name $key -Value $properties.$key -Scope $propertiesScope | Out-Null
         }
     }
