@@ -88,23 +88,10 @@ namespace JiraApi
         public async Task<bool> AddJob(JobDefinition job)
         {
             var poster = GetJobPoster(job.TaskId);
-
-            var url = GetApiUrl(job.TaskId) + $"issue/{job.TaskId}/worklog";
-            var body = new WorkLog() { timeSpent = $"{job.Duration}m", comment = job.Description, started = job.Date.ToString("yyyy-MM-ddTHH:mm:ss.fffzz00") };
-
             using (var client = GetClient())
             {
-                var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json"));
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = JsonConvert.DeserializeObject<WorkLogResponse>(await response.Content.ReadAsStringAsync());
-                    var id = content.id; // @@
-
-                    return true;
-                }
+                return await poster.SendAsync(job, client);
             }
-
-            return false;
         }
 
         private IJobPoster GetJobPoster(string taskId)
