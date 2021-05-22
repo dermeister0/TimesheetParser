@@ -162,7 +162,7 @@ namespace TimesheetParser.Business.ViewModel
 
         private void GenerateCommand_Executed()
         {
-            var parser = new Parser(new DefaultIdleStrategy());
+            var parser = new Parser(new ProportionalIdleStrategy());
             var result = parser.Parse(SourceText, DistributeIdle);
             ResultText = result.Format();
 
