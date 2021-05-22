@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace TimesheetParser.Business.IdleStrategies
 {
-    class DefaultIdleStrategy : IIdleStrategy
+    class DefaultIdleStrategy : BaseIdleStrategy
     {
-        public void DistributeIdle(ParseResult result)
+        public override void DistributeIdle(ParseResult result)
         {
-            var idleJobs = result.Jobs.Where(j => string.Compare(j.Description.Trim(), "Idle.", StringComparison.OrdinalIgnoreCase) == 0).ToList();
+            var idleJobs = GetIdleJobs(result);
             var idleTime = idleJobs.Sum(j => j.Duration.TotalMinutes);
 
             foreach (var idleJob in idleJobs)
