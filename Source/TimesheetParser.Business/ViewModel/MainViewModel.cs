@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using Heavysoft.TimesheetParser.PluginInterfaces;
+using TimesheetParser.Business.IdleStrategies;
 using TimesheetParser.Business.Services;
 using TimesheetParser.Business.Support;
 
@@ -161,7 +162,7 @@ namespace TimesheetParser.Business.ViewModel
 
         private void GenerateCommand_Executed()
         {
-            var parser = new Parser();
+            var parser = new Parser(new DefaultIdleStrategy());
             var result = parser.Parse(SourceText, DistributeIdle);
             ResultText = result.Format();
 

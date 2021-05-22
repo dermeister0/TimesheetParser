@@ -2,11 +2,19 @@
 using System.Text.RegularExpressions;
 using System.Linq;
 using TimesheetParser.Business.Model;
+using TimesheetParser.Business.IdleStrategies;
 
 namespace TimesheetParser.Business
 {
     public class Parser
     {
+        IIdleStrategy idleStrategy;
+
+        public Parser(IIdleStrategy idleStrategy)
+        {
+            this.idleStrategy = idleStrategy;
+        }
+
         public ParseResult Parse(string source, bool distributeIdle)
         {
             var result = new ParseResult();
@@ -90,33 +98,13 @@ namespace TimesheetParser.Business
 
             if (distributeIdle)
             {
-                DistributeIdle(result);
+                idleStrategy.DistributeIdle(result);
+                var et = result.Jobs.Sum(j => j.ExtraTime.TotalMinutes);
             }
 
             result.Jobs.Sort((j1, j2) => string.Compare(j1.Task, j2.Task));
 
             return result;
-        }
-
-        void DistributeIdle(ParseResult result)
-        {
-            var idleJobs = result.Jobs.Where(j => string.Compare(j.Description.Trim(), "Idle.", StringComparison.OrdinalIgnoreCase) == 0).ToList();
-            var idleTime = idleJobs.Sum(j => j.Duration.TotalMinutes);
-
-            foreach (var idleJob in idleJobs)
-            {
-                result.Jobs.Remove(idleJob);
-            }
-
-            var normalJobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).ToList();
-
-            var additionalMinutes = Math.Floor(idleTime / normalJobs.Count);
-            var additionalTime = TimeSpan.FromMinutes(additionalMinutes > 0 ? additionalMinutes : 1);
-
-            foreach (var job in normalJobs)
-            {
-                job.ExtraTime = additionalTime;
-            }
         }
 
         void AddJob(ParseResult result, Job job)
