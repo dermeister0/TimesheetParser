@@ -22,6 +22,11 @@ namespace TimesheetParser.Business.IdleStrategies
             {
                 var ratio = job.Duration.TotalMinutes / normalTime;
                 job.ExtraTime = TimeSpan.FromMinutes(idleTime * ratio);
+
+                if (job.Duration == TimeSpan.Zero && job.ExtraTime == TimeSpan.Zero)
+                {
+                    job.ExtraTime = TimeSpan.FromMinutes(1);
+                }
             }
         }
     }
