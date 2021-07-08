@@ -4,7 +4,7 @@ namespace TimesheetParser.Business.Model
 {
     public class Job
     {
-        private const string DurationFormat = "{0:h:mm tt} - {1:h:mm tt} @ {2:hh}:{2:mm}";
+        private const string TimeDescriptionFormat = "{0:h:mm tt} - {1:h:mm tt} @ {2}";
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Task { get; set; }
@@ -21,6 +21,11 @@ namespace TimesheetParser.Business.Model
             }
         }
 
-        public string TimeDescription => string.Format(DurationFormat, StartTime, EndTime, Duration);
+        public string GetTimeDescription(DurationFormat durationFormat)
+        {
+            return string.Format(TimeDescriptionFormat, StartTime, EndTime, durationFormat == Business.DurationFormat.Hours 
+                ? Duration.TotalHours.ToString("0.##'h'") 
+                : Duration.ToString("hh':'mm"));
+        }
     }
 }

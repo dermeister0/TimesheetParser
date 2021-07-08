@@ -27,25 +27,31 @@ namespace TimesheetParser.Business.ViewModel
         private bool isProcessing;
         private readonly IPortableNavigationService navigationService;
         private readonly IDialogService dialogService;
+        private readonly ISettingsService settingsService;
+        private DurationFormat durationFormat;
+        private string durationFormatText;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public MainViewModel(IPluginService pluginService, IClipboardService clipboardService, IPortableNavigationService navigationService,
-            IDialogService dialogService)
+            IDialogService dialogService, ISettingsService settingsService)
         {
             this.pluginService = pluginService;
             this.clipboardService = clipboardService;
             this.navigationService = navigationService;
             this.dialogService = dialogService;
+            this.settingsService = settingsService;
 
             var version = AppVersion.Get().ProductVersion.Split('+')[0];
             Title = $"Timesheet Parser {version}";
             JobsDate = DateTime.Now;
+            DurationFormat = this.settingsService.Get<DurationFormat>("DurationFormat");
 
             GenerateCommand = new RelayCommand(GenerateCommand_Executed);
             SubmitJobsCommand = new RelayCommand(SubmitJobs_Executed, SubmitJobs_CanExecute);
             HelpCommand = new RelayCommand(HelpCommand_Executed);
+            SwitchDurationFormatCommand = new RelayCommand(SwitchDurationFormatCommand_Executed);
         }
 
         public void Initialize()
@@ -113,9 +119,34 @@ namespace TimesheetParser.Business.ViewModel
             }
         }
 
+        private DurationFormat DurationFormat
+        {
+            get { return durationFormat; }
+            set
+            {
+                durationFormat = value;
+                this.settingsService.Set("DurationFormat", value);
+                this.settingsService.Save();
+                DurationFormatText = durationFormat == DurationFormat.Default
+                    ? "hh:mm"
+                    : "0.##h";
+            }
+        }
+
+        public string DurationFormatText
+        {
+            get { return durationFormatText; }
+            set
+            {
+                durationFormatText = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public ICommand GenerateCommand { get; set; }
         public ICommand SubmitJobsCommand { get; set; }
         public ICommand HelpCommand { get; set; }
+        public ICommand SwitchDurationFormatCommand { get; set; }
 
         public DateTime JobsDate
         {
@@ -164,9 +195,9 @@ namespace TimesheetParser.Business.ViewModel
         {
             var parser = new Parser(new ProportionalIdleStrategy());
             var result = parser.Parse(SourceText, DistributeIdle);
-            ResultText = result.Format();
+            ResultText = result.Format(DurationFormat);
 
-            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j, clipboardService)).ToList();
+            Jobs = result.Jobs.Where(j => !string.IsNullOrEmpty(j.Task)).Select(j => new JobViewModel(j, clipboardService, settingsService)).ToList();
 
             string previousTask = null;
             bool isOdd = false;
@@ -260,6 +291,14 @@ namespace TimesheetParser.Business.ViewModel
         private void HelpCommand_Executed()
         {
             navigationService.NavigateTo(Location.Help);
+        }
+
+        private void SwitchDurationFormatCommand_Executed()
+        {
+            DurationFormat = DurationFormat == DurationFormat.Default 
+                ? DurationFormat.Hours
+                : DurationFormat.Default;
+            GenerateCommand.Execute(null);
         }
 
         #endregion Commands
