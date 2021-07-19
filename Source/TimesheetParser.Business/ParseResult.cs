@@ -38,7 +38,7 @@ namespace TimesheetParser.Business
             return sb.ToString();
         }
 
-        void WriteJobs(IReadOnlyCollection<Job> jobs, StringBuilder sb)
+        private void WriteJobs(IReadOnlyCollection<Job> jobs, StringBuilder sb)
         {
             foreach (var job in jobs)
             {
@@ -49,7 +49,7 @@ namespace TimesheetParser.Business
                 sb.AppendLine();
             }
 
-            var totalMinutes = jobs.Sum(j => j.Duration.TotalMinutes);
+            var totalMinutes = jobs.Sum(j => j.TotalMinutes);
             sb.AppendFormat("Total duration: {0:hh}:{0:mm}\n", TimeSpan.FromMinutes(totalMinutes));
             sb.AppendLine("---------------------");
             sb.AppendLine();

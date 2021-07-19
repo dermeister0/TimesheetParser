@@ -22,5 +22,13 @@ namespace TimesheetParser.Business.Model
         }
 
         public string TimeDescription => string.Format(DurationFormat, StartTime, EndTime, Duration);
+
+        public int TotalMinutes
+        {
+            get
+            {
+                return (int)Duration.TotalMinutes;
+            }
+        }
     }
 }
