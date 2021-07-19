@@ -226,7 +226,7 @@ namespace TimesheetParser.Business.ViewModel
                                 TaskId = jobVM.Job.Task,
                                 Date = JobsDate,
                                 Description = jobVM.Description,
-                                Duration = (int)jobVM.Job.Duration.TotalMinutes,
+                                Duration = jobVM.Job.TotalMinutes,
                                 IsBillable = taskHeader.IsBillable,
                             });
                         }
