@@ -17,7 +17,7 @@ namespace TimesheetParser.Business.Model
             get
             {
                 var duration = EndTime - StartTime + ExtraTime;
-                return duration.TotalMinutes > 0 ? duration : TimeSpan.FromMinutes(1);
+                return duration.TotalMinutes >= 1 ? duration : TimeSpan.FromMinutes(1);
             }
         }
 
