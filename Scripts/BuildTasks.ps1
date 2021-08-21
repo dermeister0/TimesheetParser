@@ -48,5 +48,5 @@ Task build-saritasa-api `
 
 Task clean `
 {
-    Exec { git clean -xdf -e packages/ -e nuget.exe -e Releases/ }
+    Exec { git clean -xdf -e packages/ -e nuget.exe -e Releases/ -e Config.ps1 }
 }
