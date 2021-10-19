@@ -15,6 +15,7 @@ namespace TimesheetParser.Business.ViewModel
             this.navigationService = navigationService;
 
             LoginCommand = new RelayCommand(LoginCommand_Executed, () => !string.IsNullOrWhiteSpace(Login) && !string.IsNullOrEmpty(Password));
+            BackCommand = new RelayCommand(BackCommand_Executed);
         }
 
         public string Login
@@ -40,12 +41,19 @@ namespace TimesheetParser.Business.ViewModel
         }
 
         public ICommand LoginCommand { get; set; }
+        public ICommand BackCommand { get; set; }
+
         public CrmPluginViewModel SourcePlugin { private get; set; }
 
         private void LoginCommand_Executed()
         {
             SourcePlugin?.CheckConnection(Login, Password);
 
+            navigationService.NavigateTo(Location.Main);
+        }
+
+        private void BackCommand_Executed()
+        {
             navigationService.NavigateTo(Location.Main);
         }
     }

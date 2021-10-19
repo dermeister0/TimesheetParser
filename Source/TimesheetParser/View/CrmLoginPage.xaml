@@ -21,6 +21,9 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <WrapPanel Grid.Column="0" Grid.Row="0">
+            <Button Style="{StaticResource LowButtonStyle}" Command="{Binding BackCommand}">Back</Button>
+        </WrapPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
             <TextBlock>Login:</TextBlock>
             <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" />
