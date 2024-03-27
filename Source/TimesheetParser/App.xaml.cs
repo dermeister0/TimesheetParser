@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
-using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
+using Microsoft.Practices.ServiceLocation;
 using TimesheetParser.Business.Services;
 using TimesheetParser.Services;
 
