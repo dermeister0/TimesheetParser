@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JiraApi
 {
-    class TempoJobPoster : IJobPoster
+    internal class TempoJobPoster : IJobPoster
     {
         private readonly string jiraAccountId;
         private readonly string token;
@@ -22,9 +22,16 @@ namespace JiraApi
 
         public async Task<bool> SendAsync(JobDefinition job, HttpClient client)
         {
-            var url = "https://api.tempo.io/core/3/worklogs";
-            var body = new TempoWorkLog() { issueKey = job.TaskId, timeSpentSeconds = job.Duration * 60, description = job.Description,
-                startDate = job.Date.ToString("yyyy-MM-dd"), startTime = job.Date.ToUniversalTime().ToString("HH:mm:ss"), authorAccountId = jiraAccountId };
+            var url = "https://api.tempo.io/core/4/worklogs";
+            var body = new TempoWorkLog()
+            {
+                issueKey = job.TaskId,
+                timeSpentSeconds = job.Duration * 60,
+                description = job.Description,
+                startDate = job.Date.ToString("yyyy-MM-dd"),
+                startTime = job.Date.ToUniversalTime().ToString("HH:mm:ss"),
+                authorAccountId = jiraAccountId
+            };
             body.attributes.Add(new TempoWorkAttribute { key = "_JobType_", value = jobType });
 
             var authValue = new AuthenticationHeaderValue("Bearer", token);
