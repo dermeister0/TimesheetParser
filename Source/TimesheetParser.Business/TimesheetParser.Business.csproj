@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="1.3.0" />
-    <PackageReference Include="Heavysoft.TimesheetParser.PluginInterfaces" Version="1.1.5186" />
+    <PackageReference Include="Heavysoft.TimesheetParser.PluginInterfaces" Version="1.2.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.2.0" />
   </ItemGroup>
 

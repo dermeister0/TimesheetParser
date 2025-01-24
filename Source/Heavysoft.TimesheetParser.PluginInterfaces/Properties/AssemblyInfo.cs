@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Heavysoft")]
 [assembly: AssemblyProduct("Heavysoft.TimesheetParser.PluginInterfaces")]
-[assembly: AssemblyCopyright("Copyright ©  2015-2021")]
+[assembly: AssemblyCopyright("Copyright ©  2015-2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
