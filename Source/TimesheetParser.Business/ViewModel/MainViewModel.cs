@@ -221,9 +221,11 @@ namespace TimesheetParser.Business.ViewModel
 
                         try
                         {
+                            var taskId = taskHeader.UniqueId > 0 ? taskHeader.UniqueId.ToString() : jobVM.Job.Task;
+
                             jobAdded = await pluginVM.Client.AddJob(new JobDefinition
                             {
-                                TaskId = jobVM.Job.Task,
+                                TaskId = taskId,
                                 Date = JobsDate,
                                 Description = jobVM.Description,
                                 Duration = jobVM.Job.TotalMinutes,

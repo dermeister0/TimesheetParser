@@ -116,6 +116,7 @@ namespace JiraApi
         {
             var url = GetApiUrl(taskId) + $"issue/{taskId}?fields=summary";
             var title = string.Empty;
+            int uniqueId = 0;
 
             using (var client = GetClient())
             {
@@ -123,11 +124,12 @@ namespace JiraApi
                 if (response.IsSuccessStatusCode)
                 {
                     var content = JsonConvert.DeserializeObject<IssueSummaryResponse>(await response.Content.ReadAsStringAsync());
-                    title = content.fields["summary"];
+                    title = content.Fields["summary"];
+                    uniqueId = content.Id;
                 }
             }
 
-            return new TaskHeader() { Title = title };
+            return new TaskHeader() { Title = title, UniqueId = uniqueId };
         }
 
         private string GetSettingsFileName()

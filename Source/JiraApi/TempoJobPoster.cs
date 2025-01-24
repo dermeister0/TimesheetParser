@@ -22,10 +22,11 @@ namespace JiraApi
 
         public async Task<bool> SendAsync(JobDefinition job, HttpClient client)
         {
-            var url = "https://api.tempo.io/core/4/worklogs";
+            // https://apidocs.tempo.io/#tag/Worklogs/operation/createWorklog
+            var url = "https://api.tempo.io/4/worklogs";
             var body = new TempoWorkLog()
             {
-                issueKey = job.TaskId,
+                issueId = job.TaskId,
                 timeSpentSeconds = job.Duration * 60,
                 description = job.Description,
                 startDate = job.Date.ToString("yyyy-MM-dd"),
