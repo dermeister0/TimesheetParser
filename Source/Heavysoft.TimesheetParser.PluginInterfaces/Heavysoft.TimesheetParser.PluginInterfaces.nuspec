@@ -5,14 +5,17 @@
     <version>$version$</version>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://raw.githubusercontent.com/dermeister0/TimesheetParser/master/LICENSE</licenseUrl>
+    <license type="file">LICENSE</license>
     <projectUrl>https://github.com/dermeister0/TimesheetParser</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <copyright>Copyright © 2015-2021 Der_Meister</copyright>
-	<frameworkAssemblies>
-		<frameworkAssembly assemblyName="System" targetFramework="net40" />
-		<frameworkAssembly assemblyName="System.Core" targetFramework="net40" />
-	</frameworkAssemblies>
+    <copyright>Copyright © 2015-2025 Der_Meister</copyright>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="net40" />
+    </frameworkAssemblies>
   </metadata>
+  <files>
+    <file src="..\..\LICENSE" target="LICENSE" />
+  </files>
 </package>

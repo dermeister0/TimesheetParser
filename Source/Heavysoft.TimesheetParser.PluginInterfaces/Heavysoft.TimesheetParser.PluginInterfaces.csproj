@@ -14,10 +14,11 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>TimesheetParser0.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Heavysoft.VersionGenerator" Version="1.2.1.0" />
   </ItemGroup>
-
 </Project>

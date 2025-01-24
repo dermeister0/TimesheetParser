@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace JiraApi
 {
-    class IssueSummaryResponse
+    internal class IssueSummaryResponse
     {
-        public Dictionary<string, string> fields { get; set; }
+        [JsonProperty("Fields")]
+        public Dictionary<string, string> Fields { get; set; }
+
+        [JsonProperty("Id")]
+        public int Id { get; set; }
     }
 }

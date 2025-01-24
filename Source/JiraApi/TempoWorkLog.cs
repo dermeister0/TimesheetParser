@@ -2,9 +2,9 @@
 
 namespace JiraApi
 {
-    class TempoWorkLog
+    internal class TempoWorkLog
     {
-        public string issueKey { get; set; }
+        public string issueId { get; set; }
 
         public int timeSpentSeconds { get; set; }
 
