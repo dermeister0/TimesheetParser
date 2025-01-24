@@ -57,7 +57,10 @@ function Invoke-NugetRestore
         [string] $ProjectPath,
         # Path to the solution directory. Not valid when restoring packages for a solution.
         [Parameter(Mandatory = $true, ParameterSetName = 'Project')]
-        [string] $SolutionDirectory
+        [string] $SolutionDirectory,
+        # Path to nuget config file.
+        [Parameter(Mandatory = $false)]
+        [string] $ConfigFile
     )
 
     Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
@@ -84,6 +87,11 @@ function Invoke-NugetRestore
     else
     {
         $params += @($ProjectPath, '-SolutionDirectory', $SolutionDirectory)
+    }
+
+    if ($ConfigFile)
+    {
+        $params += @('-ConfigFile', $ConfigFile)
     }
 
     &$nugetExePath $params
@@ -143,12 +151,18 @@ function Invoke-ProjectBuild
         [string] $Configuration,
         [string] $Target = 'Build',
         # Additional build parameters.
-        [string[]] $BuildParams
+        [string[]] $BuildParams,
+        [switch] $SingleThreaded
     )
 
     Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
 
-    msbuild.exe $ProjectPath '/m' "/t:$Target" "/p:Configuration=$Configuration" '/verbosity:normal' $BuildParams
+    if (!$SingleThreaded)
+    {
+        $BuildParams += @('/m')
+    }
+
+    msbuild.exe $ProjectPath "/t:$Target" "/p:Configuration=$Configuration" '/verbosity:normal' $BuildParams
     if ($LASTEXITCODE)
     {
         throw 'Build failed.'
