@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/dermeister0/TimesheetParser</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <copyright>Copyright © 2015-2021 Der_Meister</copyright>
+    <copyright>Copyright © 2015-2025 Der_Meister</copyright>
 	<frameworkAssemblies>
 		<frameworkAssembly assemblyName="System" targetFramework="net40" />
 		<frameworkAssembly assemblyName="System.Core" targetFramework="net40" />

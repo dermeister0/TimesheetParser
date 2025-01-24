@@ -8,8 +8,9 @@ Task download-nuget `
     Install-NugetCli $tools
 }
 
-Task pack-plugininterfaces -depends download-nuget -description "* Pack Heavysoft.TimesheetParser.PluginInterfaces.nupkg." `
+Task pack-plugininterfaces -depends pre-build, download-nuget -description "* Pack Heavysoft.TimesheetParser.PluginInterfaces.nupkg." `
 {
+    Invoke-ProjectBuild "$src\Heavysoft.TimesheetParser.PluginInterfaces\Heavysoft.TimesheetParser.PluginInterfaces.csproj" -Configuration 'Release' -Target 'Restore;Build'
     Exec { &"$tools\nuget.exe" 'Pack' "$src\Heavysoft.TimesheetParser.PluginInterfaces\Heavysoft.TimesheetParser.PluginInterfaces.csproj" -Prop Configuration=Release }
 }
 
