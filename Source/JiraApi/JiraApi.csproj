@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Heavysoft.TimesheetParser.PluginInterfaces" Version="1.2.0" />
+    <PackageReference Include="Heavysoft.TimesheetParser.PluginInterfaces" Version="1.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
